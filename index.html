@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loque Digital — Be the answer, not just a result</title>
+<meta name="description" content="Loque Digital builds visibility where people actually search: Google, AI engines, and answer boxes. Plus cold email campaigns that fill your pipeline.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300..900&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0b0b0c;
+    --ink-soft:#141416;
+    --ink-card:#161618;
+    --line:#26262a;
+    --paper:#f5f4ee;
+    --muted:#8d8d88;
+    --accent:#d2ff4d;
+    --accent-dim:#a9cf3c;
+    --maxw:1180px;
+    --ease:cubic-bezier(.2,.7,.2,1);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:"Hanken Grotesk",sans-serif;
+    font-size:18px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  /* grain + glow atmosphere */
+  body::before{
+    content:"";
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(900px 600px at 78% -8%, rgba(210,255,77,.10), transparent 60%),
+      radial-gradient(700px 500px at -5% 30%, rgba(210,255,77,.05), transparent 55%);
+  }
+  body::after{
+    content:"";
+    position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.04;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px;position:relative;z-index:2}
+
+  a{color:inherit;text-decoration:none}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:blur(12px);
+    background:rgba(11,11,12,.7);
+    border-bottom:1px solid transparent;
+    transition:border-color .3s var(--ease),background .3s var(--ease);
+  }
+  header.scrolled{border-bottom-color:var(--line)}
+  nav{display:flex;align-items:center;justify-content:space-between;height:78px;position:relative}
+
+  /* LOGO SLOT — replace the markup inside .logo with your <img> when ready.
+     Recommended: <img src="loque-logo.svg" alt="Loque Digital" style="height:34px"> */
+  .logo{display:inline-flex;align-items:center;font-family:"Outfit";font-weight:800;font-size:28px;letter-spacing:-.03em;line-height:1;white-space:nowrap;color:var(--paper)}
+  .logo .dot{color:var(--accent);font-size:1.35em;line-height:0}
+  .nav-links{display:flex;align-items:center;gap:38px}
+  .nav-links a{font-size:15px;color:var(--muted);transition:color .2s}
+  .nav-links a:hover{color:var(--paper)}
+  .nav-cta{
+    font-family:"Hanken Grotesk";font-weight:600;font-size:15px;
+    color:var(--ink)!important;background:var(--paper);
+    padding:11px 20px;border-radius:100px;transition:transform .2s var(--ease),background .2s;
+  }
+  .nav-cta:hover{transform:translateY(-2px);background:var(--accent)}
+  .menu-btn{display:none;background:none;border:0;color:var(--paper);font-size:24px;cursor:pointer}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:128px 0 70px;position:relative;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .hero-bg img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    object-position:center 40%;opacity:.20;
+  }
+  /* drifting tech grid */
+  .hero-grid{
+    position:absolute;inset:-2px;
+    background-image:
+      linear-gradient(rgba(210,255,77,.055) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(210,255,77,.055) 1px,transparent 1px);
+    background-size:56px 56px;
+    -webkit-mask:radial-gradient(820px 560px at 68% 32%,#000 0%,transparent 72%);
+    mask:radial-gradient(820px 560px at 68% 32%,#000 0%,transparent 72%);
+    animation:gridDrift 22s linear infinite;
+  }
+  @keyframes gridDrift{to{background-position:56px 56px}}
+  /* slow rotating aurora */
+  .hero-aurora{
+    position:absolute;width:820px;height:820px;right:-200px;top:-260px;border-radius:50%;
+    background:conic-gradient(from 0deg,rgba(210,255,77,.30),transparent 38%,rgba(90,170,160,.16) 55%,transparent 72%,rgba(210,255,77,.30));
+    filter:blur(64px);opacity:.5;animation:spin 30s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  /* gradient vignette so text stays legible */
+  .hero-bg::before{
+    content:"";position:absolute;inset:0;z-index:3;
+    background:
+      linear-gradient(180deg,var(--ink) 0%,transparent 26%,transparent 68%,var(--ink) 100%),
+      linear-gradient(90deg,var(--ink) 4%,transparent 60%);
+  }
+  /* cursor-reactive glow */
+  .hero-cursor{
+    position:absolute;z-index:1;width:540px;height:540px;border-radius:50%;
+    left:var(--cx,72%);top:var(--cy,34%);transform:translate(-50%,-50%);
+    background:radial-gradient(circle,rgba(210,255,77,.12),transparent 62%);
+    transition:left .35s var(--ease),top .35s var(--ease);
+  }
+  .hero .wrap,.hero .ticker{position:relative;z-index:2}
+  .hero-inner{display:grid;grid-template-columns:1.04fr .96fr;gap:56px;align-items:center}
+  .hero-copy{max-width:620px}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);
+    font-weight:600;margin-bottom:28px;
+  }
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent);animation:pulse 2.4s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+  h1{
+    font-family:"Outfit";
+    font-weight:800;
+    font-size:clamp(44px,5.6vw,84px);
+    line-height:.99;
+    letter-spacing:-.035em;
+    max-width:14ch;
+  }
+  h1 em{font-style:normal;color:var(--accent);position:relative;white-space:nowrap}
+  h1 em::after{
+    content:"";position:absolute;left:0;bottom:-.02em;width:100%;height:.09em;border-radius:3px;
+    background:var(--accent);box-shadow:0 0 18px var(--accent);
+    transform:scaleX(0);transform-origin:left;animation:hlIn .6s var(--ease) .55s forwards;
+  }
+  @keyframes hlIn{to{transform:scaleX(1)}}
+
+  .hero p.lead{
+    margin-top:30px;max-width:54ch;font-size:clamp(18px,2vw,21px);color:#cfceca;
+  }
+  .hero-actions{display:flex;flex-wrap:wrap;gap:16px;margin-top:42px}
+  .btn{
+    font-family:"Hanken Grotesk";font-weight:600;font-size:16px;
+    padding:15px 28px;border-radius:100px;cursor:pointer;border:1px solid transparent;
+    transition:transform .2s var(--ease),background .2s,border-color .2s;
+  }
+  .btn-primary{background:var(--accent);color:var(--ink)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(210,255,77,.28)}
+  .btn-ghost{border-color:var(--line);color:var(--paper)}
+  .btn-ghost:hover{border-color:var(--paper);transform:translateY(-2px)}
+
+  /* ---------- HERO ANSWER-ENGINE DEMO ---------- */
+  .demo{
+    position:relative;perspective:1400px;
+    opacity:0;transform:translateY(30px);
+    animation:demoIn .9s var(--ease) .35s forwards;
+  }
+  @keyframes demoIn{to{opacity:1;transform:none}}
+  .demo-card{
+    position:relative;border-radius:22px;padding:20px;
+    background:linear-gradient(180deg,rgba(26,26,29,.92),rgba(16,16,18,.92));
+    border:1px solid #2f2f35;
+    box-shadow:0 40px 90px rgba(0,0,0,.55),0 0 0 1px rgba(210,255,77,.04),inset 0 1px 0 rgba(255,255,255,.04);
+    transform-style:preserve-3d;
+    transition:transform .25s var(--ease);
+    will-change:transform;
+  }
+  .demo-card::before{
+    content:"";position:absolute;inset:0;border-radius:22px;pointer-events:none;
+    background:radial-gradient(420px 200px at var(--gx,80%) var(--gy,0%),rgba(210,255,77,.14),transparent 70%);
+    opacity:.9;
+  }
+  .demo-bar{display:flex;align-items:center;gap:10px;margin-bottom:14px;transform:translateZ(40px)}
+  .demo-dots{display:flex;gap:6px}
+  .demo-dots i{width:10px;height:10px;border-radius:50%;background:#34343a;display:block}
+  .demo-live{margin-left:auto;display:inline-flex;align-items:center;gap:7px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .demo-live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);animation:pulse 2s infinite}
+  .demo-search{
+    display:flex;align-items:center;gap:12px;background:#0f0f11;border:1px solid var(--line);
+    border-radius:13px;padding:14px 16px;transform:translateZ(30px);
+  }
+  .demo-search svg{flex:none;width:18px;height:18px;stroke:var(--muted)}
+  .demo-q{font-family:"Hanken Grotesk";font-size:15.5px;color:var(--paper);min-height:20px;line-height:1.3}
+  .demo-q .caret{display:inline-block;width:2px;height:1.05em;background:var(--accent);margin-left:1px;transform:translateY(2px);animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .demo-answer{
+    margin-top:14px;border:1px solid var(--line);border-radius:14px;overflow:hidden;opacity:0;
+    background:linear-gradient(180deg,rgba(210,255,77,.05),transparent);transform:translateZ(20px) translateY(8px);
+  }
+  .demo-answer .ah{display:flex;align-items:center;gap:9px;padding:11px 15px;border-bottom:1px solid var(--line);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  .demo-answer .ah svg{width:14px;height:14px;fill:var(--accent)}
+  .demo-atext{padding:15px 16px;font-size:14.5px;line-height:1.55;color:#d8d7d1}
+  .demo-atext b{color:var(--paper);background:linear-gradient(transparent 62%,rgba(210,255,77,.34) 0);padding:0 2px;font-weight:600}
+  .demo-cites{display:flex;flex-wrap:wrap;gap:8px;padding:0 16px 16px}
+  .demo-chip{
+    font-size:11.5px;font-weight:600;color:#cfcec9;border:1px solid var(--line);border-radius:100px;
+    padding:5px 11px;display:inline-flex;align-items:center;gap:6px;background:#141416;
+  }
+  .demo-chip.brand{color:var(--ink);background:var(--accent);border-color:var(--accent)}
+  .demo-chip .rank{opacity:.6}
+  .demo-foot{display:flex;align-items:center;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line);transform:translateZ(15px)}
+  .demo-surface{font-size:11.5px;color:var(--muted);font-weight:600}
+  .demo-surface b{color:var(--paper);font-weight:700}
+  .demo-progress{margin-left:auto;display:flex;gap:5px}
+  .demo-progress i{width:18px;height:4px;border-radius:3px;background:#2c2c32;display:block;transition:background .3s}
+  .demo-progress i.on{background:var(--accent)}
+  /* floating accent badges around the card */
+  .demo-badge{
+    position:absolute;z-index:3;display:inline-flex;align-items:center;gap:7px;
+    font-family:"Outfit";font-weight:700;font-size:13px;letter-spacing:-.01em;color:var(--paper);
+    background:rgba(20,20,22,.88);border:1px solid #34343c;border-radius:100px;padding:9px 14px;
+    box-shadow:0 16px 40px rgba(0,0,0,.5);backdrop-filter:blur(8px);
+  }
+  .demo-badge .d{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
+  .demo-badge.b1{top:-18px;left:-26px;animation:float1 6s ease-in-out infinite}
+  .demo-badge.b2{bottom:46px;right:-30px;animation:float2 7s ease-in-out infinite}
+  @keyframes float1{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  @keyframes float2{0%,100%{transform:translateY(0)}50%{transform:translateY(9px)}}
+
+  @media(prefers-reduced-motion:reduce){
+    .hero-grid,.hero-aurora,.demo-badge.b1,.demo-badge.b2,.demo-live::before,.eyebrow .dot{animation:none}
+  }
+
+  /* ticker */
+  .ticker{margin-top:90px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:18px 0;position:relative;z-index:2}
+  .ticker-track{display:flex;gap:48px;white-space:nowrap;animation:scroll 26s linear infinite;width:max-content}
+  .ticker-track span{font-family:"Outfit";font-weight:600;font-size:18px;color:var(--muted);display:inline-flex;align-items:center;gap:48px}
+  .ticker-track span::after{content:"✦";color:var(--accent)}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{position:relative;z-index:2}
+  .sec-head{max-width:var(--maxw);margin:0 auto;padding:110px 32px 0}
+  .sec-tag{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:18px}
+  .sec-title{font-family:"Outfit";font-weight:800;font-size:clamp(32px,4.6vw,56px);line-height:1.02;letter-spacing:-.03em;max-width:18ch}
+
+  /* ---------- SERVICES ---------- */
+  .services{padding:44px 0 0}
+  .svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:54px}
+  .card{
+    background:var(--ink-card);border:1px solid var(--line);border-radius:20px;
+    padding:40px 36px;position:relative;overflow:hidden;
+    transition:transform .35s var(--ease),border-color .35s,background .35s;
+  }
+  .card::before{
+    content:"";position:absolute;inset:0;opacity:0;transition:opacity .35s;
+    background:radial-gradient(420px 200px at var(--mx,80%) -10%, rgba(210,255,77,.14), transparent 70%);
+  }
+  .card:hover{transform:translateY(-6px);border-color:#3a3a40}
+  .card:hover::before{opacity:1}
+  .card .num{font-family:"Outfit";font-size:14px;color:var(--accent);font-weight:600;letter-spacing:.05em}
+  .card h3{font-family:"Outfit";font-weight:800;font-size:30px;letter-spacing:-.02em;margin:18px 0 6px;display:flex;align-items:baseline;gap:12px}
+  .card h3 .full{font-family:"Hanken Grotesk";font-weight:500;font-size:15px;color:var(--muted);letter-spacing:0}
+  .card p{color:#c2c1bd;font-size:16.5px;margin-top:8px}
+  .card ul{list-style:none;margin-top:22px;display:flex;flex-wrap:wrap;gap:8px}
+  .card li{font-size:13.5px;color:var(--paper);border:1px solid var(--line);border-radius:100px;padding:6px 14px}
+
+  /* ---------- APPROACH ---------- */
+  .approach{padding:0 0}
+  .ap-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:start;margin-top:54px}
+  .ap-grid p.big{font-size:clamp(22px,2.6vw,30px);line-height:1.42;font-family:"Outfit";font-weight:400;letter-spacing:-.01em}
+  .ap-grid p.big b{color:var(--accent);font-weight:600}
+  .steps{display:flex;flex-direction:column;gap:0}
+  .step{display:flex;gap:22px;padding:24px 0;border-top:1px solid var(--line)}
+  .step:last-child{border-bottom:1px solid var(--line)}
+  .step .k{font-family:"Outfit";font-weight:700;font-size:20px;color:var(--accent);min-width:42px}
+  .step h4{font-family:"Outfit";font-weight:600;font-size:20px;letter-spacing:-.01em;margin-bottom:4px}
+  .step p{color:var(--muted);font-size:15.5px}
+
+  /* ---------- PRICING ---------- */
+  .pricing{padding:44px 0 0}
+  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:54px}
+  .price-card{
+    background:var(--ink-card);border:1px solid var(--line);border-radius:20px;
+    padding:40px 36px;position:relative;overflow:hidden;display:flex;flex-direction:column;
+    transition:transform .35s var(--ease),border-color .35s;
+  }
+  .price-card:hover{transform:translateY(-6px);border-color:#3a3a40}
+  .price-card.featured{border-color:var(--accent-dim);background:linear-gradient(180deg,rgba(210,255,77,.06),transparent 60%)}
+  .price-card .badge{
+    position:absolute;top:24px;right:24px;font-size:12px;font-weight:600;letter-spacing:.05em;
+    text-transform:uppercase;color:var(--ink);background:var(--accent);padding:5px 12px;border-radius:100px;
+  }
+  .price-card .pname{font-family:"Outfit";font-weight:700;font-size:22px;letter-spacing:-.01em}
+  .price-card .psub{color:var(--muted);font-size:14.5px;margin-top:6px}
+  .price-card .amount{font-family:"Outfit";font-weight:800;font-size:clamp(38px,3.6vw,52px);letter-spacing:-.03em;margin:26px 0 2px;line-height:1}
+  .price-card .amount span{font-family:"Hanken Grotesk";font-weight:500;font-size:16px;color:var(--muted);letter-spacing:0}
+  .price-card .amount.range{font-size:clamp(32px,3vw,42px);white-space:nowrap}
+  .price-card .amount.range span{display:block;margin-top:4px}
+  .price-card .quote{font-family:"Outfit";font-weight:800;font-size:34px;letter-spacing:-.02em;margin:26px 0 2px;line-height:1}
+  .price-card ul{list-style:none;margin:24px 0 32px;display:flex;flex-direction:column;gap:12px}
+  .price-card li{font-size:15.5px;color:#d6d5cf;display:flex;align-items:flex-start;gap:11px}
+  .price-card li::before{content:"";flex:none;width:18px;height:18px;margin-top:2px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(210,255,77,.12);
+    -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z'/%3E%3C/svg%3E") center/13px no-repeat;
+    mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z'/%3E%3C/svg%3E") center/13px no-repeat;background-color:var(--accent)}
+  .price-card .btn{margin-top:18px;width:100%;text-align:center}
+  .price-note{margin-top:26px;color:var(--muted);font-size:14.5px;max-width:60ch}
+  .price-card .price-note{margin:auto 0 0;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;line-height:1.55}
+
+  /* ---------- TRUST: PLATFORM STRIP ---------- */
+  .platforms{padding:60px 0 0;position:relative;z-index:2}
+  .plat-label{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;text-align:center;margin-bottom:28px}
+  .plat-row{display:flex;align-items:center;justify-content:center;gap:clamp(28px,5vw,60px);flex-wrap:wrap}
+  .plat-row .pl{display:inline-flex;align-items:center;gap:9px;font-family:"Outfit";font-weight:700;font-size:18px;color:#5a5a56;letter-spacing:-.01em;transition:color .25s}
+  .plat-row .pl:hover{color:var(--paper)}
+  .plat-row .pl svg{width:22px;height:22px;flex:none;opacity:.55}
+
+  /* ---------- TRUST: STATS BAR ---------- */
+  .stats{padding:80px 0 0;position:relative;z-index:2}
+  .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .stat{text-align:center;padding:36px 20px;border:1px solid var(--line);border-radius:18px;background:var(--ink-card)}
+  .stat .val{font-family:"Outfit";font-weight:800;font-size:clamp(34px,4vw,50px);letter-spacing:-.03em;color:var(--accent);line-height:1}
+  .stat .label{margin-top:8px;font-size:14.5px;color:var(--muted);font-weight:500}
+
+  /* ---------- TRUST: TESTIMONIALS ---------- */
+  .testimonials{padding:0 0}
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:54px}
+  .testi{
+    background:var(--ink-card);border:1px solid var(--line);border-radius:20px;
+    padding:36px 32px;display:flex;flex-direction:column;
+  }
+  .testi-stars{display:flex;gap:3px;margin-bottom:18px}
+  .testi-stars svg{width:16px;height:16px;fill:var(--accent)}
+  .testi q{font-size:16px;line-height:1.6;color:#d6d5cf;flex:1;display:block;quotes:none}
+  .testi-who{margin-top:22px;padding-top:18px;border-top:1px solid var(--line);display:flex;align-items:center;gap:14px}
+  .testi-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#7ab82a);display:grid;place-items:center;font-family:"Outfit";font-weight:800;font-size:16px;color:var(--ink);flex:none}
+  .testi-info .name{font-family:"Outfit";font-weight:700;font-size:15px;color:var(--paper)}
+  .testi-info .role{font-size:13px;color:var(--muted);margin-top:2px}
+
+  /* ---------- TRUST: PRICING BADGES ---------- */
+  .trust-pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:20px;border-top:1px solid var(--line)}
+  .trust-pill{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:var(--muted);letter-spacing:.02em}
+  .trust-pill svg{width:15px;height:15px;fill:var(--accent);flex:none}
+
+  @media(max-width:960px){
+    .stats-row{grid-template-columns:repeat(2,1fr)}
+    .testi-grid{grid-template-columns:1fr;max-width:520px}
+  }
+  @media(max-width:860px){
+    .stats-row{grid-template-columns:1fr;max-width:320px;margin:0 auto}
+  }
+
+  /* ---------- CTA ---------- */
+  .cta{margin:120px 0 0}
+  .cta-box{
+    max-width:var(--maxw);margin:0 auto;
+    background:var(--accent);
+    color:var(--ink);border-radius:28px;
+    padding:72px 56px;position:relative;overflow:hidden;
+  }
+  .cta-box::after{
+    content:"";position:absolute;right:-60px;bottom:-90px;width:340px;height:340px;border-radius:50%;
+    background:rgba(11,11,12,.10);
+  }
+  .cta-box h2{font-family:"Outfit";font-weight:800;font-size:clamp(34px,4.8vw,60px);line-height:1;letter-spacing:-.03em;max-width:16ch;position:relative}
+  .cta-box p{margin-top:20px;max-width:48ch;font-size:19px;color:#1c1c10;position:relative}
+  .cta-box .btn{display:inline-block;margin-top:48px;background:var(--ink);color:var(--paper);position:relative}
+  .cta-box .btn:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(11,11,12,.3)}
+
+  /* ---------- CONTACT FORM ---------- */
+  .contact-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:54px;align-items:start;margin-top:54px}
+  .contact-copy .big{font-size:clamp(20px,2.4vw,27px);line-height:1.42;font-family:"Outfit";font-weight:400;letter-spacing:-.01em;color:#e7e6e1}
+  .contact-copy .big b{color:var(--accent);font-weight:600}
+  .contact-points{list-style:none;margin-top:30px;display:flex;flex-direction:column;gap:16px}
+  .contact-points li{display:flex;align-items:flex-start;gap:13px;font-size:16px;color:#cfceca}
+  .contact-points li svg{flex:none;width:20px;height:20px;fill:var(--accent);margin-top:2px}
+  .contact-direct{margin-top:32px;padding-top:24px;border-top:1px solid var(--line);font-size:15px;color:var(--muted)}
+  .contact-direct a{color:var(--paper);font-weight:600}
+  .contact-direct a:hover{color:var(--accent)}
+
+  .form-card{
+    background:var(--ink-card);border:1px solid var(--line);border-radius:22px;
+    padding:38px 34px;position:relative;overflow:hidden;
+  }
+  .form-card::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(420px 200px at 100% -10%,rgba(210,255,77,.08),transparent 70%);
+  }
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;position:relative;z-index:1}
+  .field{display:flex;flex-direction:column;gap:8px}
+  .field.full{grid-column:1 / -1}
+  .field label{font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--muted)}
+  .field label .req{color:var(--accent)}
+  .field input,.field select,.field textarea{
+    font-family:"Hanken Grotesk";font-size:15.5px;color:var(--paper);
+    background:#0f0f11;border:1px solid var(--line);border-radius:12px;
+    padding:13px 15px;width:100%;transition:border-color .2s,box-shadow .2s;
+  }
+  .field textarea{resize:vertical;min-height:118px}
+  .field select{appearance:none;cursor:pointer;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238d8d88' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 14px center;background-size:16px;padding-right:40px}
+  .field input::placeholder,.field textarea::placeholder{color:#5e5e5a}
+  .field input:focus,.field select:focus,.field textarea:focus{
+    outline:none;border-color:var(--accent-dim);box-shadow:0 0 0 3px rgba(210,255,77,.12)}
+  .form-card .btn{margin-top:24px;width:100%;text-align:center;position:relative;z-index:1}
+  .form-card .btn[disabled]{opacity:.6;cursor:wait}
+  .form-fine{margin-top:14px;font-size:12.5px;color:var(--muted);text-align:center;position:relative;z-index:1}
+  .form-status{
+    margin-top:18px;border-radius:12px;padding:14px 16px;font-size:14.5px;font-weight:500;
+    position:relative;z-index:1;display:none;
+  }
+  .form-status.show{display:block}
+  .form-status.ok{background:rgba(210,255,77,.10);border:1px solid var(--accent-dim);color:#e7f6c4}
+  .form-status.err{background:rgba(255,90,90,.08);border:1px solid #5a2a2a;color:#f0c5c5}
+  .hp{position:absolute;left:-9999px;top:-9999px;opacity:0;height:0;width:0;overflow:hidden}
+
+  @media(max-width:960px){
+    .contact-grid{grid-template-columns:1fr;gap:40px}
+  }
+  @media(max-width:560px){
+    .form-grid{grid-template-columns:1fr}
+    .form-card{padding:30px 22px}
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:70px 0 50px;margin-top:90px;border-top:1px solid var(--line)}
+  .foot{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap}
+  .foot .logo{font-size:26px}
+  .foot-meta{color:var(--muted);font-size:14px;line-height:1.9}
+  .foot-meta a:hover{color:var(--accent)}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+
+  @media(max-width:960px){
+    .hero-inner{grid-template-columns:1fr;gap:48px}
+    .hero-copy{max-width:none}
+    .demo{max-width:480px}
+    .demo-badge.b2{right:-12px}
+    .demo-badge.b1{left:-12px}
+  }
+  @media(max-width:860px){
+    .nav-links{
+      display:none;flex-direction:column;gap:0;
+      position:absolute;top:100%;left:0;right:0;z-index:99;
+      background:rgba(11,11,12,.96);backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--line);
+      padding:12px 22px 18px;
+    }
+    .nav-links.open{display:flex}
+    .nav-links a{
+      display:block;padding:14px 0;font-size:17px;color:var(--paper);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-links a:last-child{border-bottom:none}
+    .nav-links .nav-cta{
+      margin-top:10px;display:inline-block;text-align:center;
+      padding:13px 24px;border-radius:100px;
+    }
+    .menu-btn{display:block;font-size:28px;line-height:1}
+    .svc-grid{grid-template-columns:1fr}
+    .price-grid{grid-template-columns:1fr;max-width:480px}
+    .ap-grid{grid-template-columns:1fr;gap:38px}
+    .cta-box{padding:48px 30px}
+    .wrap{padding:0 22px}
+    .sec-head{padding-left:22px;padding-right:22px}
+    .hero{padding-top:80px}
+  }
+</style>
+</head>
+<body>
+
+<header id="top">
+  <div class="wrap">
+    <nav>
+      <a class="logo" href="#top" aria-label="Loque Digital">
+        Loque Digital<span class="dot">.</span>
+      </a>
+      <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#approach">Approach</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact" class="nav-cta">Start a project</a>
+      </div>
+      <button class="menu-btn" id="menuBtn" aria-label="Menu">≡</button>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <img src="img/hero-bg.jpg" alt="">
+    <div class="hero-grid"></div>
+    <div class="hero-aurora"></div>
+    <div class="hero-cursor" id="heroCursor"></div>
+  </div>
+  <div class="wrap">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <span class="eyebrow reveal"><span class="dot"></span>SEO · GEO · AEO · Cold Email · Web Dev</span>
+        <h1 class="reveal" style="transition-delay:.06s">Be the <em>answer</em>, not just a result.</h1>
+        <p class="lead reveal" style="transition-delay:.14s">
+          Search is splitting into Google, AI engines, and answer boxes. Loque Digital makes sure your business shows up in all three, then runs cold email that turns visibility into a full pipeline.
+        </p>
+        <div class="hero-actions reveal" style="transition-delay:.22s">
+          <a href="#contact" class="btn btn-primary">Get a growth plan</a>
+          <a href="#services" class="btn btn-ghost">See what we do</a>
+        </div>
+      </div>
+
+      <div class="demo" id="demo" aria-hidden="true">
+        <span class="demo-badge b1"><span class="d"></span>Ranked #1</span>
+        <span class="demo-badge b2"><span class="d"></span>Cited by AI</span>
+        <div class="demo-card" id="demoCard">
+          <div class="demo-bar">
+            <span class="demo-dots"><i></i><i></i><i></i></span>
+            <span class="demo-live">Answer engine</span>
+          </div>
+          <div class="demo-search">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.2-3.2"></path></svg>
+            <span class="demo-q" id="demoQ"><span class="caret"></span></span>
+          </div>
+          <div class="demo-answer" id="demoAns">
+            <div class="ah"><svg viewBox="0 0 24 24"><path d="M12 2 9.2 9.2 2 12l7.2 2.8L12 22l2.8-7.2L22 12l-7.2-2.8z"/></svg><span id="demoTag">AI Overview</span></div>
+            <div class="demo-atext" id="demoText"></div>
+            <div class="demo-cites">
+              <span class="demo-chip brand"><span class="rank">#1</span> Loque Digital</span>
+              <span class="demo-chip">Source</span>
+              <span class="demo-chip">Source</span>
+            </div>
+          </div>
+          <div class="demo-foot">
+            <span class="demo-surface">Answering on <b id="demoSurface">Google AI Overviews</b></span>
+            <span class="demo-progress" id="demoProg"><i class="on"></i><i></i><i></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>Search Engine Optimization</span><span>Generative Engine Optimization</span><span>Answer Engine Optimization</span><span>Cold Email Campaigns</span><span>Custom Web Development</span>
+      <span>Search Engine Optimization</span><span>Generative Engine Optimization</span><span>Answer Engine Optimization</span><span>Cold Email Campaigns</span><span>Custom Web Development</span>
+    </div>
+  </div>
+</section>
+
+<div class="wrap platforms reveal">
+  <div class="plat-label">Optimizing your presence on</div>
+  <div class="plat-row">
+    <span class="pl"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>Google</span>
+    <span class="pl"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M22.2 6.7c-.3-.6-.8-1-1.4-1.3-.6-.3-1.3-.4-2.1-.4h-4.3L13.1 2h-2.4L9.4 5H5.3c-.8 0-1.5.1-2.1.4-.6.3-1.1.7-1.4 1.3S1.3 8 1.3 8.8v7.5c0 .8.2 1.5.5 2.1.3.6.8 1 1.4 1.3.6.3 1.3.4 2.1.4h13.5c.8 0 1.5-.1 2.1-.4.6-.3 1.1-.7 1.4-1.3s.5-1.3.5-2.1V8.8c-.1-.8-.3-1.5-.6-2.1zM12 17.1c-2.5 0-4.5-2-4.5-4.5s2-4.5 4.5-4.5 4.5 2 4.5 4.5-2 4.5-4.5 4.5z"/></svg>ChatGPT</span>
+    <span class="pl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path fill="currentColor" d="M12 6v6l4.5 2.5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>Perplexity</span>
+    <span class="pl"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.22.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>Gemini</span>
+    <span class="pl"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>AI Overviews</span>
+  </div>
+</div>
+
+<section id="services">
+  <div class="sec-head">
+    <div class="sec-tag reveal">What we do</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">Five channels. One job: get you found and get you booked.</h2>
+  </div>
+  <div class="wrap services">
+    <div class="svc-grid">
+
+      <article class="card reveal">
+        <div class="num">01</div>
+        <h3>SEO <span class="full">Search Engine Optimization</span></h3>
+        <p>Rank where buyers still start. We build technical foundations, content, and authority that earn durable, compounding traffic from Google instead of renting it through ads.</p>
+        <ul><li>Technical audits</li><li>Content strategy</li><li>Local & maps</li><li>Link authority</li></ul>
+      </article>
+
+      <article class="card reveal" style="transition-delay:.06s">
+        <div class="num">02</div>
+        <h3>GEO <span class="full">Generative Engine Optimization</span></h3>
+        <p>Get cited inside ChatGPT, Gemini, Perplexity, and Google AI Overviews. We structure your brand so the models pulling answers pull yours, not your competitor's.</p>
+        <ul><li>llms.txt setup</li><li>AI crawler access</li><li>Entity building</li><li>Source citations</li></ul>
+      </article>
+
+      <article class="card reveal">
+        <div class="num">03</div>
+        <h3>AEO <span class="full">Answer Engine Optimization</span></h3>
+        <p>Own the snippet, the voice result, and the zero-click answer. We format your expertise into the structured, schema-rich content answer engines reward with the top spot.</p>
+        <ul><li>Featured snippets</li><li>Schema markup</li><li>FAQ targeting</li><li>Voice search</li></ul>
+      </article>
+
+      <article class="card reveal" style="transition-delay:.06s">
+        <div class="num">04</div>
+        <h3>Cold Email <span class="full">Outbound Campaigns</span></h3>
+        <p>Fill the calendar while organic builds. We handle list building, deliverability, copy, and follow-up sequences that land in the inbox and book real conversations.</p>
+        <ul><li>Lead sourcing</li><li>Inbox warmup</li><li>Copy & sequences</li><li>Reply handling</li></ul>
+      </article>
+
+      <article class="card reveal">
+        <div class="num">05</div>
+        <h3>Web Dev <span class="full">Custom Website Development</span></h3>
+        <p>A great site is the foundation everything else points to. We design and build fast, conversion-ready websites tailored to your brand — no templates, no bloat.</p>
+        <ul><li>Custom design</li><li>Responsive build</li><li>Speed optimization</li><li>CMS integration</li></ul>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<div class="wrap stats">
+  <div class="stats-row">
+    <div class="stat reveal">
+      <div class="val">3</div>
+      <div class="label">Search surfaces covered</div>
+    </div>
+    <div class="stat reveal" style="transition-delay:.06s">
+      <div class="val">92%</div>
+      <div class="label">Client retention rate</div>
+    </div>
+    <div class="stat reveal" style="transition-delay:.12s">
+      <div class="val">4.2×</div>
+      <div class="label">Avg. traffic increase</div>
+    </div>
+    <div class="stat reveal" style="transition-delay:.18s">
+      <div class="val">30 days</div>
+      <div class="label">To first measurable results</div>
+    </div>
+  </div>
+</div>
+
+<section id="approach" class="approach">
+  <div class="sec-head">
+    <div class="sec-tag reveal">How we work</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">Built for the way people search now.</h2>
+  </div>
+  <div class="wrap">
+    <div class="ap-grid">
+      <p class="big reveal">
+        Most agencies still optimize for one screen of blue links. We treat <b>every surface a customer uses to find you</b> as a channel worth winning, from the classic Google result to the AI assistant answering out loud, and we back it with outbound that does not wait for rankings to mature.
+      </p>
+      <div class="steps">
+        <div class="step reveal"><div class="k">01</div><div><h4>Audit</h4><p>We map where you appear and where you vanish across search, AI engines, and answer boxes.</p></div></div>
+        <div class="step reveal" style="transition-delay:.05s"><div class="k">02</div><div><h4>Build</h4><p>Technical fixes, structured content, and outbound infrastructure set up to compound.</p></div></div>
+        <div class="step reveal" style="transition-delay:.1s"><div class="k">03</div><div><h4>Capture</h4><p>Cold email and answer-ready content turn new visibility into booked conversations.</p></div></div>
+        <div class="step reveal" style="transition-delay:.15s"><div class="k">04</div><div><h4>Report</h4><p>Plain numbers on rankings, AI citations, and pipeline. No vanity dashboards.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials" class="testimonials">
+  <div class="sec-head">
+    <div class="sec-tag reveal">What clients say</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">Real results. Real feedback.</h2>
+  </div>
+  <div class="wrap">
+    <div class="testi-grid">
+
+      <div class="testi reveal">
+        <div class="testi-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></div>
+        <q>We went from invisible to showing up in ChatGPT answers within two months. Our inbound leads tripled and we didn't change anything else about our marketing.</q>
+        <div class="testi-who">
+          <div class="testi-avatar">JR</div>
+          <div class="testi-info"><div class="name">James R.</div><div class="role">CEO, SaaS Startup</div></div>
+        </div>
+      </div>
+
+      <div class="testi reveal" style="transition-delay:.06s">
+        <div class="testi-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></div>
+        <q>The cold email campaigns started filling our calendar within the first week. Loque handled everything — list building, copy, follow-ups. We just showed up to the calls.</q>
+        <div class="testi-who">
+          <div class="testi-avatar">MK</div>
+          <div class="testi-info"><div class="name">Maria K.</div><div class="role">Founder, Consulting Firm</div></div>
+        </div>
+      </div>
+
+      <div class="testi reveal" style="transition-delay:.12s">
+        <div class="testi-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></div>
+        <q>Other agencies talked about SEO in isolation. Loque was the first to actually show us how Google, AI search, and outbound work together. Our site went from page 3 to featured snippets.</q>
+        <div class="testi-who">
+          <div class="testi-avatar">DL</div>
+          <div class="testi-info"><div class="name">David L.</div><div class="role">Owner, Home Services</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="sec-head">
+    <div class="sec-tag reveal">Pricing</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">Transparent pricing. No surprise invoices.</h2>
+  </div>
+  <div class="wrap pricing">
+    <div class="price-grid">
+
+      <article class="price-card featured reveal">
+        <div class="badge">Most popular</div>
+        <div class="pname">Search Visibility</div>
+        <div class="psub">AEO · GEO · SEO — the full answer-engine stack</div>
+        <div class="amount">$750<span> / month</span></div>
+        <ul>
+          <li>Technical SEO foundations & content strategy</li>
+          <li>Generative engine optimization for ChatGPT, Gemini & Perplexity</li>
+          <li>Answer engine optimization — snippets, schema & voice</li>
+          <li>Monthly reporting on rankings & AI citations</li>
+        </ul>
+        <div class="trust-pills">
+          <span class="trust-pill"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>Month-to-month</span>
+          <span class="trust-pill"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>Cancel anytime</span>
+          <span class="trust-pill"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>No hidden fees</span>
+        </div>
+        <a href="#contact" class="btn btn-primary">Get started</a>
+      </article>
+
+      <article class="price-card reveal" style="transition-delay:.06s">
+        <div class="pname">Cold Email Campaigns</div>
+        <div class="psub">Outbound that fills your pipeline</div>
+        <div class="amount range">$750–$3,000*<span>/ month · scales with volume</span></div>
+        <ul>
+          <li>Lead sourcing & list building</li>
+          <li>Inbox warmup & deliverability</li>
+          <li>Copywriting & follow-up sequences</li>
+          <li>Reply handling & booked conversations</li>
+        </ul>
+        <p class="price-note">*Cold email pricing scales with list size and send volume — most campaigns land between $750 and $3,000 a month, and larger, higher-volume campaigns will cost more. We'll give you an exact quote once we understand your targets. Every engagement is month-to-month — no long lock-in contracts.</p>
+        <a href="#contact" class="btn btn-ghost">Request a quote</a>
+      </article>
+
+      <article class="price-card reveal" style="transition-delay:.12s">
+        <div class="pname">Custom Website Development</div>
+        <div class="psub">Designed and built for your brand</div>
+        <div class="quote">Custom</div>
+        <ul>
+          <li>Custom design tailored to your business</li>
+          <li>Responsive, fast, and SEO-ready build</li>
+          <li>CMS integration & content setup</li>
+          <li>Fair, upfront pricing based on scope of work</li>
+          <li>Ongoing support & iterations</li>
+        </ul>
+        <p class="price-note">Every website is different — we scope and price based on your goals, pages, and features. We'll walk through it together and give you a clear quote upfront.</p>
+        <a href="#contact" class="btn btn-ghost">Get a quote</a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="approach">
+  <div class="sec-head">
+    <div class="sec-tag reveal">Get started</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">Ready to show up everywhere that matters?</h2>
+  </div>
+  <div class="wrap">
+    <div class="contact-grid">
+
+      <div class="contact-copy reveal">
+        <p class="big">Tell us about your business and we'll put together a <b>plan across search, AI engines, and outbound</b>. No pressure, no jargon.</p>
+        <ul class="contact-points">
+          <li><svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>A free audit of where you appear — and where you vanish.</li>
+          <li><svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>A clear, plain-numbers plan tailored to your goals.</li>
+          <li><svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>No long lock-in contracts — every engagement is month-to-month.</li>
+        </ul>
+        <div class="contact-direct">
+          Prefer email? Reach us directly at <a href="mailto:hello@loquelogic.com">hello@loquelogic.com</a>
+        </div>
+      </div>
+
+      <div class="form-card reveal" style="transition-delay:.06s">
+        <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+          <!-- Web3Forms config -->
+          <input type="hidden" name="access_key" value="c8b900d1-4085-4a4b-9b99-5bcbce6175b3">
+          <input type="hidden" name="subject" value="New growth-plan request — Loque Digital">
+          <input type="hidden" name="from_name" value="Loque Digital Website">
+          <!-- Honeypot spam filter -->
+          <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="cf-name">Name <span class="req">*</span></label>
+              <input type="text" id="cf-name" name="name" placeholder="Jane Doe" required>
+            </div>
+            <div class="field">
+              <label for="cf-email">Email <span class="req">*</span></label>
+              <input type="email" id="cf-email" name="email" placeholder="jane@company.com" required>
+            </div>
+            <div class="field">
+              <label for="cf-company">Company</label>
+              <input type="text" id="cf-company" name="company" placeholder="Company name">
+            </div>
+            <div class="field">
+              <label for="cf-phone">Phone</label>
+              <input type="tel" id="cf-phone" name="phone" placeholder="(555) 123-4567">
+            </div>
+            <div class="field">
+              <label for="cf-service">I'm interested in</label>
+              <select id="cf-service" name="service">
+                <option value="Not sure yet — help me decide">Not sure yet — help me decide</option>
+                <option value="Search Visibility (SEO · GEO · AEO)">Search Visibility (SEO · GEO · AEO)</option>
+                <option value="Cold Email Campaigns">Cold Email Campaigns</option>
+                <option value="Custom Website Development">Custom Website Development</option>
+                <option value="A bit of everything">A bit of everything</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="cf-budget">Monthly budget</label>
+              <select id="cf-budget" name="budget">
+                <option value="Not sure yet">Not sure yet</option>
+                <option value="Under $750/mo">Under $750/mo</option>
+                <option value="$750–$1,500/mo">$750–$1,500/mo</option>
+                <option value="$1,500–$3,000/mo">$1,500–$3,000/mo</option>
+                <option value="$3,000+/mo">$3,000+/mo</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="cf-message">Tell us about your business <span class="req">*</span></label>
+              <textarea id="cf-message" name="message" placeholder="What you do, who you're trying to reach, and what you'd like help with." required></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="cf-submit">Get a growth plan</button>
+          <div class="form-fine">We'll only use your details to follow up about your plan. No spam, ever.</div>
+          <div class="form-status" id="cf-status" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <a class="logo" href="#top" aria-label="Loque Digital">
+        Loque Digital<span class="dot">.</span>
+      </a>
+      <div class="foot-meta">
+        SEO · GEO · AEO · Cold Email · Web Development<br>
+        <a href="mailto:hello@loquelogic.com">hello@loquelogic.com</a><br>
+        &copy; <span id="yr"></span> Loque Digital. All rights reserved.
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // year
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // mobile menu toggle
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.querySelector('.nav-links');
+  if (menuBtn && navLinks){
+    menuBtn.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      menuBtn.textContent = open ? '✕' : '≡';
+      menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Menu');
+    });
+    // close menu when a link is tapped
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        navLinks.removeAttribute('style'); // clear any leftover inline display
+        menuBtn.textContent = '≡';
+        menuBtn.setAttribute('aria-label', 'Menu');
+      });
+    });
+  }
+
+  // nav border on scroll
+  const head = document.querySelector('header');
+  addEventListener('scroll', () => head.classList.toggle('scrolled', scrollY > 12));
+
+  // scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  }, { threshold:.14 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // card pointer glow
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('pointermove', e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', ((e.clientX - r.left)/r.width*100) + '%');
+    });
+  });
+
+  // fire reveals already in view on load
+  addEventListener('load', () => {
+    document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('in'));
+  });
+
+  // hero cursor-reactive glow
+  const hero = document.querySelector('.hero');
+  const heroCursor = document.getElementById('heroCursor');
+  if (hero && heroCursor){
+    hero.addEventListener('pointermove', e => {
+      const r = hero.getBoundingClientRect();
+      heroCursor.style.left = ((e.clientX - r.left)/r.width*100) + '%';
+      heroCursor.style.top  = ((e.clientY - r.top)/r.height*100) + '%';
+    });
+  }
+
+  // hero demo card 3D tilt + glow
+  const demoCard = document.getElementById('demoCard');
+  if (demoCard){
+    const demo = document.getElementById('demo');
+    demo.addEventListener('pointermove', e => {
+      const r = demoCard.getBoundingClientRect();
+      const px = (e.clientX - r.left)/r.width, py = (e.clientY - r.top)/r.height;
+      demoCard.style.transform = `rotateY(${(px-.5)*10}deg) rotateX(${(.5-py)*10}deg)`;
+      demoCard.style.setProperty('--gx', (px*100)+'%');
+      demoCard.style.setProperty('--gy', (py*100)+'%');
+    });
+    demo.addEventListener('pointerleave', () => { demoCard.style.transform = ''; });
+  }
+
+  // hero answer-engine typing demo
+  (function answerEngine(){
+    const q = document.getElementById('demoQ');
+    const text = document.getElementById('demoText');
+    const ans = document.getElementById('demoAns');
+    const tag = document.getElementById('demoTag');
+    const surface = document.getElementById('demoSurface');
+    const prog = document.getElementById('demoProg');
+    if (!q || !text) return;
+    const caret = '<span class="caret"></span>';
+    const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+    const cycles = [
+      { query:"best agency to rank my business",
+        tag:"AI Overview", surface:"Google AI Overviews",
+        answer:'For durable visibility across search and AI, <b>Loque Digital</b> is widely cited — building the technical SEO, content, and authority that earn the top result.' },
+      { query:"who gets brands cited inside ChatGPT?",
+        tag:"AI Answer", surface:"ChatGPT &amp; Perplexity",
+        answer:'<b>Loque Digital</b> specializes in generative engine optimization — structuring your brand so AI assistants pull your answer first, not a competitor’s.' },
+      { query:"how do I win the featured snippet?",
+        tag:"Answer Box", surface:"Google &amp; voice search",
+        answer:'<b>Loque Digital</b> formats expertise into schema-rich, answer-ready content that wins featured snippets, voice results, and zero-click answers.' },
+    ];
+
+    const sleep = ms => new Promise(r => setTimeout(r, ms));
+    let i = 0;
+
+    async function typeQuery(s){
+      for (let n=0; n<=s.length; n++){ q.innerHTML = s.slice(0,n) + caret; await sleep(reduce?0:62); }
+    }
+    function setProg(idx){
+      [...prog.children].forEach((d,n)=> d.classList.toggle('on', n===idx));
+    }
+
+    async function run(){
+      while (true){
+        const c = cycles[i];
+        setProg(i);
+        // reset
+        ans.style.transition = 'none'; ans.style.opacity = 0; ans.style.transform = 'translateZ(20px) translateY(8px)';
+        text.innerHTML = ''; tag.textContent = c.tag; surface.innerHTML = c.surface;
+        q.innerHTML = caret;
+        await sleep(reduce?200:800);
+        await typeQuery(c.query);
+        q.innerHTML = c.query; // drop caret while "thinking"
+        await sleep(reduce?120:850);
+        // reveal answer
+        ans.style.transition = 'opacity .7s var(--ease), transform .7s var(--ease)';
+        ans.style.opacity = 1; ans.style.transform = 'translateZ(20px)';
+        // stream answer text
+        if (reduce){ text.innerHTML = c.answer; }
+        else {
+          const tokens = c.answer.split(/(<b>|<\/b>| )/).filter(Boolean);
+          let built = '';
+          for (const t of tokens){ built += t; text.innerHTML = built; await sleep(55); }
+        }
+        await sleep(reduce?1400:4800);
+        i = (i+1) % cycles.length;
+      }
+    }
+    run();
+  })();
+
+  // contact form — Web3Forms AJAX submit with inline status
+  (function contactForm(){
+    const form = document.getElementById('contactForm');
+    if (!form) return;
+    const status = document.getElementById('cf-status');
+    const btn = document.getElementById('cf-submit');
+    const btnText = btn.textContent;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.className = 'form-status';
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form)
+        });
+        const data = await res.json();
+        if (res.ok && data.success){
+          status.textContent = "Thanks — your request is in. We'll be in touch within one business day.";
+          status.className = 'form-status ok show';
+          form.reset();
+        } else {
+          status.textContent = data.message || 'Something went wrong. Please email hello@loquelogic.com.';
+          status.className = 'form-status err show';
+        }
+      } catch (err) {
+        status.textContent = 'Network error — please try again or email hello@loquelogic.com.';
+        status.className = 'form-status err show';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = btnText;
+      }
+    });
+  })();
+</script>
+</body>
+</html>
