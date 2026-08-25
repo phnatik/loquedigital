@@ -12,487 +12,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-5LMTM2MK');</script>
 <!-- End Google Tag Manager -->
 
-<title>Loque Logic — Be the answer, not just a result</title>
-<meta name="description" content="Loque Logic builds visibility where people actually search: Google, AI engines, and answer boxes. Plus cold email campaigns that fill your pipeline.">
+<title>Loque Agents — Bespoke Executive AI Assistant</title>
+<meta name="description" content="We don't sell you software and a login. We build and run an executive AI assistant around how your business actually works — email triage, replies drafted in your voice, calendar defended, follow-through tracked. Nothing sends without your approval.">
+<link rel="canonical" href="https://loqueagent.com/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://loqueagent.com/">
+<meta property="og:title" content="Loque Agents — Bespoke Executive AI Assistant">
+<meta property="og:description" content="We build and run the system for you. Email triage, replies drafted in your voice, calendar defended, follow-through tracked. Nothing goes out under your name without your approval.">
+<meta property="og:image" content="https://loqueagent.com/img/loque-agent-dark.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300..900&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#0b0b0c;
-    --ink-soft:#141416;
-    --ink-card:#161618;
-    --line:#26262a;
-    --paper:#f5f4ee;
-    --muted:#8d8d88;
-    --accent:#d2ff4d;
-    --accent-dim:#a9cf3c;
-    --maxw:1180px;
-    --ease:cubic-bezier(.2,.7,.2,1);
-  }
-
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{
-    background:var(--ink);
-    color:var(--paper);
-    font-family:"Hanken Grotesk",sans-serif;
-    font-size:18px;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-
-  /* grain + glow atmosphere */
-  body::before{
-    content:"";
-    position:fixed;inset:0;z-index:0;pointer-events:none;
-    background:
-      radial-gradient(900px 600px at 78% -8%, rgba(210,255,77,.10), transparent 60%),
-      radial-gradient(700px 500px at -5% 30%, rgba(210,255,77,.05), transparent 55%);
-  }
-  body::after{
-    content:"";
-    position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.04;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px;position:relative;z-index:2}
-
-  a{color:inherit;text-decoration:none}
-
-  /* ---------- NAV ---------- */
-  header{
-    position:sticky;top:0;z-index:50;
-    backdrop-filter:blur(12px);
-    background:rgba(11,11,12,.7);
-    border-bottom:1px solid transparent;
-    transition:border-color .3s var(--ease),background .3s var(--ease);
-  }
-  header.scrolled{border-bottom-color:var(--line)}
-  nav{display:flex;align-items:center;justify-content:space-between;height:78px;position:relative}
-
-  /* LOGO — nav uses the wordmark crop, footer uses the full lockup with tagline */
-  .logo{display:inline-flex;align-items:center;line-height:0}
-  .logo img{display:block;height:54px;width:auto}
-  .nav-right{display:flex;align-items:center;gap:28px}
-  .nav-phone{
-    display:inline-flex;align-items:center;gap:8px;
-    font-family:"Hanken Grotesk";font-weight:700;font-size:18px;
-    color:var(--paper);white-space:nowrap;transition:color .2s;
-  }
-  .nav-phone:hover{color:var(--accent)}
-  .nav-phone-icon{color:var(--accent);font-size:20px;line-height:1}
-  .nav-links{display:flex;align-items:center;gap:38px}
-  .nav-links a{font-size:15px;color:var(--muted);transition:color .2s}
-  .nav-links a:hover{color:var(--paper)}
-  .nav-cta{
-    font-family:"Hanken Grotesk";font-weight:600;font-size:15px;
-    color:var(--ink)!important;background:var(--paper);
-    padding:11px 20px;border-radius:100px;transition:transform .2s var(--ease),background .2s;
-  }
-  .nav-cta:hover{transform:translateY(-2px);background:var(--accent)}
-  .menu-btn{display:none;background:none;border:0;color:var(--paper);font-size:24px;cursor:pointer}
-
-  /* ---------- HERO ---------- */
-  .hero{padding:128px 0 70px;position:relative;overflow:hidden}
-  .hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-  .hero-bg img{
-    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-    object-position:center 40%;opacity:.20;
-  }
-  /* drifting tech grid */
-  .hero-grid{
-    position:absolute;inset:-2px;
-    background-image:
-      linear-gradient(rgba(210,255,77,.055) 1px,transparent 1px),
-      linear-gradient(90deg,rgba(210,255,77,.055) 1px,transparent 1px);
-    background-size:56px 56px;
-    -webkit-mask:radial-gradient(820px 560px at 68% 32%,#000 0%,transparent 72%);
-    mask:radial-gradient(820px 560px at 68% 32%,#000 0%,transparent 72%);
-    animation:gridDrift 22s linear infinite;
-  }
-  @keyframes gridDrift{to{background-position:56px 56px}}
-  /* slow rotating aurora */
-  .hero-aurora{
-    position:absolute;width:820px;height:820px;right:-200px;top:-260px;border-radius:50%;
-    background:conic-gradient(from 0deg,rgba(210,255,77,.30),transparent 38%,rgba(90,170,160,.16) 55%,transparent 72%,rgba(210,255,77,.30));
-    filter:blur(64px);opacity:.5;animation:spin 30s linear infinite;
-  }
-  @keyframes spin{to{transform:rotate(360deg)}}
-  /* gradient vignette so text stays legible */
-  .hero-bg::before{
-    content:"";position:absolute;inset:0;z-index:3;
-    background:
-      linear-gradient(180deg,var(--ink) 0%,transparent 26%,transparent 68%,var(--ink) 100%),
-      linear-gradient(90deg,var(--ink) 4%,transparent 60%);
-  }
-  /* cursor-reactive glow */
-  .hero-cursor{
-    position:absolute;z-index:1;width:540px;height:540px;border-radius:50%;
-    left:var(--cx,72%);top:var(--cy,34%);transform:translate(-50%,-50%);
-    background:radial-gradient(circle,rgba(210,255,77,.12),transparent 62%);
-    transition:left .35s var(--ease),top .35s var(--ease);
-  }
-  .hero .wrap,.hero .ticker{position:relative;z-index:2}
-  .hero-inner{display:grid;grid-template-columns:1.04fr .96fr;gap:56px;align-items:center}
-  .hero-copy{max-width:620px}
-  .eyebrow{
-    display:inline-flex;align-items:center;gap:10px;
-    font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);
-    font-weight:600;margin-bottom:28px;
-  }
-  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent);animation:pulse 2.4s infinite}
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-
-  h1{
-    font-family:"Outfit";
-    font-weight:800;
-    font-size:clamp(44px,5.6vw,84px);
-    line-height:.99;
-    letter-spacing:-.035em;
-    max-width:14ch;
-  }
-  h1 em{font-style:normal;color:var(--accent);position:relative;white-space:nowrap}
-  h1 em::after{
-    content:"";position:absolute;left:0;bottom:-.02em;width:100%;height:.09em;border-radius:3px;
-    background:var(--accent);box-shadow:0 0 18px var(--accent);
-    transform:scaleX(0);transform-origin:left;animation:hlIn .6s var(--ease) .55s forwards;
-  }
-  @keyframes hlIn{to{transform:scaleX(1)}}
-
-  .hero p.lead{
-    margin-top:30px;max-width:54ch;font-size:clamp(18px,2vw,21px);color:#cfceca;
-  }
-  .hero-actions{display:flex;flex-wrap:wrap;gap:16px;margin-top:42px}
-  .btn{
-    font-family:"Hanken Grotesk";font-weight:600;font-size:16px;
-    padding:15px 28px;border-radius:100px;cursor:pointer;border:1px solid transparent;
-    transition:transform .2s var(--ease),background .2s,border-color .2s;
-  }
-  .btn-primary{background:var(--accent);color:var(--ink)}
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(210,255,77,.28)}
-  .btn-ghost{border-color:var(--line);color:var(--paper)}
-  .btn-ghost:hover{border-color:var(--paper);transform:translateY(-2px)}
-
-  /* ---------- HERO ANSWER-ENGINE DEMO ---------- */
-  .demo{
-    position:relative;perspective:1400px;
-    opacity:0;transform:translateY(30px);
-    animation:demoIn .9s var(--ease) .35s forwards;
-  }
-  @keyframes demoIn{to{opacity:1;transform:none}}
-  .demo-card{
-    position:relative;border-radius:22px;padding:20px;
-    background:linear-gradient(180deg,rgba(26,26,29,.92),rgba(16,16,18,.92));
-    border:1px solid #2f2f35;
-    box-shadow:0 40px 90px rgba(0,0,0,.55),0 0 0 1px rgba(210,255,77,.04),inset 0 1px 0 rgba(255,255,255,.04);
-    transform-style:preserve-3d;
-    transition:transform .25s var(--ease);
-    will-change:transform;
-  }
-  .demo-card::before{
-    content:"";position:absolute;inset:0;border-radius:22px;pointer-events:none;
-    background:radial-gradient(420px 200px at var(--gx,80%) var(--gy,0%),rgba(210,255,77,.14),transparent 70%);
-    opacity:.9;
-  }
-  .demo-bar{display:flex;align-items:center;gap:10px;margin-bottom:14px;transform:translateZ(40px)}
-  .demo-dots{display:flex;gap:6px}
-  .demo-dots i{width:10px;height:10px;border-radius:50%;background:#34343a;display:block}
-  .demo-live{margin-left:auto;display:inline-flex;align-items:center;gap:7px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
-  .demo-live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);animation:pulse 2s infinite}
-  .demo-search{
-    display:flex;align-items:center;gap:12px;background:#0f0f11;border:1px solid var(--line);
-    border-radius:13px;padding:14px 16px;transform:translateZ(30px);
-  }
-  .demo-search svg{flex:none;width:18px;height:18px;stroke:var(--muted)}
-  .demo-q{font-family:"Hanken Grotesk";font-size:15.5px;color:var(--paper);min-height:20px;line-height:1.3}
-  .demo-q .caret{display:inline-block;width:2px;height:1.05em;background:var(--accent);margin-left:1px;transform:translateY(2px);animation:blink 1s steps(1) infinite}
-  @keyframes blink{50%{opacity:0}}
-  .demo-answer{
-    margin-top:14px;border:1px solid var(--line);border-radius:14px;overflow:hidden;opacity:0;
-    background:linear-gradient(180deg,rgba(210,255,77,.05),transparent);transform:translateZ(20px) translateY(8px);
-  }
-  .demo-answer .ah{display:flex;align-items:center;gap:9px;padding:11px 15px;border-bottom:1px solid var(--line);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:700}
-  .demo-answer .ah svg{width:14px;height:14px;fill:var(--accent)}
-  .demo-atext{padding:15px 16px;font-size:14.5px;line-height:1.55;color:#d8d7d1}
-  .demo-atext b{color:var(--paper);background:linear-gradient(transparent 62%,rgba(210,255,77,.34) 0);padding:0 2px;font-weight:600}
-  .demo-cites{display:flex;flex-wrap:wrap;gap:8px;padding:0 16px 16px}
-  .demo-chip{
-    font-size:11.5px;font-weight:600;color:#cfcec9;border:1px solid var(--line);border-radius:100px;
-    padding:5px 11px;display:inline-flex;align-items:center;gap:6px;background:#141416;
-  }
-  .demo-chip.brand{color:var(--ink);background:var(--accent);border-color:var(--accent)}
-  .demo-chip .rank{opacity:.6}
-  .demo-foot{display:flex;align-items:center;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line);transform:translateZ(15px)}
-  .demo-surface{font-size:11.5px;color:var(--muted);font-weight:600}
-  .demo-surface b{color:var(--paper);font-weight:700}
-  .demo-progress{margin-left:auto;display:flex;gap:5px}
-  .demo-progress i{width:18px;height:4px;border-radius:3px;background:#2c2c32;display:block;transition:background .3s}
-  .demo-progress i.on{background:var(--accent)}
-  /* floating accent badges around the card */
-  .demo-badge{
-    position:absolute;z-index:3;display:inline-flex;align-items:center;gap:7px;
-    font-family:"Outfit";font-weight:700;font-size:13px;letter-spacing:-.01em;color:var(--paper);
-    background:rgba(20,20,22,.88);border:1px solid #34343c;border-radius:100px;padding:9px 14px;
-    box-shadow:0 16px 40px rgba(0,0,0,.5);backdrop-filter:blur(8px);
-  }
-  .demo-badge .d{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
-  .demo-badge.b1{top:-18px;left:-26px;animation:float1 6s ease-in-out infinite}
-  .demo-badge.b2{bottom:46px;right:-30px;animation:float2 7s ease-in-out infinite}
-  @keyframes float1{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-  @keyframes float2{0%,100%{transform:translateY(0)}50%{transform:translateY(9px)}}
-
-  @media(prefers-reduced-motion:reduce){
-    .hero-grid,.hero-aurora,.demo-badge.b1,.demo-badge.b2,.demo-live::before,.eyebrow .dot{animation:none}
-  }
-
-  /* ticker */
-  .ticker{margin-top:90px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:18px 0;position:relative;z-index:2}
-  .ticker-track{display:flex;gap:48px;white-space:nowrap;animation:scroll 26s linear infinite;width:max-content}
-  .ticker-track span{font-family:"Outfit";font-weight:600;font-size:18px;color:var(--muted);display:inline-flex;align-items:center;gap:48px}
-  .ticker-track span::after{content:"✦";color:var(--accent)}
-  @keyframes scroll{to{transform:translateX(-50%)}}
-
-  /* ---------- SECTION SHELL ---------- */
-  section{position:relative;z-index:2}
-  .sec-head{max-width:var(--maxw);margin:0 auto;padding:110px 32px 0}
-  .sec-tag{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:18px}
-  .sec-title{font-family:"Outfit";font-weight:800;font-size:clamp(32px,4.6vw,56px);line-height:1.02;letter-spacing:-.03em;max-width:18ch}
-
-  /* ---------- SERVICES ---------- */
-  .services{padding:44px 0 0}
-  .svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:54px}
-  .card{
-    background:var(--ink-card);border:1px solid var(--line);border-radius:20px;
-    padding:40px 36px;position:relative;overflow:hidden;
-    transition:transform .35s var(--ease),border-color .35s,background .35s;
-  }
-  .card::before{
-    content:"";position:absolute;inset:0;opacity:0;transition:opacity .35s;
-    background:radial-gradient(420px 200px at var(--mx,80%) -10%, rgba(210,255,77,.14), transparent 70%);
-  }
-  .card:hover{transform:translateY(-6px);border-color:#3a3a40}
-  .card:hover::before{opacity:1}
-  .card .num{font-family:"Outfit";font-size:14px;color:var(--accent);font-weight:600;letter-spacing:.05em}
-  .card h3{font-family:"Outfit";font-weight:800;font-size:30px;letter-spacing:-.02em;margin:18px 0 6px;display:flex;align-items:baseline;gap:12px}
-  .card h3 .full{font-family:"Hanken Grotesk";font-weight:500;font-size:15px;color:var(--muted);letter-spacing:0}
-  .card p{color:#c2c1bd;font-size:16.5px;margin-top:8px}
-  .card ul{list-style:none;margin-top:22px;display:flex;flex-wrap:wrap;gap:8px}
-  .card li{font-size:13.5px;color:var(--paper);border:1px solid var(--line);border-radius:100px;padding:6px 14px}
-
-  /* ---------- APPROACH ---------- */
-  .approach{padding:0 0}
-  .ap-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:start;margin-top:54px}
-  .ap-grid p.big{font-size:clamp(22px,2.6vw,30px);line-height:1.42;font-family:"Outfit";font-weight:400;letter-spacing:-.01em}
-  .ap-grid p.big b{color:var(--accent);font-weight:600}
-  .steps{display:flex;flex-direction:column;gap:0}
-  .step{display:flex;gap:22px;padding:24px 0;border-top:1px solid var(--line)}
-  .step:last-child{border-bottom:1px solid var(--line)}
-  .step .k{font-family:"Outfit";font-weight:700;font-size:20px;color:var(--accent);min-width:42px}
-  .step h4{font-family:"Outfit";font-weight:600;font-size:20px;letter-spacing:-.01em;margin-bottom:4px}
-  .step p{color:var(--muted);font-size:15.5px}
-
-  /* ---------- PRICING ---------- */
-  .pricing{padding:44px 0 0}
-  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:54px}
-  .price-card{
-    background:var(--ink-card);border:1px solid var(--line);border-radius:20px;
-    padding:40px 36px;position:relative;overflow:hidden;display:flex;flex-direction:column;
-    transition:transform .35s var(--ease),border-color .35s;
-  }
-  .price-card:hover{transform:translateY(-6px);border-color:#3a3a40}
-  .price-card.featured{border-color:var(--accent-dim);background:linear-gradient(180deg,rgba(210,255,77,.06),transparent 60%)}
-  .price-card .badge{
-    position:absolute;top:24px;right:24px;font-size:12px;font-weight:600;letter-spacing:.05em;
-    text-transform:uppercase;color:var(--ink);background:var(--accent);padding:5px 12px;border-radius:100px;
-  }
-  .price-card .pname{font-family:"Outfit";font-weight:700;font-size:22px;letter-spacing:-.01em}
-  .price-card .psub{color:var(--muted);font-size:14.5px;margin-top:6px}
-  .price-card .amount{font-family:"Outfit";font-weight:800;font-size:clamp(38px,3.6vw,52px);letter-spacing:-.03em;margin:26px 0 2px;line-height:1}
-  .price-card .amount span{font-family:"Hanken Grotesk";font-weight:500;font-size:16px;color:var(--muted);letter-spacing:0}
-  .price-card .amount.range{font-size:clamp(32px,3vw,42px);white-space:nowrap}
-  .price-card .amount.range span{display:block;margin-top:4px}
-  .price-card .quote{font-family:"Outfit";font-weight:800;font-size:34px;letter-spacing:-.02em;margin:26px 0 2px;line-height:1}
-  .price-card ul{list-style:none;margin:24px 0 32px;display:flex;flex-direction:column;gap:12px}
-  .price-card li{font-size:15.5px;color:#d6d5cf;display:flex;align-items:flex-start;gap:11px}
-  .price-card li::before{content:"";flex:none;width:18px;height:18px;margin-top:2px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(210,255,77,.12);
-    -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z'/%3E%3C/svg%3E") center/13px no-repeat;
-    mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z'/%3E%3C/svg%3E") center/13px no-repeat;background-color:var(--accent)}
-  .price-card .btn{margin-top:18px;width:100%;text-align:center}
-  .price-note{margin-top:26px;color:var(--muted);font-size:14.5px;max-width:60ch}
-  .price-card .price-note{margin:auto 0 0;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;line-height:1.55}
-
-  /* ---------- TRUST: PLATFORM STRIP ---------- */
-  .platforms{padding:60px 0 0;position:relative;z-index:2}
-  .plat-label{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;text-align:center;margin-bottom:28px}
-  .plat-row{display:flex;align-items:center;justify-content:center;gap:clamp(28px,5vw,60px);flex-wrap:wrap}
-  .plat-row .pl{display:inline-flex;align-items:center;gap:9px;font-family:"Outfit";font-weight:700;font-size:18px;color:#5a5a56;letter-spacing:-.01em;transition:color .25s}
-  .plat-row .pl:hover{color:var(--paper)}
-  .plat-row .pl svg{width:22px;height:22px;flex:none;opacity:.55}
-
-  /* ---------- TRUST: STATS BAR ---------- */
-  .stats{padding:80px 0 0;position:relative;z-index:2}
-  .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-  .stat{text-align:center;padding:36px 20px;border:1px solid var(--line);border-radius:18px;background:var(--ink-card)}
-  .stat .val{font-family:"Outfit";font-weight:800;font-size:clamp(34px,4vw,50px);letter-spacing:-.03em;color:var(--accent);line-height:1}
-  .stat .label{margin-top:8px;font-size:14.5px;color:var(--muted);font-weight:500}
-
-  /* ---------- TRUST: TESTIMONIALS ---------- */
-  .testimonials{padding:0 0}
-  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:54px}
-  .testi{
-    background:var(--ink-card);border:1px solid var(--line);border-radius:20px;
-    padding:36px 32px;display:flex;flex-direction:column;
-  }
-  .testi-stars{display:flex;gap:3px;margin-bottom:18px}
-  .testi-stars svg{width:16px;height:16px;fill:var(--accent)}
-  .testi q{font-size:16px;line-height:1.6;color:#d6d5cf;flex:1;display:block;quotes:none}
-  .testi-who{margin-top:22px;padding-top:18px;border-top:1px solid var(--line);display:flex;align-items:center;gap:14px}
-  .testi-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#7ab82a);display:grid;place-items:center;font-family:"Outfit";font-weight:800;font-size:16px;color:var(--ink);flex:none}
-  .testi-info .name{font-family:"Outfit";font-weight:700;font-size:15px;color:var(--paper)}
-  .testi-info .role{font-size:13px;color:var(--muted);margin-top:2px}
-
-  /* ---------- TRUST: PRICING BADGES ---------- */
-  .trust-pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:20px;border-top:1px solid var(--line)}
-  .trust-pill{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:var(--muted);letter-spacing:.02em}
-  .trust-pill svg{width:15px;height:15px;fill:var(--accent);flex:none}
-
-  @media(max-width:960px){
-    .stats-row{grid-template-columns:repeat(2,1fr)}
-    .testi-grid{grid-template-columns:1fr;max-width:520px}
-  }
-  @media(max-width:860px){
-    .stats-row{grid-template-columns:1fr;max-width:320px;margin:0 auto}
-  }
-
-  /* ---------- CTA ---------- */
-  .cta{margin:120px 0 0}
-  .cta-box{
-    max-width:var(--maxw);margin:0 auto;
-    background:var(--accent);
-    color:var(--ink);border-radius:28px;
-    padding:72px 56px;position:relative;overflow:hidden;
-  }
-  .cta-box::after{
-    content:"";position:absolute;right:-60px;bottom:-90px;width:340px;height:340px;border-radius:50%;
-    background:rgba(11,11,12,.10);
-  }
-  .cta-box h2{font-family:"Outfit";font-weight:800;font-size:clamp(34px,4.8vw,60px);line-height:1;letter-spacing:-.03em;max-width:16ch;position:relative}
-  .cta-box p{margin-top:20px;max-width:48ch;font-size:19px;color:#1c1c10;position:relative}
-  .cta-box .btn{display:inline-block;margin-top:48px;background:var(--ink);color:var(--paper);position:relative}
-  .cta-box .btn:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(11,11,12,.3)}
-
-  /* ---------- CONTACT FORM ---------- */
-  .contact-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:54px;align-items:start;margin-top:54px}
-  .contact-copy .big{font-size:clamp(20px,2.4vw,27px);line-height:1.42;font-family:"Outfit";font-weight:400;letter-spacing:-.01em;color:#e7e6e1}
-  .contact-copy .big b{color:var(--accent);font-weight:600}
-  .contact-points{list-style:none;margin-top:30px;display:flex;flex-direction:column;gap:16px}
-  .contact-points li{display:flex;align-items:flex-start;gap:13px;font-size:16px;color:#cfceca}
-  .contact-points li svg{flex:none;width:20px;height:20px;fill:var(--accent);margin-top:2px}
-  .contact-direct{margin-top:32px;padding-top:24px;border-top:1px solid var(--line);font-size:15px;color:var(--muted)}
-  .contact-direct a{color:var(--paper);font-weight:600}
-  .contact-direct a:hover{color:var(--accent)}
-
-  .form-card{
-    background:var(--ink-card);border:1px solid var(--line);border-radius:22px;
-    padding:38px 34px;position:relative;overflow:hidden;
-  }
-  .form-card::before{
-    content:"";position:absolute;inset:0;pointer-events:none;
-    background:radial-gradient(420px 200px at 100% -10%,rgba(210,255,77,.08),transparent 70%);
-  }
-  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;position:relative;z-index:1}
-  .field{display:flex;flex-direction:column;gap:8px}
-  .field.full{grid-column:1 / -1}
-  .field label{font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--muted)}
-  .field label .req{color:var(--accent)}
-  .field input,.field select,.field textarea{
-    font-family:"Hanken Grotesk";font-size:15.5px;color:var(--paper);
-    background:#0f0f11;border:1px solid var(--line);border-radius:12px;
-    padding:13px 15px;width:100%;transition:border-color .2s,box-shadow .2s;
-  }
-  .field textarea{resize:vertical;min-height:118px}
-  .field select{appearance:none;cursor:pointer;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238d8d88' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-    background-repeat:no-repeat;background-position:right 14px center;background-size:16px;padding-right:40px}
-  .field input::placeholder,.field textarea::placeholder{color:#5e5e5a}
-  .field input:focus,.field select:focus,.field textarea:focus{
-    outline:none;border-color:var(--accent-dim);box-shadow:0 0 0 3px rgba(210,255,77,.12)}
-  .form-card .btn{margin-top:24px;width:100%;text-align:center;position:relative;z-index:1}
-  .form-card .btn[disabled]{opacity:.6;cursor:wait}
-  .form-fine{margin-top:14px;font-size:12.5px;color:var(--muted);text-align:center;position:relative;z-index:1}
-  .form-status{
-    margin-top:18px;border-radius:12px;padding:14px 16px;font-size:14.5px;font-weight:500;
-    position:relative;z-index:1;display:none;
-  }
-  .form-status.show{display:block}
-  .form-status.ok{background:rgba(210,255,77,.10);border:1px solid var(--accent-dim);color:#e7f6c4}
-  .form-status.err{background:rgba(255,90,90,.08);border:1px solid #5a2a2a;color:#f0c5c5}
-  .hp{position:absolute;left:-9999px;top:-9999px;opacity:0;height:0;width:0;overflow:hidden}
-
-  @media(max-width:960px){
-    .contact-grid{grid-template-columns:1fr;gap:40px}
-  }
-  @media(max-width:560px){
-    .form-grid{grid-template-columns:1fr}
-    .form-card{padding:30px 22px}
-  }
-
-  /* ---------- FOOTER ---------- */
-  footer{padding:70px 0 50px;margin-top:90px;border-top:1px solid var(--line)}
-  .foot{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap}
-  .foot .logo img{height:76px}
-  .foot-meta{color:var(--muted);font-size:14px;line-height:1.9}
-  .foot-meta a:hover{color:var(--accent)}
-
-  /* reveal */
-  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
-  .reveal.in{opacity:1;transform:none}
-
-  @media(max-width:960px){
-    .hero-inner{grid-template-columns:1fr;gap:48px}
-    .hero-copy{max-width:none}
-    .demo{max-width:480px}
-    .demo-badge.b2{right:-12px}
-    .demo-badge.b1{left:-12px}
-  }
-  @media(max-width:860px){
-    .nav-links{
-      display:none;flex-direction:column;gap:0;
-      position:absolute;top:100%;left:0;right:0;z-index:99;
-      background:rgba(11,11,12,.96);backdrop-filter:blur(16px);
-      border-bottom:1px solid var(--line);
-      padding:12px 22px 18px;
-    }
-    .nav-links.open{display:flex}
-    .nav-links a{
-      display:block;padding:14px 0;font-size:17px;color:var(--paper);
-      border-bottom:1px solid var(--line);
-    }
-    .nav-links a:last-child{border-bottom:none}
-    .nav-links .nav-cta{
-      margin-top:10px;display:inline-block;text-align:center;
-      padding:13px 24px;border-radius:100px;
-    }
-    .nav-right{gap:16px}
-    .nav-phone{font-size:15px}
-    .menu-btn{display:block;font-size:28px;line-height:1}
-    .svc-grid{grid-template-columns:1fr}
-    .price-grid{grid-template-columns:1fr;max-width:480px}
-    .ap-grid{grid-template-columns:1fr;gap:38px}
-    .cta-box{padding:48px 30px}
-    .wrap{padding:0 22px}
-    .sec-head{padding-left:22px;padding-right:22px}
-    .hero{padding-top:80px}
-  }
-  @media(max-width:430px){
-    .logo img{height:38px}
-    .foot .logo img{height:60px}
-    .nav-phone{font-size:14px;gap:6px}
-    .nav-phone-icon{font-size:16px}
-  }
-</style>
+<link rel="stylesheet" href="css/site.css">
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -503,15 +35,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <header id="top">
   <div class="wrap">
     <nav>
-      <a class="logo" href="#top" aria-label="Loque Logic — home">
-        <img src="img/loque-logic-wordmark.png" alt="Loque Logic" width="1228" height="318">
+      <a class="logo" href="#top" aria-label="Loque Agents — home">
+        <img src="img/loque-agent-wordmark.svg" alt="Loque Agents" width="2762" height="646">
       </a>
       <div class="nav-right">
         <div class="nav-links">
-          <a href="#services">Services</a>
-          <a href="#approach">Approach</a>
+          <a href="#how">How it works</a>
+          <a href="#plans">Plans</a>
+          <div class="has-drop">
+            <button class="drop-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="indDrop">
+              Industries
+              <svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M1.5 4 6 8.5 10.5 4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="drop" id="indDrop">
+              <a href="legal.html">Legal<small>Deadlines, matters and privilege</small></a>
+              <a href="healthcare.html">Healthcare<small>PHI, referrals and payers</small></a>
+              <a href="index.html#industries">Professional services<small>Everything else we build for</small></a>
+            </div>
+          </div>
           <a href="#pricing">Pricing</a>
-          <a href="#contact" class="nav-cta">Start a project</a>
+          <a href="#contact" class="nav-cta">Book a call</a>
         </div>
         <a class="nav-phone" href="tel:+14352435808" aria-label="Call (435) 243-5808">
           <span class="nav-phone-icon" aria-hidden="true">✆</span>(435) 243-5808
@@ -532,40 +75,51 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="wrap">
     <div class="hero-inner">
       <div class="hero-copy">
-        <span class="eyebrow reveal"><span class="dot"></span>SEO · GEO · AEO · Cold Email · Web Dev</span>
-        <h1 class="reveal" style="transition-delay:.06s">Be the <em>answer</em>, not just a result.</h1>
+        <span class="eyebrow reveal"><span class="dot"></span>Bespoke Executive AI Assistant</span>
+        <h1 class="reveal" style="transition-delay:.06s">We build and run the system <em>for you</em>.</h1>
         <p class="lead reveal" style="transition-delay:.14s">
-          Search is splitting into Google, AI engines, and answer boxes. Loque Logic makes sure your business shows up in all three, then runs cold email that turns visibility into a full pipeline.
+          You don't get software and a login. You get an assistant that already knows your priorities, drafts replies that sound like you, protects your calendar, and makes sure nothing you committed to quietly disappears.
         </p>
         <div class="hero-actions reveal" style="transition-delay:.22s">
-          <a href="#contact" class="btn btn-primary">Get a growth plan</a>
-          <a href="#services" class="btn btn-ghost">See what we do</a>
+          <a href="#contact" class="btn btn-primary">Book the first conversation</a>
+          <a href="#plans" class="btn btn-ghost">See the three plans</a>
         </div>
       </div>
 
       <div class="demo" id="demo" aria-hidden="true">
-        <span class="demo-badge b1"><span class="d"></span>Ranked #1</span>
-        <span class="demo-badge b2"><span class="d"></span>Cited by AI</span>
+        <span class="demo-badge b1"><span class="d"></span>Sorted before you open it</span>
+        <span class="demo-badge b2"><span class="d"></span>Nothing sends unapproved</span>
         <div class="demo-card" id="demoCard">
           <div class="demo-bar">
             <span class="demo-dots"><i></i><i></i><i></i></span>
-            <span class="demo-live">Answer engine</span>
+            <span class="demo-live">Your inbox</span>
           </div>
-          <div class="demo-search">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.2-3.2"></path></svg>
-            <span class="demo-q" id="demoQ"><span class="caret"></span></span>
-          </div>
-          <div class="demo-answer" id="demoAns">
-            <div class="ah"><svg viewBox="0 0 24 24"><path d="M12 2 9.2 9.2 2 12l7.2 2.8L12 22l2.8-7.2L22 12l-7.2-2.8z"/></svg><span id="demoTag">AI Overview</span></div>
-            <div class="demo-atext" id="demoText"></div>
-            <div class="demo-cites">
-              <span class="demo-chip brand"><span class="rank">#1</span> Loque Logic</span>
-              <span class="demo-chip">Source</span>
-              <span class="demo-chip">Source</span>
+
+          <div class="demo-mail">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"></rect><path d="m3.5 6.5 8.5 6 8.5-6"></path></svg>
+            <div class="demo-mailtxt">
+              <div class="demo-from" id="demoFrom">Incoming</div>
+              <div class="demo-subj" id="demoSubj"><span class="caret"></span></div>
             </div>
           </div>
+
+          <div class="demo-tags" id="demoTags"></div>
+
+          <div class="demo-draft" id="demoDraft">
+            <div class="dh">
+              <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.8 9.94l-3.75-3.75zM20.7 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75z"/></svg>
+              <span>Drafted in your voice</span>
+            </div>
+            <div class="demo-dtext" id="demoDraftText"></div>
+            <div class="demo-approve">
+              <span class="demo-abtn ok">Approve &amp; send</span>
+              <span class="demo-abtn edit">Edit</span>
+              <span class="demo-wait">Waiting on you</span>
+            </div>
+          </div>
+
           <div class="demo-foot">
-            <span class="demo-surface">Answering on <b id="demoSurface">Google AI Overviews</b></span>
+            <span class="demo-surface">Handled as <b id="demoRule">a client deadline</b></span>
             <span class="demo-progress" id="demoProg"><i class="on"></i><i></i><i></i></span>
           </div>
         </div>
@@ -575,236 +129,566 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="ticker" aria-hidden="true">
     <div class="ticker-track">
-      <span>Search Engine Optimization</span><span>Generative Engine Optimization</span><span>Answer Engine Optimization</span><span>Cold Email Campaigns</span><span>Custom Web Development</span>
-      <span>Search Engine Optimization</span><span>Generative Engine Optimization</span><span>Answer Engine Optimization</span><span>Cold Email Campaigns</span><span>Custom Web Development</span>
+      <span>Email triage</span><span>Drafts in your voice</span><span>Calendar defended</span><span>Meetings captured</span><span>Commitments tracked</span><span>The Handwritten Layer</span>
+      <span>Email triage</span><span>Drafts in your voice</span><span>Calendar defended</span><span>Meetings captured</span><span>Commitments tracked</span><span>The Handwritten Layer</span>
     </div>
   </div>
 </section>
 
 <div class="wrap platforms reveal">
-  <div class="plat-label">Optimizing your presence on</div>
+  <div class="plat-label">We own the part that never gets done</div>
   <div class="plat-row">
-    <span class="pl"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>Google</span>
-    <span class="pl"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M22.2 6.7c-.3-.6-.8-1-1.4-1.3-.6-.3-1.3-.4-2.1-.4h-4.3L13.1 2h-2.4L9.4 5H5.3c-.8 0-1.5.1-2.1.4-.6.3-1.1.7-1.4 1.3S1.3 8 1.3 8.8v7.5c0 .8.2 1.5.5 2.1.3.6.8 1 1.4 1.3.6.3 1.3.4 2.1.4h13.5c.8 0 1.5-.1 2.1-.4.6-.3 1.1-.7 1.4-1.3s.5-1.3.5-2.1V8.8c-.1-.8-.3-1.5-.6-2.1zM12 17.1c-2.5 0-4.5-2-4.5-4.5s2-4.5 4.5-4.5 4.5 2 4.5 4.5-2 4.5-4.5 4.5z"/></svg>ChatGPT</span>
-    <span class="pl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path fill="currentColor" d="M12 6v6l4.5 2.5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>Perplexity</span>
-    <span class="pl"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.22.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>Gemini</span>
-    <span class="pl"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>AI Overviews</span>
+    <span class="pl"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2 3 6v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V6l-9-4z"/></svg>Setup</span>
+    <span class="pl"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm9 4a9 9 0 0 1-.1 1.3l2 1.5-2 3.5-2.4-1a9 9 0 0 1-2.2 1.3L16 21H8l-.3-2.4a9 9 0 0 1-2.2-1.3l-2.4 1-2-3.5 2-1.5A9 9 0 0 1 3 12l-.1-1.3-2-1.5 2-3.5 2.4 1a9 9 0 0 1 2.2-1.3L8 3h8l.3 2.4a9 9 0 0 1 2.2 1.3l2.4-1 2 3.5-2 1.5z"/></svg>Tuning</span>
+    <span class="pl"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 4V1L8 5l4 4V6a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z"/></svg>Ongoing refinement</span>
+    <span class="pl"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M21.7 18.6 13.4 4.2a1.6 1.6 0 0 0-2.8 0L2.3 18.6A1.6 1.6 0 0 0 3.7 21h16.6a1.6 1.6 0 0 0 1.4-2.4zM13 18h-2v-2h2zm0-4h-2V9h2z"/></svg>Fixing drift</span>
+    <span class="pl"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>Keeping it right</span>
   </div>
 </div>
 
-<section id="services">
+<section id="problem">
   <div class="sec-head">
-    <div class="sec-tag reveal">What we do</div>
-    <h2 class="sec-title reveal" style="transition-delay:.06s">Five channels. One job: get you found and get you booked.</h2>
+    <div class="sec-tag reveal">The problem you already know about</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">You've already tried a tool for this.</h2>
   </div>
-  <div class="wrap services">
-    <div class="svc-grid">
-
-      <article class="card reveal">
-        <div class="num">01</div>
-        <h3>SEO <span class="full">Search Engine Optimization</span></h3>
-        <p>Rank where buyers still start. We build technical foundations, content, and authority that earn durable, compounding traffic from Google instead of renting it through ads.</p>
-        <ul><li>Technical audits</li><li>Content strategy</li><li>Local & maps</li><li>Link authority</li></ul>
-      </article>
-
-      <article class="card reveal" style="transition-delay:.06s">
-        <div class="num">02</div>
-        <h3>GEO <span class="full">Generative Engine Optimization</span></h3>
-        <p>Get cited inside ChatGPT, Gemini, Perplexity, and Google AI Overviews. We structure your brand so the models pulling answers pull yours, not your competitor's.</p>
-        <ul><li>llms.txt setup</li><li>AI crawler access</li><li>Entity building</li><li>Source citations</li></ul>
-      </article>
-
-      <article class="card reveal">
-        <div class="num">03</div>
-        <h3>AEO <span class="full">Answer Engine Optimization</span></h3>
-        <p>Own the snippet, the voice result, and the zero-click answer. We format your expertise into the structured, schema-rich content answer engines reward with the top spot.</p>
-        <ul><li>Featured snippets</li><li>Schema markup</li><li>FAQ targeting</li><li>Voice search</li></ul>
-      </article>
-
-      <article class="card reveal" style="transition-delay:.06s">
-        <div class="num">04</div>
-        <h3>Cold Email <span class="full">Outbound Campaigns</span></h3>
-        <p>Fill the calendar while organic builds. We handle list building, deliverability, copy, and follow-up sequences that land in the inbox and book real conversations.</p>
-        <ul><li>Lead sourcing</li><li>Inbox warmup</li><li>Copy & sequences</li><li>Reply handling</li></ul>
-      </article>
-
-      <article class="card reveal">
-        <div class="num">05</div>
-        <h3>Web Dev <span class="full">Custom Website Development</span></h3>
-        <p>A great site is the foundation everything else points to. We design and build fast, conversion-ready websites tailored to your brand — no templates, no bloat.</p>
-        <ul><li>Custom design</li><li>Responsive build</li><li>Speed optimization</li><li>CMS integration</li></ul>
-      </article>
-
+  <div class="wrap">
+    <div class="prob-grid">
+      <div class="reveal">
+        <p class="big">It's sitting in a browser tab right now, half configured, doing maybe <b>a tenth of what it promised</b>.</p>
+        <p class="body">Not because the software is bad. Because getting it to actually work takes hours nobody has — and the person who most needs it is the person least able to spend an afternoon writing rules and training it on their own writing.</p>
+        <p class="body">So the inbox keeps filling. The follow-ups keep slipping. And the thing that was supposed to save time became one more thing to manage.</p>
+      </div>
+      <div class="alt-card reveal" style="transition-delay:.06s">
+        <div class="kicker">The alternative most people consider</div>
+        <h4>Hiring an assistant.</h4>
+        <p>That works. It also costs real money, takes months, and still leaves gaps.</p>
+        <ul class="alt-rows">
+          <li><span class="v">$40K–$150K</span><span class="l">per year for an executive assistant</span></li>
+          <li><span class="v">Months</span><span class="l">to train one to be useful</span></li>
+          <li><span class="v">Zero</span><span class="l">coverage at 6am or on a Sunday</span></li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
 
-<div class="wrap stats">
-  <div class="stats-row">
-    <div class="stat reveal">
-      <div class="val">3</div>
-      <div class="label">Search surfaces covered</div>
-    </div>
-    <div class="stat reveal" style="transition-delay:.06s">
-      <div class="val">92%</div>
-      <div class="label">Client retention rate</div>
-    </div>
-    <div class="stat reveal" style="transition-delay:.12s">
-      <div class="val">4.2×</div>
-      <div class="label">Avg. traffic increase</div>
-    </div>
-    <div class="stat reveal" style="transition-delay:.18s">
-      <div class="val">30 days</div>
-      <div class="label">To first measurable results</div>
-    </div>
-  </div>
-</div>
-
-<section id="approach" class="approach">
+<section id="how" class="approach">
   <div class="sec-head">
-    <div class="sec-tag reveal">How we work</div>
-    <h2 class="sec-title reveal" style="transition-delay:.06s">Built for the way people search now.</h2>
+    <div class="sec-tag reveal">What we do</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">We build and run the system for you.</h2>
   </div>
   <div class="wrap">
     <div class="ap-grid">
-      <p class="big reveal">
-        Most agencies still optimize for one screen of blue links. We treat <b>every surface a customer uses to find you</b> as a channel worth winning, from the classic Google result to the AI assistant answering out loud, and we back it with outbound that does not wait for rankings to mature.
-      </p>
+      <div class="reveal">
+        <p class="big">We do the setup, the tuning, and the ongoing refinement. <b>When it drifts, we fix it. When your business changes, we change it.</b></p>
+        <div class="own">
+          <span>Setup</span><span>Tuning</span><span>Ongoing refinement</span><span>Fixing drift</span>
+        </div>
+      </div>
       <div class="steps">
-        <div class="step reveal"><div class="k">01</div><div><h4>Audit</h4><p>We map where you appear and where you vanish across search, AI engines, and answer boxes.</p></div></div>
-        <div class="step reveal" style="transition-delay:.05s"><div class="k">02</div><div><h4>Build</h4><p>Technical fixes, structured content, and outbound infrastructure set up to compound.</p></div></div>
-        <div class="step reveal" style="transition-delay:.1s"><div class="k">03</div><div><h4>Capture</h4><p>Cold email and answer-ready content turn new visibility into booked conversations.</p></div></div>
-        <div class="step reveal" style="transition-delay:.15s"><div class="k">04</div><div><h4>Report</h4><p>Plain numbers on rankings, AI citations, and pipeline. No vanity dashboards.</p></div></div>
+        <div class="step reveal"><div class="k">01</div><div><h4>Discovery</h4><p>We look at how your email, calendar and follow-ups actually work today. On Custom Reserve this produces a documented map of your operation — most practices have never had one.</p></div></div>
+        <div class="step reveal" style="transition-delay:.05s"><div class="k">02</div><div><h4>Build</h4><p>Rules, routing and voice modelling configured around your business. On Reserve, voice training runs on your last six to twelve months of sent mail.</p></div></div>
+        <div class="step reveal" style="transition-delay:.1s"><div class="k">03</div><div><h4>Staged deploy</h4><p>It goes in piece by piece, so nothing breaks while it's going in. One week for Select, four to eight for a full custom build.</p></div></div>
+        <div class="step reveal" style="transition-delay:.15s"><div class="k">04</div><div><h4>Refinement</h4><p>Monthly, every two weeks, or a weekly call — depending on your plan. This is the part that never happens when you buy software.</p></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="testimonials" class="testimonials">
+<section class="promise">
+  <div class="wrap">
+    <div class="promise-box reveal">
+      <div class="sec-tag">One thing we want to be clear about</div>
+      <h2>Nothing goes out under your name without <em>your approval</em>. Ever.</h2>
+      <p>The system drafts. You approve. There is no mode where it decides on its own to answer a client, respond to a partner, or send anything at all on your behalf. We don't offer that, and we're not planning to.</p>
+      <p>Your name and your relationships are not worth the risk — and any vendor comfortable with that risk is telling you something about how they'll treat the rest of your data.</p>
+      <div class="flow">
+        <span class="flow-step">System drafts</span>
+        <span class="flow-arrow" aria-hidden="true">→</span>
+        <span class="flow-step key">You approve</span>
+        <span class="flow-arrow" aria-hidden="true">→</span>
+        <span class="flow-step">It sends</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="plans">
   <div class="sec-head">
-    <div class="sec-tag reveal">What clients say</div>
-    <h2 class="sec-title reveal" style="transition-delay:.06s">Real results. Real feedback.</h2>
+    <div class="sec-tag reveal">The three plans</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">Three levels. One of them isn't a plan at all.</h2>
+    <p class="sec-sub reveal" style="transition-delay:.1s">Select and Reserve are productized — fast to deploy and consistent. Custom Reserve is a build, designed around how your operation actually runs.</p>
   </div>
   <div class="wrap">
-    <div class="testi-grid">
+    <div class="plan-grid">
 
-      <div class="testi reveal">
-        <div class="testi-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></div>
-        <q>We went from invisible to showing up in ChatGPT answers within two months. Our inbound leads tripled and we didn't change anything else about our marketing.</q>
-        <div class="testi-who">
-          <div class="testi-avatar">JR</div>
-          <div class="testi-info"><div class="name">James R.</div><div class="role">CEO, SaaS Startup</div></div>
+      <article class="plan reveal">
+        <div class="pnum">PLAN ONE</div>
+        <h3>Select</h3>
+        <div class="job">Know what matters</div>
+        <div class="kind">High-end personalized solution</div>
+        <p class="blurb">Your inbox, sorted and prioritized. You open your email already knowing what needs you.</p>
+        <ul class="ticks">
+          <li>Classification and smart foldering</li>
+          <li>Spam, noise and newsletter suppression</li>
+          <li>Importance and urgency scoring</li>
+          <li>Daily priority digest</li>
+          <li>Unsubscribe hygiene</li>
+          <li>Protected focus blocks on your calendar</li>
+        </ul>
+        <div class="deploy">
+          <span class="dl">Deploys in</span>
+          <span class="dv">About 1 week</span>
+        </div>
+        <ul class="runrows">
+          <li><span>Onboarding</span><b>One session</b></li>
+          <li><span>Refinement</span><b>Monthly tuning</b></li>
+          <li><span>Support</span><b>Within 2 business days</b></li>
+          <li><span>Accounts</span><b>1 inbox</b></li>
+        </ul>
+        <div class="btn-wrap"><a href="#pricing" class="btn btn-ghost">See pricing</a></div>
+      </article>
+
+      <article class="plan featured reveal" style="transition-delay:.06s">
+        <div class="badge">Most chosen</div>
+        <div class="pnum">PLAN TWO</div>
+        <h3>Reserve</h3>
+        <div class="job">Act on what matters</div>
+        <div class="kind">Semi-custom / bespoke solution</div>
+        <p class="blurb">Everything in Select, plus the system starts doing the work instead of just organizing it.</p>
+        <ul class="ticks">
+          <li>Replies drafted in your actual voice, queued for one-click approval</li>
+          <li>VIP routing, so the people who matter never wait</li>
+          <li>Tasks pulled out of email automatically</li>
+          <li>Scheduling, rescheduling and conflict resolution handled</li>
+          <li>Meeting notes and summaries, with action items extracted and assigned</li>
+          <li>A monthly allowance of genuinely handwritten cards</li>
+        </ul>
+        <div class="deploy">
+          <span class="dl">Deploys in</span>
+          <span class="dv">2 to 3 weeks, staged</span>
+        </div>
+        <ul class="runrows">
+          <li><span>Onboarding</span><b>2–3 sessions plus voice training</b></li>
+          <li><span>Refinement</span><b>Every two weeks</b></li>
+          <li><span>Support</span><b>1 business day</b></li>
+          <li><span>Accounts</span><b>1 inbox, 1 calendar</b></li>
+        </ul>
+        <div class="btn-wrap"><a href="#pricing" class="btn btn-primary">See pricing</a></div>
+      </article>
+
+      <article class="plan reveal" style="transition-delay:.12s">
+        <div class="pnum">PLAN THREE</div>
+        <h3>Custom Reserve</h3>
+        <div class="job">So nothing falls through</div>
+        <div class="kind">Custom-built bespoke solution</div>
+        <p class="blurb">Not a bigger version of Reserve. It's a build — and it starts with a real discovery process.</p>
+        <ul class="ticks">
+          <li>Meeting prep briefs before every call, with full relationship context and open items</li>
+          <li>Calendar audit and time analysis</li>
+          <li>Commitment tracking, so everything you promised gets closed out</li>
+          <li>Waiting-on tracking, so everything others owe you gets chased</li>
+          <li>CRM sync</li>
+          <li>Vendor and subscription renewal tracking</li>
+        </ul>
+        <div class="deploy">
+          <span class="dl">Deploys in</span>
+          <span class="dv">4 to 8 weeks, staged</span>
+        </div>
+        <ul class="runrows">
+          <li><span>Onboarding</span><b>Full discovery, works with your assistant</b></li>
+          <li><span>Refinement</span><b>Weekly call</b></li>
+          <li><span>Support</span><b>Same day, priority</b></li>
+          <li><span>Accounts</span><b>Up to 2 inboxes, 2 calendars</b></li>
+        </ul>
+        <div class="btn-wrap"><a href="#custom" class="btn btn-ghost">What makes it custom</a></div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="custom">
+  <div class="sec-head">
+    <div class="sec-tag reveal">Custom Reserve</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">Then the part that makes it yours.</h2>
+  </div>
+  <div class="wrap">
+    <div class="build-grid">
+      <article class="build reveal">
+        <h4><span class="k">01</span>Custom escalation logic</h4>
+        <p>Not a generic urgency score. Rules built around what actually constitutes an emergency in your business — a filing deadline, a payer denial, a key client going quiet for eleven days, a specific name in a subject line.</p>
+      </article>
+      <article class="build reveal" style="transition-delay:.06s">
+        <h4><span class="k">02</span>Custom assignment and routing</h4>
+        <p>Who handles what, encoded. Which paralegal owns which matter type, which biller handles which payer, what goes to the office manager, what waits for the weekly review. Most things shouldn't reach you at all.</p>
+      </article>
+      <article class="build reveal">
+        <h4><span class="k">03</span>Custom process flows</h4>
+        <p>Multi-step workflows that mirror how your business actually moves work, start to finish. Intake through conflict check through engagement letter. Referral through insurance verification through pre-visit packet.</p>
+      </article>
+      <article class="build reveal" style="transition-delay:.06s">
+        <h4><span class="k">04</span>Custom analytics and reporting</h4>
+        <p>Built around the numbers you actually manage by — response time by client tier, matter activity aging, referral source performance, payer correspondence aging — delivered in the format and on the schedule you'll actually read.</p>
+      </article>
+    </div>
+    <div class="build-note reveal">
+      <p>Every Custom Reserve engagement starts with a real discovery process and produces <b>a documented map of how your operation currently works</b>. Most practices have never had one. It's useful before we automate a single thing.</p>
+    </div>
+  </div>
+</section>
+
+<section id="compare">
+  <div class="sec-head">
+    <div class="sec-tag reveal">At a glance</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">What's in each plan.</h2>
+  </div>
+  <div class="wrap">
+    <div class="matrix-wrap reveal">
+      <div class="matrix-scroll">
+        <table class="matrix">
+          <thead>
+            <tr>
+              <th scope="col">Feature</th>
+              <th scope="col">Select<small>Know what matters</small></th>
+              <th scope="col" class="hi">Reserve<small>Act on what matters</small></th>
+              <th scope="col">Custom Reserve<small>Nothing falls through</small></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="grp"><td colspan="4">Email</td></tr>
+            <tr><td class="feat">Classification and smart foldering</td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Spam, noise and newsletter suppression</td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Importance and urgency scoring</td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Daily priority digest</td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Unsubscribe hygiene</td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">VIP routing and escalation</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Replies drafted in your voice</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Task extraction from email</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td></tr>
+
+            <tr class="grp"><td colspan="4">Calendar</td></tr>
+            <tr><td class="feat">Protected focus blocks</td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Scheduling and booking coordination</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Conflict resolution and rescheduling</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Meeting prep briefs</td><td class="val mno">—</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Calendar audit and time analysis</td><td class="val mno">—</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td></tr>
+
+            <tr class="grp"><td colspan="4">Meetings and follow-through</td></tr>
+            <tr><td class="feat">Meeting notes and summaries</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Action item extraction and assignment</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Commitment tracking</td><td class="val mno">—</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Waiting-on tracking</td><td class="val mno">—</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">CRM sync</td><td class="val mno">—</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Vendor and subscription renewal tracking</td><td class="val mno">—</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td></tr>
+
+            <tr class="grp"><td colspan="4">The Handwritten Layer</td></tr>
+            <tr><td class="feat">Handwritten cards included</td><td class="val mno">—</td><td class="val">10 / month</td><td class="val">20 / month</td></tr>
+            <tr><td class="feat">Handwritten letters included</td><td class="val mno">—</td><td class="val mno">—</td><td class="val">5 / month</td></tr>
+            <tr><td class="feat">Automatic post-meeting thank-you</td><td class="val mno">—</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Request address for custom sends</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td></tr>
+
+            <tr class="grp"><td colspan="4">Custom build</td></tr>
+            <tr><td class="feat">Documented workflow map</td><td class="val mno">—</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Custom escalation logic</td><td class="val mno">—</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Custom assignment and routing</td><td class="val mno">—</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Custom process flows</td><td class="val mno">—</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Custom analytics and reporting</td><td class="val mno">—</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Industry configuration</td><td class="val mno">—</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td></tr>
+
+            <tr class="grp"><td colspan="4">Service</td></tr>
+            <tr><td class="feat">Onboarding</td><td class="val">1 session</td><td class="val">2–3 sessions plus voice training</td><td class="val">Full discovery, works with your assistant</td></tr>
+            <tr><td class="feat">Refinement</td><td class="val">Monthly</td><td class="val">Every two weeks</td><td class="val">Weekly call</td></tr>
+            <tr><td class="feat">Support response</td><td class="val">2 business days</td><td class="val">1 business day</td><td class="val">Same day, priority</td></tr>
+            <tr><td class="feat">Accounts covered</td><td class="val">1 inbox</td><td class="val">1 inbox, 1 calendar</td><td class="val">Up to 2 inboxes, 2 calendars</td></tr>
+            <tr><td class="feat">Time to deploy</td><td class="val">About 1 week</td><td class="val">2–3 weeks, staged</td><td class="val">4–8 weeks, staged</td></tr>
+
+            <tr class="grp"><td colspan="4">Add-ons</td></tr>
+            <tr><td class="feat">Regulated Practice Layer</td><td class="val mno">—</td><td class="val">Available</td><td class="val">Available</td></tr>
+            <tr><td class="feat">Additional inbox or calendar</td><td class="val">Available</td><td class="val">Available</td><td class="val">Available</td></tr>
+            <tr><td class="feat">Travel coordination workflows</td><td class="val">Available</td><td class="val">Available</td><td class="val">Available</td></tr>
+            <tr><td class="feat">Additional custom development</td><td class="val mno">—</td><td class="val mno">—</td><td class="val">Available</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p class="matrix-hint">Scroll the table sideways to compare all three plans.</p>
+  </div>
+</section>
+
+<section id="handwritten">
+  <div class="sec-head">
+    <div class="sec-tag reveal">The Handwritten Layer</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">The one part of this you can actually hold.</h2>
+  </div>
+  <div class="wrap">
+    <div class="hw-grid">
+      <div class="hw-copy reveal">
+        <p>Reserve and Custom Reserve include a monthly allowance of handwritten cards, and Custom Reserve includes handwritten letters. They look like what they are: something a person took the time to send.</p>
+        <p class="hw-quote">Real pen, real ink, written by machine rather than printed.</p>
+        <p>At Custom Reserve, qualifying external meetings can trigger a thank-you card automatically, drawn from a template library you approve once during onboarding. You'll get a weekly digest of what went out. There's also a dedicated address you or your assistant can email when you want something specific sent.</p>
+      </div>
+      <div class="hw-card reveal" style="transition-delay:.06s">
+        <div class="kicker">Included each month</div>
+        <ul class="hw-rows">
+          <li><span>Select</span><b>Not included</b></li>
+          <li><span>Reserve</span><b>10 cards</b></li>
+          <li><span>Custom Reserve</span><b>20 cards · 5 letters</b></li>
+          <li><span>Extra pieces</span><b>$3 per card · $5 per letter</b></li>
+        </ul>
+        <div class="hw-ceiling">
+          <h4>You set the ceiling</h4>
+          <p>You tell us how many extra pieces per month we can send without asking. Past that, we email you for approval. Nobody gets a surprise invoice.</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
 
-      <div class="testi reveal" style="transition-delay:.06s">
-        <div class="testi-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></div>
-        <q>The cold email campaigns started filling our calendar within the first week. Loque handled everything — list building, copy, follow-ups. We just showed up to the calls.</q>
-        <div class="testi-who">
-          <div class="testi-avatar">MK</div>
-          <div class="testi-info"><div class="name">Maria K.</div><div class="role">Founder, Consulting Firm</div></div>
+<section id="industries">
+  <div class="sec-head">
+    <div class="sec-tag reveal">Who we build for</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">Built around your industry, not a generic template.</h2>
+    <p class="sec-sub reveal" style="transition-delay:.1s">Legal and healthcare are where we've built the most, because the deadlines are real and the compliance obligations aren't optional. The same approach works anywhere the work is relationship-driven and the follow-through matters.</p>
+  </div>
+  <div class="wrap">
+    <div class="ind-grid">
+
+      <a class="ind reveal" href="legal.html">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2a1 1 0 0 1 1 1v1.2l6.4 1.7a1 1 0 1 1-.5 1.9L13 6.3V19h3a1 1 0 1 1 0 2H8a1 1 0 1 1 0-2h3V6.3L5.1 7.8a1 1 0 0 1-.5-1.9L11 4.2V3a1 1 0 0 1 1-1zM5.5 9l2.6 5.2a1 1 0 0 1-.1 1A3.7 3.7 0 0 1 5.5 17a3.7 3.7 0 0 1-2.5-1.8 1 1 0 0 1-.1-1L5.5 9zm13 0 2.6 5.2a1 1 0 0 1-.1 1 3.7 3.7 0 0 1-2.5 1.8 3.7 3.7 0 0 1-2.5-1.8 1 1 0 0 1-.1-1L18.5 9z"/></svg></span>
+        <h3>Legal</h3>
+        <div class="isub">Deadlines, matters and privilege</div>
+        <p>Anything referencing a filing, hearing or date escalates the moment it lands. Everything else files itself by client and matter number.</p>
+        <ul>
+          <li>Deadline and docket escalation</li>
+          <li>Matter-based routing and filing</li>
+          <li>Privilege-aware handling</li>
+          <li>Zero data retention available</li>
+        </ul>
+        <span class="go">See the legal build <span class="arw" aria-hidden="true">&rarr;</span></span>
+      </a>
+
+      <a class="ind reveal" href="healthcare.html" style="transition-delay:.06s">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 2h4a1 1 0 0 1 1 1v4h4a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-4v4a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-4H5a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h4V3a1 1 0 0 1 1-1z"/></svg></span>
+        <h3>Healthcare</h3>
+        <div class="isub">PHI, referrals and payers</div>
+        <p>Protected health information is detected and held inside the compliant path. Referrals, prior authorisations and payer correspondence get tracked to closure.</p>
+        <ul>
+          <li>PHI detection and routing</li>
+          <li>Referral intake and source tracking</li>
+          <li>Prior authorisation tracking</li>
+          <li>HIPAA-ready with a signed BAA</li>
+        </ul>
+        <span class="go">See the healthcare build <span class="arw" aria-hidden="true">&rarr;</span></span>
+      </a>
+
+      <a class="ind soft reveal" href="#contact" style="transition-delay:.12s">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M16 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm-8 1a3.5 3.5 0 1 0-3.5-3.5A3.5 3.5 0 0 0 8 12zm0 2c-2.7 0-6 1.3-6 4v2a1 1 0 0 0 1 1h7.2a5.6 5.6 0 0 1-.2-1.5V18c0-1.4.6-2.6 1.6-3.5A12 12 0 0 0 8 14zm8 0c-3 0-6 1.5-6 4v2a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-2c0-2.5-3-4-6-4z"/></svg></span>
+        <h3>Professional services</h3>
+        <div class="isub">Finance, consulting, agencies and firms</div>
+        <p>No pre-built industry configuration yet, but the same engine underneath. If your work runs on inboxes, calendars and commitments, we scope it during discovery.</p>
+        <ul>
+          <li>Custom escalation and routing rules</li>
+          <li>Process flows mapped to how you work</li>
+          <li>Zero data retention available</li>
+          <li>Scoped on a Custom Reserve build</li>
+        </ul>
+        <span class="go">Talk to us about your practice <span class="arw" aria-hidden="true">&rarr;</span></span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section id="compliance">
+  <div class="sec-head">
+    <div class="sec-tag reveal">If your data can't leave</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">The Regulated Practice Layer.</h2>
+  </div>
+  <div class="wrap">
+    <div class="rpl-grid">
+      <div class="rpl-copy reveal">
+        <p>For practices with real compliance obligations, we offer this as a paid add-on. Depending on your situation you take one path or the other — they are two different configurations, and they aren't combinable.</p>
+        <div class="rpl-paths">
+          <div class="rpl-path">
+            <div class="pk">Path one</div>
+            <h4>Zero data retention</h4>
+            <p>Prompts and responses are never stored. The usual choice for legal, finance and HR work.</p>
+          </div>
+          <div class="rpl-path">
+            <div class="pk">Path two</div>
+            <h4>HIPAA-ready</h4>
+            <p>A signed Business Associate Agreement, with documented retention rules. The path for practices handling PHI.</p>
+          </div>
+        </div>
+        <div class="rpl-price">$250 / month on Reserve <span>·</span> $400 / month on Custom Reserve</div>
+        <div class="rpl-flag">
+          <b>Why we charge for it.</b> Zero retention at the model layer means nothing if the meeting recorder, CRM and mail vendor all retain data. An honest end-to-end claim means auditing every vendor in the chain — which is work, and which is why it isn't bundled free.
         </div>
       </div>
-
-      <div class="testi reveal" style="transition-delay:.12s">
-        <div class="testi-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></div>
-        <q>Other agencies talked about SEO in isolation. Loque was the first to actually show us how Google, AI search, and outbound work together. Our site went from page 3 to featured snippets.</q>
-        <div class="testi-who">
-          <div class="testi-avatar">DL</div>
-          <div class="testi-info"><div class="name">David L.</div><div class="role">Owner, Home Services</div></div>
+      <div class="rpl-card reveal" style="transition-delay:.06s">
+        <div class="kicker">What's included</div>
+        <ul class="ticks">
+          <li>Zero data retention <em>or</em> HIPAA-ready configuration</li>
+          <li>DPA or BAA as applicable</li>
+          <li>A restricted, vetted tool stack — every vendor in the chain checked for how they handle retention</li>
+          <li>Documented retention and deletion rules by data type</li>
+          <li>Audit logging</li>
+          <li>A written data flow map</li>
+        </ul>
+        <div class="hw-ceiling">
+          <h4>The document worth having on its own</h4>
+          <p>A written map showing exactly where your information travels and what is kept at each step. Most practices need one for their own compliance posture and can't produce it.</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
 
+<section id="why">
+  <div class="sec-head">
+    <div class="sec-tag reveal">Why us</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">Loque is run by operators, not consultants.</h2>
+  </div>
+  <div class="wrap">
+    <div class="why-grid">
+      <div class="why-copy reveal">
+        <p class="big">Chris Barbieri has spent over twenty years <b>running companies rather than advising them</b> — CEO, CRO and COO across healthcare, marketing, professional services and software.</p>
+        <p>Along the way he taught himself to build the systems those companies ran on: the databases, the CRMs, the automations. At one healthcare supply company he built the tools that automated patient intake, inside a HIPAA-regulated operation.</p>
+        <p>Automation projects don't fail because the technology doesn't work. They fail because someone built something that didn't match how the business actually runs, or broke something that was working fine. We've been on the receiving end of that.</p>
+      </div>
+      <div class="reveal" style="transition-delay:.06s">
+        <div class="why-stat">
+          <div class="val">30%</div>
+          <div class="label">reduction in intake workload, with errors nearly eliminated, inside a HIPAA-regulated operation</div>
+        </div>
+        <div class="why-line">Keeping your business running comes first. <b>Optimization comes second.</b></div>
+      </div>
     </div>
   </div>
 </section>
 
 <section id="pricing">
   <div class="sec-head">
-    <div class="sec-tag reveal">Pricing</div>
-    <h2 class="sec-title reveal" style="transition-delay:.06s">Transparent pricing. No surprise invoices.</h2>
+    <div class="sec-tag reveal">What it costs</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">Setup, monthly, and what prepaying saves you.</h2>
+    <p class="sec-sub reveal" style="transition-delay:.1s">Prepaying reduces both numbers. Quarterly takes 30% off setup and 10% off monthly. Semi-annual cuts setup in half and takes 20% off monthly.</p>
   </div>
   <div class="wrap pricing">
     <div class="price-grid">
 
-      <article class="price-card featured reveal">
-        <div class="badge">Most popular</div>
-        <div class="pname">Search Visibility</div>
-        <div class="psub">AEO · GEO · SEO — the full answer-engine stack</div>
-        <div class="amount">$750<span> / month</span></div>
-        <ul>
-          <li>Technical SEO foundations & content strategy</li>
-          <li>Generative engine optimization for ChatGPT, Gemini & Perplexity</li>
-          <li>Answer engine optimization — snippets, schema & voice</li>
-          <li>Monthly reporting on rankings & AI citations</li>
+      <article class="price-card reveal">
+        <div class="pname">Select</div>
+        <div class="plan-job">Know what matters</div>
+        <div class="psub">Your inbox, sorted and prioritized</div>
+        <ul class="price-rows">
+          <li class="prh"><span class="rl">Plan</span><span class="rs">Setup</span><span class="rm">Monthly</span></li>
+          <li><span class="rl">Month to month</span><span class="rs">$1,000</span><span class="rm">$300</span></li>
+          <li><span class="rl">Quarterly</span><span class="rs">$700</span><span class="rm">$270</span></li>
+          <li class="best"><span class="rl">Semi-annual<small>What most people take</small></span><span class="rs">$500</span><span class="rm">$240</span></li>
         </ul>
         <div class="trust-pills">
-          <span class="trust-pill"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>Month-to-month</span>
-          <span class="trust-pill"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>Cancel anytime</span>
-          <span class="trust-pill"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>No hidden fees</span>
+          <span class="trust-pill"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>Deploys in about a week</span>
+          <span class="trust-pill"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>Setup-fee guarantee</span>
         </div>
-        <a href="#contact" class="btn btn-primary">Get started</a>
+        <a href="#contact" class="btn btn-ghost">Start with Select</a>
       </article>
 
-      <article class="price-card reveal" style="transition-delay:.06s">
-        <div class="pname">Cold Email Campaigns</div>
-        <div class="psub">Outbound that fills your pipeline</div>
-        <div class="amount range">$750–$3,000*<span>/ month · scales with volume</span></div>
-        <ul>
-          <li>Lead sourcing & list building</li>
-          <li>Inbox warmup & deliverability</li>
-          <li>Copywriting & follow-up sequences</li>
-          <li>Reply handling & booked conversations</li>
+      <article class="price-card featured reveal" style="transition-delay:.06s">
+        <div class="badge">Most chosen</div>
+        <div class="pname">Reserve</div>
+        <div class="plan-job">Act on what matters</div>
+        <div class="psub">Drafts in your voice, calendar handled, meetings captured</div>
+        <ul class="price-rows">
+          <li class="prh"><span class="rl">Plan</span><span class="rs">Setup</span><span class="rm">Monthly</span></li>
+          <li><span class="rl">Month to month</span><span class="rs">$2,500</span><span class="rm">$650</span></li>
+          <li><span class="rl">Quarterly</span><span class="rs">$1,750</span><span class="rm">$585</span></li>
+          <li class="best"><span class="rl">Semi-annual<small>What most people take</small></span><span class="rs">$1,250</span><span class="rm">$520</span></li>
         </ul>
-        <p class="price-note">*Cold email pricing scales with list size and send volume — most campaigns land between $750 and $3,000 a month, and larger, higher-volume campaigns will cost more. We'll give you an exact quote once we understand your targets. Every engagement is month-to-month — no long lock-in contracts.</p>
-        <a href="#contact" class="btn btn-ghost">Request a quote</a>
+        <div class="trust-pills">
+          <span class="trust-pill"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>Includes 10 handwritten cards</span>
+          <span class="trust-pill"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>Founding rates available</span>
+        </div>
+        <a href="#contact" class="btn btn-primary">Start with Reserve</a>
       </article>
 
       <article class="price-card reveal" style="transition-delay:.12s">
-        <div class="pname">Custom Website Development</div>
-        <div class="psub">Designed and built for your brand</div>
-        <div class="quote">Custom</div>
-        <ul>
-          <li>Custom design tailored to your business</li>
-          <li>Responsive, fast, and SEO-ready build</li>
-          <li>CMS integration & content setup</li>
-          <li>Fair, upfront pricing based on scope of work</li>
-          <li>Ongoing support & iterations</li>
+        <div class="pname">Custom Reserve</div>
+        <div class="plan-job">So nothing falls through</div>
+        <div class="psub">Discovery, a documented workflow map, and a build around your operation</div>
+        <ul class="price-rows">
+          <li class="prh"><span class="rl">Plan</span><span class="rs">Setup</span><span class="rm">Monthly</span></li>
+          <li><span class="rl">Month to month</span><span class="rs">$5,000</span><span class="rm">$2,000</span></li>
+          <li><span class="rl">Quarterly</span><span class="rs">$3,500</span><span class="rm">$1,800</span></li>
+          <li class="best"><span class="rl">Semi-annual<small>What most people take</small></span><span class="rs">$2,500</span><span class="rm">$1,600</span></li>
         </ul>
-        <p class="price-note">Every website is different — we scope and price based on your goals, pages, and features. We'll walk through it together and give you a clear quote upfront.</p>
-        <a href="#contact" class="btn btn-ghost">Get a quote</a>
+        <p class="price-note">Every engagement includes discovery and a documented workflow map, up to three custom process flows, one escalation matrix, up to two custom reports, and one industry configuration. Anything beyond that is scoped and quoted separately before we build it.</p>
+        <a href="#contact" class="btn btn-ghost">Scope an engagement</a>
       </article>
 
+    </div>
+
+    <div class="addon-wrap">
+      <div class="addon-card reveal">
+        <div class="kicker">Everything else you can bolt on</div>
+        <ul class="addon-rows">
+          <li><span>Regulated Practice Layer</span><b>$250/mo Reserve · $400/mo Custom Reserve</b></li>
+          <li><span>Additional inbox or calendar</span><b>$150 / month</b></li>
+          <li><span>Travel coordination workflows</span><b>$200 / month</b></li>
+          <li><span>Extra handwritten pieces</span><b>$3 per card · $5 per letter</b></li>
+          <li><span>Additional custom development</span><b>Quoted before we build</b></li>
+        </ul>
+      </div>
+      <div class="guarantee reveal" style="transition-delay:.06s">
+        <div class="kicker">Our guarantee</div>
+        <h4>If you're not saving real hours by month two, we refund your setup fee.</h4>
+        <p>Claimable through the end of month two. Any prepaid months you haven't used convert to credit you can put toward anything we do.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="founding">
+  <div class="wrap">
+    <div class="founding-box reveal">
+      <div class="kicker">Limited availability</div>
+      <h2>Additional discount for founding clients.</h2>
+      <p>We're taking on a limited number of founding clients at reduced pricing, and those rates are permanent for as long as you stay with us. In exchange we ask for honest feedback, a testimonial once you've used it for a couple of months, and the ability to talk about the results.</p>
+      <div class="founding-facts">
+        <span>Permanent rates</span>
+        <span>Reserve and Custom Reserve only</span>
+        <span>Custom Reserve builds are capacity limited</span>
+      </div>
+      <a href="#contact" class="btn">Ask about founding rates</a>
     </div>
   </div>
 </section>
 
 <section id="contact" class="approach">
   <div class="sec-head">
-    <div class="sec-tag reveal">Get started</div>
-    <h2 class="sec-title reveal" style="transition-delay:.06s">Ready to show up everywhere that matters?</h2>
+    <div class="sec-tag reveal">Where to start</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">The first conversation is short and free.</h2>
   </div>
   <div class="wrap">
     <div class="contact-grid">
 
       <div class="contact-copy reveal">
-        <p class="big">Tell us about your business and we'll put together a <b>plan across search, AI engines, and outbound</b>. No pressure, no jargon.</p>
+        <p class="big">We'll look at how your email, calendar and follow-ups actually work right now, and tell you honestly <b>whether this makes sense for you</b> and which plan fits. If it doesn't make sense, we'll say so.</p>
         <ul class="contact-points">
-          <li><svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>A free audit of where you appear — and where you vanish.</li>
-          <li><svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>A clear, plain-numbers plan tailored to your goals.</li>
-          <li><svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>No long lock-in contracts — every engagement is month-to-month.</li>
+          <li><svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>A straight read on where your time is actually going.</li>
+          <li><svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>A recommendation on Select, Reserve or a custom build — including "none of these yet".</li>
+          <li><svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>If you're not saving real hours by month two, we refund your setup fee.</li>
         </ul>
         <div class="contact-direct">
-          Prefer email? Reach us directly at <a href="mailto:hello@loquelogic.com">hello@loquelogic.com</a>
+          Prefer email? Reach us directly at <a href="mailto:questions@loquelogic.com">questions@loquelogic.com</a>
         </div>
       </div>
 
       <div class="form-card reveal" style="transition-delay:.06s">
-        <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+        <form id="contactForm" action="https://api.web3forms.com/submit" method="POST" data-ajax>
           <!-- Web3Forms config -->
           <input type="hidden" name="access_key" value="c8b900d1-4085-4a4b-9b99-5bcbce6175b3">
-          <input type="hidden" name="subject" value="New growth-plan request — Loque Logic">
-          <input type="hidden" name="from_name" value="Loque Logic Website">
+          <input type="hidden" name="subject" value="New enquiry — Loque Agents">
+          <input type="hidden" name="from_name" value="Loque Agents Website">
           <!-- Honeypot spam filter -->
           <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
 
@@ -815,44 +699,46 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
             <div class="field">
               <label for="cf-email">Email <span class="req">*</span></label>
-              <input type="email" id="cf-email" name="email" placeholder="jane@company.com" required>
+              <input type="email" id="cf-email" name="email" placeholder="jane@firm.com" required>
             </div>
             <div class="field">
-              <label for="cf-company">Company</label>
-              <input type="text" id="cf-company" name="company" placeholder="Company name">
+              <label for="cf-company">Company or practice</label>
+              <input type="text" id="cf-company" name="company" placeholder="Practice name">
             </div>
             <div class="field">
               <label for="cf-phone">Phone</label>
               <input type="tel" id="cf-phone" name="phone" placeholder="(435) 243-5808">
             </div>
             <div class="field">
-              <label for="cf-service">I'm interested in</label>
-              <select id="cf-service" name="service">
+              <label for="cf-plan">I'm interested in</label>
+              <select id="cf-plan" name="plan">
                 <option value="Not sure yet — help me decide">Not sure yet — help me decide</option>
-                <option value="Search Visibility (SEO · GEO · AEO)">Search Visibility (SEO · GEO · AEO)</option>
-                <option value="Cold Email Campaigns">Cold Email Campaigns</option>
-                <option value="Custom Website Development">Custom Website Development</option>
-                <option value="A bit of everything">A bit of everything</option>
+                <option value="Select — know what matters">Select — know what matters</option>
+                <option value="Reserve — act on what matters">Reserve — act on what matters</option>
+                <option value="Custom Reserve — a custom build">Custom Reserve — a custom build</option>
+                <option value="Founding client rates">Founding client rates</option>
               </select>
             </div>
             <div class="field">
-              <label for="cf-budget">Monthly budget</label>
-              <select id="cf-budget" name="budget">
-                <option value="Not sure yet">Not sure yet</option>
-                <option value="Under $750/mo">Under $750/mo</option>
-                <option value="$750–$1,500/mo">$750–$1,500/mo</option>
-                <option value="$1,500–$3,000/mo">$1,500–$3,000/mo</option>
-                <option value="$3,000+/mo">$3,000+/mo</option>
+              <label for="cf-industry">Industry</label>
+              <select id="cf-industry" name="industry">
+                <option value="Not listed">Not listed</option>
+                <option value="Legal">Legal</option>
+                <option value="Healthcare">Healthcare</option>
+                <option value="Professional services">Professional services</option>
+                <option value="Finance">Finance</option>
+                <option value="Software / technology">Software / technology</option>
+                <option value="Other">Other</option>
               </select>
             </div>
             <div class="field full">
-              <label for="cf-message">Tell us about your business <span class="req">*</span></label>
-              <textarea id="cf-message" name="message" placeholder="What you do, who you're trying to reach, and what you'd like help with." required></textarea>
+              <label for="cf-message">What's actually eating your time? <span class="req">*</span></label>
+              <textarea id="cf-message" name="message" placeholder="Roughly how much email you get, what keeps slipping, and whether anyone helps you with it today." required></textarea>
             </div>
           </div>
 
-          <button type="submit" class="btn btn-primary" id="cf-submit">Get a growth plan</button>
-          <div class="form-fine">We'll only use your details to follow up about your plan. No spam, ever.</div>
+          <button type="submit" class="btn btn-primary" id="cf-submit">Book the first conversation</button>
+          <div class="form-fine">We'll only use your details to follow up about your enquiry. No spam, ever.</div>
           <div class="form-status" id="cf-status" role="status" aria-live="polite"></div>
         </form>
       </div>
@@ -864,192 +750,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <footer>
   <div class="wrap">
     <div class="foot">
-      <a class="logo" href="#top" aria-label="Loque Logic — back to top">
-        <img src="img/loque-logic-logo.png" alt="Loque Logic — AI Powered Automation &amp; Marketing" width="1228" height="434">
+      <a class="logo" href="#top" aria-label="Loque Agents — back to top">
+        <img src="img/loque-agent-lockup.svg" alt="Loque Agents — Bespoke Intelligent Virtual Agents &amp; Assistants" width="2762" height="821">
       </a>
       <div class="foot-meta">
-        SEO · GEO · AEO · Cold Email · Web Development<br>
-        <a href="mailto:hello@loquelogic.com">hello@loquelogic.com</a><br>
-        &copy; <span id="yr"></span> Loque Logic. All rights reserved.
+        Select · Reserve · Custom Reserve<br>
+        <a href="mailto:questions@loquelogic.com">questions@loquelogic.com</a> · <a href="tel:+14352435808">(435) 243-5808</a><br>
+        Nothing goes out under your name without your approval.<br>
+        &copy; <span id="yr"></span> Loque Agents, a Loque Logic company. All rights reserved.
       </div>
     </div>
   </div>
 </footer>
 
-<script>
-  // year
-  document.getElementById('yr').textContent = new Date().getFullYear();
-
-  // mobile menu toggle
-  const menuBtn = document.getElementById('menuBtn');
-  const navLinks = document.querySelector('.nav-links');
-  if (menuBtn && navLinks){
-    menuBtn.addEventListener('click', () => {
-      const open = navLinks.classList.toggle('open');
-      menuBtn.textContent = open ? '✕' : '≡';
-      menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Menu');
-    });
-    // close menu when a link is tapped
-    navLinks.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        navLinks.classList.remove('open');
-        navLinks.removeAttribute('style'); // clear any leftover inline display
-        menuBtn.textContent = '≡';
-        menuBtn.setAttribute('aria-label', 'Menu');
-      });
-    });
-  }
-
-  // nav border on scroll
-  const head = document.querySelector('header');
-  addEventListener('scroll', () => head.classList.toggle('scrolled', scrollY > 12));
-
-  // scroll reveal
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
-  }, { threshold:.14 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-  // card pointer glow
-  document.querySelectorAll('.card').forEach(card => {
-    card.addEventListener('pointermove', e => {
-      const r = card.getBoundingClientRect();
-      card.style.setProperty('--mx', ((e.clientX - r.left)/r.width*100) + '%');
-    });
-  });
-
-  // fire reveals already in view on load
-  addEventListener('load', () => {
-    document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('in'));
-  });
-
-  // hero cursor-reactive glow
-  const hero = document.querySelector('.hero');
-  const heroCursor = document.getElementById('heroCursor');
-  if (hero && heroCursor){
-    hero.addEventListener('pointermove', e => {
-      const r = hero.getBoundingClientRect();
-      heroCursor.style.left = ((e.clientX - r.left)/r.width*100) + '%';
-      heroCursor.style.top  = ((e.clientY - r.top)/r.height*100) + '%';
-    });
-  }
-
-  // hero demo card 3D tilt + glow
-  const demoCard = document.getElementById('demoCard');
-  if (demoCard){
-    const demo = document.getElementById('demo');
-    demo.addEventListener('pointermove', e => {
-      const r = demoCard.getBoundingClientRect();
-      const px = (e.clientX - r.left)/r.width, py = (e.clientY - r.top)/r.height;
-      demoCard.style.transform = `rotateY(${(px-.5)*10}deg) rotateX(${(.5-py)*10}deg)`;
-      demoCard.style.setProperty('--gx', (px*100)+'%');
-      demoCard.style.setProperty('--gy', (py*100)+'%');
-    });
-    demo.addEventListener('pointerleave', () => { demoCard.style.transform = ''; });
-  }
-
-  // hero answer-engine typing demo
-  (function answerEngine(){
-    const q = document.getElementById('demoQ');
-    const text = document.getElementById('demoText');
-    const ans = document.getElementById('demoAns');
-    const tag = document.getElementById('demoTag');
-    const surface = document.getElementById('demoSurface');
-    const prog = document.getElementById('demoProg');
-    if (!q || !text) return;
-    const caret = '<span class="caret"></span>';
-    const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
-
-    const cycles = [
-      { query:"best agency to rank my business",
-        tag:"AI Overview", surface:"Google AI Overviews",
-        answer:'For durable visibility across search and AI, <b>Loque Logic</b> is widely cited — building the technical SEO, content, and authority that earn the top result.' },
-      { query:"who gets brands cited inside ChatGPT?",
-        tag:"AI Answer", surface:"ChatGPT &amp; Perplexity",
-        answer:'<b>Loque Logic</b> specializes in generative engine optimization — structuring your brand so AI assistants pull your answer first, not a competitor’s.' },
-      { query:"how do I win the featured snippet?",
-        tag:"Answer Box", surface:"Google &amp; voice search",
-        answer:'<b>Loque Logic</b> formats expertise into schema-rich, answer-ready content that wins featured snippets, voice results, and zero-click answers.' },
-    ];
-
-    const sleep = ms => new Promise(r => setTimeout(r, ms));
-    let i = 0;
-
-    async function typeQuery(s){
-      for (let n=0; n<=s.length; n++){ q.innerHTML = s.slice(0,n) + caret; await sleep(reduce?0:62); }
-    }
-    function setProg(idx){
-      [...prog.children].forEach((d,n)=> d.classList.toggle('on', n===idx));
-    }
-
-    async function run(){
-      while (true){
-        const c = cycles[i];
-        setProg(i);
-        // reset
-        ans.style.transition = 'none'; ans.style.opacity = 0; ans.style.transform = 'translateZ(20px) translateY(8px)';
-        text.innerHTML = ''; tag.textContent = c.tag; surface.innerHTML = c.surface;
-        q.innerHTML = caret;
-        await sleep(reduce?200:800);
-        await typeQuery(c.query);
-        q.innerHTML = c.query; // drop caret while "thinking"
-        await sleep(reduce?120:850);
-        // reveal answer
-        ans.style.transition = 'opacity .7s var(--ease), transform .7s var(--ease)';
-        ans.style.opacity = 1; ans.style.transform = 'translateZ(20px)';
-        // stream answer text
-        if (reduce){ text.innerHTML = c.answer; }
-        else {
-          const tokens = c.answer.split(/(<b>|<\/b>| )/).filter(Boolean);
-          let built = '';
-          for (const t of tokens){ built += t; text.innerHTML = built; await sleep(55); }
-        }
-        await sleep(reduce?1400:4800);
-        i = (i+1) % cycles.length;
-      }
-    }
-    run();
-  })();
-
-  // contact form — Web3Forms AJAX submit with inline status
-  (function contactForm(){
-    const form = document.getElementById('contactForm');
-    if (!form) return;
-    const status = document.getElementById('cf-status');
-    const btn = document.getElementById('cf-submit');
-    const btnText = btn.textContent;
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      status.className = 'form-status';
-      btn.disabled = true;
-      btn.textContent = 'Sending…';
-
-      try {
-        const res = await fetch(form.action, {
-          method: 'POST',
-          headers: { 'Accept': 'application/json' },
-          body: new FormData(form)
-        });
-        const data = await res.json();
-        if (res.ok && data.success){
-          status.textContent = "Thanks — your request is in. We'll be in touch within one business day.";
-          status.className = 'form-status ok show';
-          form.reset();
-        } else {
-          status.textContent = data.message || 'Something went wrong. Please email hello@loquelogic.com.';
-          status.className = 'form-status err show';
-        }
-      } catch (err) {
-        status.textContent = 'Network error — please try again or email hello@loquelogic.com.';
-        status.className = 'form-status err show';
-      } finally {
-        btn.disabled = false;
-        btn.textContent = btnText;
-      }
-    });
-  })();
-</script>
+<script src="js/site.js"></script>
 
 </body>
 </html>
