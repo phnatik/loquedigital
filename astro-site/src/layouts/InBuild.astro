@@ -1,0 +1,16 @@
+---
+import Base from './Base.astro';
+const { title, path, phase } = Astro.props;
+---
+<Base title={`${title} — Loque Agent`} description="In build." path={path}>
+  <section style="padding:160px 0 120px">
+    <div class="wrap">
+      <div class="placeholder" data-placeholder>
+        <div class="ph-tag">Not built yet — not for launch</div>
+        <h2 style="font-family:Outfit;font-weight:800;font-size:clamp(28px,4vw,44px);letter-spacing:-.03em;margin:14px 0 12px">{title}</h2>
+        <p class="ph-body">This route exists so the navigation is walkable during the build. {phase}</p>
+        <p class="ph-note">Launch gate #10: every vertical page complete, or removed from the router.</p>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,21 @@
+---
+// The six categories from WEBSITE_PROCESS §4 / Blueprint §03.
+// Same six, same order, on every vertical page. Copy is per-vertical.
+const { items } = Astro.props;
+const LABELS = [
+  'Hours returned',
+  'Administrative load removed',
+  'Summarization',
+  'Documentation',
+  'Deliverables — due and owed',
+  'Process automation',
+];
+---
+<div class="build-grid gain-grid">
+  {LABELS.map((label, i) => (
+    <article class="build reveal" style={`transition-delay:${(i % 2) * 0.06}s`}>
+      <h4><span class="k">{String(i + 1).padStart(2, '0')}</span>{label}</h4>
+      <p>{items[i]}</p>
+    </article>
+  ))}
+</div>
