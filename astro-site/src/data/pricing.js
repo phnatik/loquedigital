@@ -11,9 +11,9 @@
 // pricing.astro, then this.
 
 export const TERMS = [
-  { key: 'mtm',      name: 'Month to month', short: 'MtM' },
-  { key: 'quarterly', name: 'Quarterly',     short: '3 months', note: '30% off setup · 10% off monthly' },
-  { key: 'semi',     name: 'Semi-annual',    short: '6 months', note: '50% off setup · 20% off monthly',
+  { key: 'mtm',      name: 'Month to month', short: 'Month-to-Month' },
+  { key: 'quarterly', name: 'Quarterly',     short: '3 Months', note: '30% off setup · 10% off monthly' },
+  { key: 'semi',     name: 'Semi-annual',    short: '6 Months', note: '50% off setup · 20% off monthly',
     best: true, bestLabel: 'What most people take' },
 ];
 
