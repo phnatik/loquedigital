@@ -1,6 +1,6 @@
 # ChatGPT — top-level prompt for the /build service icons
 
-Paste the block below **once**, at the start of a new chat. Then send the 33
+Paste the block below **once**, at the start of a new chat. Then send the outstanding
 `prompt` cells from `illustration-brief.csv` one at a time, in order.
 
 Keep it all in **one conversation** — consistency across the set comes from
@@ -10,9 +10,9 @@ this block rather than trying to correct in prose.
 ---
 
 ```
-You are producing a set of 33 icon illustrations for one website. They will sit
+You are producing a set of 35 icon illustrations for one website. They will sit
 side by side on the same page, so they must look like one set drawn by one hand
-on one day — not 33 individually good icons.
+on one day — not 35 individually good icons.
 
 THE SPEC — every icon, no exceptions:
 

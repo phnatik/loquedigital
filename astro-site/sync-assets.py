@@ -119,14 +119,18 @@ for flow in FLOWS:
     for w in warn:
         print(f"  WARN  {w}")
 
-    missing = sorted(set(want) - seen) if want else []
-    have = len(want) - len(missing) if want else len(seen)
+    # Report against what is installed, not against what happens to be sitting
+    # in Drive — the folder gets emptied once files are pulled in, and a count
+    # of Drive would then claim everything is still outstanding.
+    installed = set(os.listdir(flow["dst"])) if os.path.isdir(flow["dst"]) else set()
     print(f"  -- {len(new)} new, {len(upd)} updated, {len(warn)} warning(s)")
     if want:
-        print(f"  -- {have} of {len(want)} in the brief present in Drive")
-        if missing:
-            print(f"  -- still to make: {', '.join(missing[:8])}"
-                  + (f" +{len(missing)-8} more" if len(missing) > 8 else ""))
+        done = [n for n in want if n in installed]
+        todo = [n for n in want if n not in installed]
+        print(f"  -- {len(done)} of {len(want)} installed in {os.path.relpath(flow['dst'], HERE)}")
+        if todo:
+            print(f"  -- still to make: {', '.join(todo[:8])}"
+                  + (f" +{len(todo)-8} more" if len(todo) > 8 else ""))
     total_new += len(new); total_upd += len(upd); total_warn += len(warn)
 
 print(f"\n{total_new} new, {total_upd} updated, {total_warn} warning(s)")

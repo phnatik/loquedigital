@@ -122,6 +122,19 @@ for n, sid, ar in shots:
 if live:
     print(f"images installed: {live} of {live + len(shots)}")
 
+# --- blank artwork ----------------------------------------------------------
+# A 1024x1024 PNG of a few hundred bytes is a uniform field: the generator
+# returned an empty frame. It installs and renders like any other asset, so
+# nothing else would notice.
+for _d, _ext, _label in ((os.path.join(SRC, "assets", "svc"), ".png", "icon"),
+                         (os.path.join(SRC, "assets", "img"), ".jpg", "photo")):
+    if not os.path.isdir(_d):
+        continue
+    for _f in sorted(os.listdir(_d)):
+        if _f.endswith(_ext) and os.path.getsize(os.path.join(_d, _f)) < 2000:
+            add("blank-art",
+                f"{_f}: {os.path.getsize(os.path.join(_d, _f))} bytes — blank {_label}, regenerate")
+
 # --- /build tier drift ------------------------------------------------------
 # services.js transcribes its tiers from the comparison matrix in plans.astro.
 # If the two disagree, two public pages are making contradictory claims about
