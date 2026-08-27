@@ -151,6 +151,40 @@ try:
 except FileNotFoundError:
     pass
 
+# --- /build pricing drift ---------------------------------------------------
+# data/pricing.js transcribes the tables in pages/pricing.astro. Two public
+# pages quoting different prices for the same plan is the worst kind of drift,
+# so this compares them figure by figure, against source rather than build.
+try:
+    _pr = open(os.path.join(SRC, "pages", "pricing.astro")).read()
+    _cards = re.findall(r'<div class="pname">([^<]+)</div>(.*?)</article>', _pr, re.S)
+    _fromPage = {}
+    for _nm, _body in _cards:
+        _rows = re.findall(
+            r'<span class="rl">([^<]+?)(?:<small>.*?</small>)?</span>'
+            r'<span class="rs">([^<]+)</span><span class="rm">([^<]+)</span>', _body, re.S)
+        _fromPage[_nm.strip()] = {t.strip().lower(): (a, b) for t, a, b in _rows}
+    _js = open(os.path.join(SRC, "data", "pricing.js")).read()
+    _TERMKEY = {"month to month": "mtm", "quarterly": "quarterly", "semi-annual": "semi"}
+    for _plan, _terms in _fromPage.items():
+        _blk = re.search(r"name: '%s',(.*?)\n  \}," % re.escape(_plan), _js, re.S)
+        if not _blk:
+            add("build-pricing", f"{_plan}: no entry in data/pricing.js")
+            continue
+        for _term, (_setup, _monthly) in _terms.items():
+            _k = _TERMKEY.get(_term)
+            if not _k:
+                continue
+            _m = re.search(r"%s:\s*\{ setup: '([^']+)',\s*monthly: '([^']+)' \}" % _k, _blk.group(1))
+            if not _m:
+                add("build-pricing", f"{_plan}/{_k}: missing from data/pricing.js")
+            elif (_m.group(1), _m.group(2)) != (_setup, _monthly):
+                add("build-pricing",
+                    f"{_plan}/{_k}: /pricing says {_setup}+{_monthly}, "
+                    f"data/pricing.js says {_m.group(1)}+{_m.group(2)}")
+except FileNotFoundError:
+    pass
+
 # --- forms -----------------------------------------------------------------
 for f in pages:
     s = open(f).read(); n = os.path.basename(f)

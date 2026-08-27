@@ -13,6 +13,7 @@
 import Base from '../layouts/Base.astro';
 import ServiceTile from '../components/ServiceTile.astro';
 import { groups, addons, allServices } from '../data/services.js';
+import { pricing, TERMS } from '../data/pricing.js';
 
 // Presets are cumulative, the way the plans are: Reserve includes everything
 // in Select, Custom Reserve includes everything. Counted from the data so the
@@ -116,6 +117,7 @@ const PRESETS = [
           <ServiceTile
             id={a.id}
             name={a.name}
+            subtitle={a.subtitle}
             short={a.short}
             detail={a.detail}
             note={a.note}
@@ -140,13 +142,21 @@ const PRESETS = [
     </p>
   </div>
   <div class="wrap">
-    <div class="result-grid" id="resultGrid" hidden>
+    <div class="result-grid" id="resultGrid" hidden
+         data-pricing={JSON.stringify(pricing)} data-terms={JSON.stringify(TERMS)}>
       <div class="result-cols" id="resultCols"></div>
       <aside class="result-side">
         <div class="result-plan" id="resultPlan"></div>
+        <div class="result-price" id="resultPrice"></div>
         <div class="result-why" id="resultWhy"></div>
-        <a href="/book" class="btn btn-primary result-cta" id="resultCta">Book a free consultation</a>
-        <p class="result-fine">The first conversation is short and free. We&rsquo;ll bring your list to it &mdash; nothing is committed by choosing here.</p>
+        <div class="result-actions">
+          <a href="#" class="btn btn-ghost result-email" id="resultEmail">Email me this plan</a>
+          <a href="/book" class="btn btn-primary result-cta" id="resultCta">Book a free consultation</a>
+        </div>
+        <p class="result-fine">
+          The first conversation is short and free, and nothing is committed by choosing here.
+          Emailing opens your own mail app with the summary already written &mdash; we don&rsquo;t see it.
+        </p>
         <button type="button" class="result-clear" id="resultClear">Clear everything</button>
       </aside>
     </div>

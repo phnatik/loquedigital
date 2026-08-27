@@ -359,6 +359,12 @@
   var planEl = document.getElementById('resultPlan');
   var whyEl  = document.getElementById('resultWhy');
   var cta    = document.getElementById('resultCta');
+  var priceEl = document.getElementById('resultPrice');
+  var PRICING = {}, TERMS = [];
+  try {
+    PRICING = JSON.parse(grid.dataset.pricing || '{}');
+    TERMS   = JSON.parse(grid.dataset.terms   || '[]');
+  } catch (e) { /* panel still works, it just won't quote a price */ }
 
   var bar = document.createElement('div');
   bar.className = 'build-bar';
@@ -432,13 +438,75 @@
           : ' — all of it is in the entry plan.')
       : '';
 
+    priceEl.innerHTML = tier && PRICING[tier] ? priceTable(tier) : '';
+
     if (cta) cta.href = '/book?plan=' + (tier || 'addons') + '&n=' + svc.length;
+    var summary = summaryText(tier, byTier, add);
+    var mail = document.getElementById('resultEmail');
+    if (mail) {
+      var body = summary;
+      // Mail clients and Windows have historically capped the URL around 2KB.
+      if (encodeURIComponent(body).length > 1700) {
+        body = body.slice(0, 1200) + '\n\n[list continues — reopen at loqueagent.com/build]';
+      }
+      mail.href = 'mailto:?subject=' + encodeURIComponent('My Loque Agent plan') +
+                  '&body=' + encodeURIComponent(body);
+    }
 
     bar.querySelector('.bb-n').textContent =
       svc.length + ' picked' + (add.length ? ' + ' + add.length : '');
     bar.querySelector('.bb-p').textContent = tier ? LABEL[tier] : '';
     bar.classList.add('in');
   }
+
+  function priceTable(tier) {
+    var p = PRICING[tier];
+    return '<h5>' + esc(p.name) + ' — what it costs</h5>' +
+      '<div class="rp-row rp-head"><span>Term</span><span class="s">Setup</span><span class="m">Monthly</span></div>' +
+      TERMS.map(function (t) {
+        var row = p[t.key];
+        if (!row) return '';
+        return '<div class="rp-row' + (t.best ? ' is-best' : '') + '">' +
+          '<span class="t">' + esc(t.short) +
+            (t.note ? '<small>' + esc(t.note) + '</small>' : '') +
+            (t.best ? '<small>' + esc(t.bestLabel) + '</small>' : '') + '</span>' +
+          '<span class="s">' + esc(row.setup) + '</span>' +
+          '<span class="m">' + esc(row.monthly) + '</span></div>';
+      }).join('');
+  }
+
+  // Plain text, because it is going into a mail client rather than a page.
+  function summaryText(tier, byTier, add) {
+    var L = [];
+    L.push('MY LOQUE AGENT PLAN');
+    L.push('');
+    if (tier) {
+      var p = PRICING[tier];
+      L.push('Recommended plan: ' + p.name);
+      L.push('');
+      L.push('Pricing');
+      TERMS.forEach(function (t) {
+        var r = p[t.key];
+        if (r) L.push('  ' + pad(t.short, 12) + 'setup ' + pad(r.setup, 8) + 'monthly ' + r.monthly);
+      });
+      L.push('');
+    }
+    ['select', 'reserve', 'custom'].forEach(function (k) {
+      if (!byTier[k] || !byTier[k].length) return;
+      L.push(LABEL[k] + ' (' + byTier[k].length + ')');
+      byTier[k].forEach(function (i) { L.push('  - ' + i.dataset.name); });
+      L.push('');
+    });
+    if (add.length) {
+      L.push('Add-ons (priced separately)');
+      add.forEach(function (i) { L.push('  - ' + i.dataset.name); });
+      L.push('');
+    }
+    L.push('Prices are from loqueagent.com/pricing. Nothing here is committed —');
+    L.push('the first conversation is short and free: loqueagent.com/book');
+    return L.join('\n');
+  }
+  function pad(s, n) { s = String(s); while (s.length < n) s += ' '; return s; }
 
   function addonCol(add) {
     return '<div class="result-col"><h4>Add-ons &mdash; ' + add.length +
