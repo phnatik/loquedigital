@@ -288,8 +288,8 @@ export const addons = [
     minTier: 'reserve',
     exclusive: 'rpl',
     short: 'Zero data retention, for privileged material.',
-    detail: 'Nothing is retained once it has been processed — zero data retention, documented end to end. The path most firms take, because privilege makes retention the exposure rather than access.',
-    note: 'One add-on, priced once — see /pricing',
+    detail: 'Nothing is retained once processed — zero data retention, documented end to end. Privilege makes retention the risk, not access.',
+    note: 'One add-on, priced once.',
     art: 'addon-regulated-legal',
   },
   {
@@ -299,8 +299,8 @@ export const addons = [
     minTier: 'reserve',
     exclusive: 'rpl',
     short: 'A signed BAA before anything touches PHI.',
-    detail: 'A HIPAA-ready business associate agreement executed first, with retention, deletion and encryption rules documented per data type. A BAA requires retaining data for a defined window, so this and zero data retention aren\u2019t combinable — practices handling PHI take this one instead.',
-    note: 'One add-on, priced once — see /pricing',
+    detail: 'A HIPAA-ready BAA, signed before anything touches PHI. It requires keeping data for a defined window, so this and zero data retention aren\u2019t combinable.',
+    note: 'One add-on, priced once.',
     art: 'addon-regulated-health',
   },
   {
@@ -310,8 +310,8 @@ export const addons = [
     minTier: 'reserve',
     exclusive: 'rpl',
     short: 'Zero data retention, for client security reviews.',
-    detail: 'Zero data retention, documented end to end — which is what a client\u2019s IT team is actually asking for in the security questionnaire that arrives before you can be onboarded.',
-    note: 'One add-on, priced once — see /pricing',
+    detail: 'Zero data retention, documented end to end — what a client\u2019s IT team asks for in the security questionnaire before onboarding.',
+    note: 'One add-on, priced once.',
     art: 'addon-regulated-prof',
   },
   {

@@ -45,18 +45,27 @@ const badgeKey = tier || 'addon';
       <span class="svc-artwrap"><ServiceArt id={art || id} label={name} /></span>
       <span class="svc-name">{name}</span>
       {subtitle && <span class="svc-sub">{subtitle}</span>}
-      <span class="svc-tier" data-t={badgeKey}>{badge}</span>
+      {/* The front used to carry the tier here, which read as a button
+          labelled "Select" on every Select-tier card — next to a card whose
+          whole surface selects. It now says what it does. The tier is still
+          on the back, and the results panel groups by it. */}
+      <span class="svc-more">More
+        <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M4 2.5 8 6l-4 3.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
     </span>
 
     <span class="svc-face svc-back">
       <span class="svc-check" aria-hidden="true">
         <svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5 6.5 11.5 12.5 5" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </span>
-      <span class="svc-back-name">{name}{subtitle ? ` — ${subtitle}` : ''}</span>
+      {/* Name only. Appending the subtitle here pushed the practice-layer
+          backs past the card once the type went up, and the detail below
+          already explains the path. */}
+      <span class="svc-back-name">{name}</span>
       <span class="svc-short">{short}</span>
       <span class="svc-detail">{detail}</span>
       {price && (
-        <span class="svc-price">Price<b>{price}</b></span>
+        <span class="svc-price"><b>{price}</b></span>
       )}
       {note && <span class="svc-note">{note}</span>}
       <span class="svc-tier" data-t={badgeKey}>{badge}</span>

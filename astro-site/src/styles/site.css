@@ -1372,7 +1372,10 @@
     transition:border-color .25s var(--ease),background .25s;
     overflow:hidden;
   }
-  .svc-back{transform:rotateY(180deg)}
+  /* The back carries more than the front — heading, lede, body, sometimes a
+     price and a note. Slightly tighter padding buys the headroom that keeps a
+     copy edit from pushing it past the card. */
+  .svc-back{transform:rotateY(180deg);padding:22px 22px 18px}
 
   .svc-tile:focus-within .svc-face{outline:2px solid var(--accent);outline-offset:3px}
   /* Selected reads as a raised, lighter card rather than a coloured edge, so
@@ -1416,15 +1419,28 @@
 
   /* back */
   .svc-back-name{
-    display:block;font-family:"Outfit";font-weight:700;font-size:15px;
-    letter-spacing:-.01em;line-height:1.25;padding-right:34px;color:var(--paper);
+    display:block;font-family:"Outfit";font-weight:700;font-size:18px;
+    letter-spacing:-.015em;line-height:1.25;padding-right:34px;color:var(--paper);
   }
-  .svc-short{display:block;margin-top:10px;font-size:15px;line-height:1.45;color:var(--paper)}
-  .svc-detail{display:block;margin-top:9px;font-size:13.8px;line-height:1.5;color:var(--muted)}
+  .svc-short{display:block;margin-top:11px;font-size:16.5px;line-height:1.45;color:var(--paper)}
+  .svc-detail{display:block;margin-top:10px;font-size:15.2px;line-height:1.5;color:var(--muted)}
   .svc-note{
-    display:block;margin-top:9px;font-size:12px;font-weight:600;
+    display:block;margin-top:10px;font-size:13px;font-weight:600;
     letter-spacing:.02em;color:var(--accent-dim);
   }
+
+  /* Reads as the affordance it is: turn the card over. Brighter than the
+     tier pill it replaced, because nobody was finding the back. */
+  .svc-more{
+    display:inline-flex;align-items:center;gap:5px;align-self:center;
+    margin-top:12px;padding:7px 15px;border-radius:100px;
+    border:1px solid #55555f;background:rgba(245,244,238,.04);
+    font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--paper);
+    transition:border-color .25s var(--ease),background .25s;
+  }
+  .svc-more svg{width:11px;height:11px;opacity:.8}
+  .svc-tile:hover .svc-more{border-color:#6d6d78;background:rgba(245,244,238,.08)}
 
   .svc-tier{
     display:inline-block;align-self:center;margin-top:10px;padding:5px 10px;
@@ -1627,11 +1643,9 @@
   /* Add-on price, on the back of the tile. Sits above the "one add-on,
      priced once" note so the figure reads before the caveat. */
   .svc-price{
-    display:block;margin-top:12px;padding-top:11px;border-top:1px solid var(--line);
-    font-size:12px;letter-spacing:.1em;text-transform:uppercase;
-    font-weight:700;color:var(--muted);
+    display:block;margin-top:10px;padding-top:9px;border-top:1px solid var(--line);
   }
   .svc-price b{
-    display:block;margin-top:5px;font-family:"Outfit",sans-serif;font-weight:700;
+    display:block;font-family:"Outfit",sans-serif;font-weight:700;
     font-size:15.5px;letter-spacing:-.01em;text-transform:none;color:var(--accent);
   }
