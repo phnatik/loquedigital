@@ -1345,12 +1345,13 @@
      does. The tile is a <label> around a real checkbox, so a click on
      either face selects — hence the tick on both.
 
-     Fixed height because the two faces are absolutely positioned. 336px
-     clears the longest description (209 characters) at this column width
-     with room to spare. --------------------------------------------- */
+     Fixed height because the two faces are absolutely positioned. 404px
+     is set by the front — a 207px illustration plus the title and badge —
+     and comfortably clears the longest description (209 characters) on
+     the back at this column width. ------------------------------------ */
   .svc-tile{
     position:relative;display:block;cursor:pointer;
-    height:336px;perspective:1200px;background:none;border:0;padding:0;
+    height:404px;perspective:1200px;background:none;border:0;padding:0;
   }
   .svc-tile input{position:absolute;opacity:0;width:0;height:0}
 
@@ -1390,7 +1391,7 @@
 
   /* front — art centred in the space above the title */
   .svc-artwrap{flex:1;display:grid;place-items:center;min-height:0;padding-top:8px}
-  .svc-art{display:block;width:138px;height:138px;object-fit:contain}
+  .svc-art{display:block;width:207px;height:207px;object-fit:contain}
   .svc-art-todo{color:#4c4c56}
   .svc-art-todo svg{width:100%;height:100%}
 
