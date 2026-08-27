@@ -573,8 +573,7 @@
     stopCascade();
 
     var svc = inputs().filter(function (i) { return i.name === 'service'; });
-    // anything above the preset comes off immediately — removals are not
-    // something to dramatise
+    // removals are not something to dramatise
     svc.forEach(function (i) {
       if (RANK[i.dataset.tier] > RANK[key]) i.checked = false;
     });
@@ -585,31 +584,28 @@
 
     var reduced = window.matchMedia &&
                   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var home = document.getElementById('start');
 
     if (reduced || !pending.length) {
       pending.forEach(function (i) { i.checked = true; });
       render();
-      if (pending.length) {
-        document.getElementById('result')
-          .scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
-      }
       return;
     }
 
-    var startY = window.scrollY;
-    var lastTile = pending[pending.length - 1].closest('.svc-tile');
-    var endY = Math.max(startY,
-      lastTile.getBoundingClientRect().top + window.scrollY
-        - window.innerHeight * 0.55);
-    var dist = endY - startY;
-    // pace it by distance, but keep it inside a couple of seconds
-    var dur = Math.min(2400, Math.max(700, dist * 0.75));
+    // html{scroll-behavior:smooth} would turn every frame's scrollTo into a
+    // competing animation, so the follow has to opt out of it and put it back.
+    var root = document.documentElement;
+    var prevBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = 'auto';
+
+    var TICK = 55;                 // ms between boxes — one at a time, visibly
+    var idx = 0;
     var t0 = Date.now();
     var interrupted = false;
 
     function onUserScroll() { interrupted = true; }
-    window.addEventListener('wheel', onUserScroll, { passive: true, once: true });
-    window.addEventListener('touchstart', onUserScroll, { passive: true, once: true });
+    window.addEventListener('wheel', onUserScroll, { passive: true });
+    window.addEventListener('touchstart', onUserScroll, { passive: true });
 
     function finish() {
       stopCascade();
@@ -617,32 +613,47 @@
       window.removeEventListener('touchstart', onUserScroll);
       pending.forEach(function (i) { i.checked = true; });
       render();
-      if (!interrupted) {
-        document.getElementById('result')
-          .scrollIntoView({ behavior: 'smooth', block: 'start' });
+      root.style.scrollBehavior = prevBehavior;
+      if (!interrupted && home) {
+        // back to where the button was clicked, so the list is ready to adjust
+        setTimeout(function () {
+          home.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 450);
       }
     }
 
+    var lastTick = Date.now();
+
     function frame() {
-      var p = Math.min(1, (Date.now() - t0) / dur);
-      var eased = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+      if (idx < pending.length) {
+        var el = pending[idx].closest('.svc-tile');
+        var r = el.getBoundingClientRect();
+        var onScreen = r.top < window.innerHeight * 0.92 && r.bottom > 0;
+        var waited = Date.now() - lastTick;
 
-      if (!interrupted) window.scrollTo(0, startY + dist * eased);
-
-      // tick anything that has climbed into the lower half of the viewport
-      var line = window.innerHeight * 0.75;
-      var still = [];
-      pending.forEach(function (i) {
-        var el = i.closest('.svc-tile');
-        if (!i.checked && el.getBoundingClientRect().top < line) {
-          i.checked = true;
+        // Tick on the beat, but only once the box is actually on screen —
+        // the gap between two sections is further than one beat of scrolling,
+        // and ticking through it would happen where nobody can see it. The
+        // 400ms fallback keeps it moving if the scroll is blocked or the user
+        // has taken over.
+        if (waited >= TICK && (onScreen || interrupted || waited > 400)) {
+          pending[idx].checked = true;
           bumpBar();
-        } else if (!i.checked) {
-          still.push(i);
+          idx++;
+          lastTick = Date.now();
         }
-      });
 
-      if (p >= 1 || (interrupted && !still.length)) finish();
+        if (!interrupted && idx < pending.length) {
+          var next = pending[idx].closest('.svc-tile');
+          var target = next.getBoundingClientRect().top + window.scrollY
+                     - window.innerHeight * 0.45;
+          var y = window.scrollY;
+          var step = (target - y) * 0.2;
+          if (Math.abs(step) > 0.5) window.scrollTo(0, y + step);
+        }
+      }
+
+      if (idx >= pending.length) finish();
     }
     cascadeTimer = setInterval(frame, 16);
   }
