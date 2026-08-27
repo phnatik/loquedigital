@@ -120,10 +120,43 @@ for n, sid, ar in shots:
 if live:
     print(f"images installed: {live} of {live + len(shots)}")
 
+# --- /build tier drift ------------------------------------------------------
+# services.js transcribes its tiers from the comparison matrix in plans.astro.
+# If the two disagree, two public pages are making contradictory claims about
+# what a plan includes. Checked against source, not the build.
+SRC = os.path.join(os.path.dirname(os.path.abspath(__file__)), "src")
+try:
+    _plans = open(os.path.join(SRC, "pages", "plans.astro")).read()
+    _body = _plans[_plans.index("<tbody>"):_plans.index("</tbody>")]
+    _matrix = {}
+    for _row in re.findall(r"<tr>(.*?)</tr>", _body, re.S):
+        _f = re.search(r'class="feat">(.*?)</td>', _row, re.S)
+        _v = re.findall(r'<td class="val([^"]*)">(.*?)</td>', _row, re.S)
+        if not _f or len(_v) != 3:
+            continue
+        _has = [("mno" not in c) for c, _ in _v]
+        _matrix[_f.group(1).strip()] = "select" if _has[0] else ("reserve" if _has[1] else "custom")
+    _svc = open(os.path.join(SRC, "data", "services.js")).read()
+    _alias = {"Handwritten cards": "Handwritten cards included",
+              "Handwritten letters": "Handwritten letters included"}
+    for _name, _tier in re.findall(r"name: '([^']+)',\s*\n\s*tier: '(\w+)'", _svc):
+        _key = _alias.get(_name, _name)
+        if _key not in _matrix:
+            add("build-tiers", f"{_name}: not present in the /plans matrix")
+        elif _matrix[_key] != _tier:
+            add("build-tiers",
+                f"{_name}: matrix says {_matrix[_key]}, services.js says {_tier}")
+except FileNotFoundError:
+    pass
+
 # --- forms -----------------------------------------------------------------
 for f in pages:
     s = open(f).read(); n = os.path.basename(f)
     for form in re.findall(r'<form\b.*?</form>', s, re.S):
+        # /build's selector is a form for keyboard and no-JS reasons but never
+        # submits anywhere; it has no endpoint to check.
+        if 'id="builder"' in form:
+            continue
         keys = re.findall(r'name="access_key" value="([^"]*)"', form)
         vert = re.findall(r'name="vertical" value="([^"]*)"', form)
         subj = re.findall(r'name="subject" value="([^"]*)"', form)

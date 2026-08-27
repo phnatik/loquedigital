@@ -327,3 +327,198 @@
       if (e.key === 'Escape') toggles.forEach(close);
     });
   })();
+
+/* ---------------------------------------------------------------------------
+   /build — the assistant builder (Phase 8).
+
+   Rule: the plan you need is the highest tier among the things you picked.
+   Add-ons never move the tier — they are priced on top of the plan, and
+   folding them in would imply they are included in the plan price.
+
+   The tier data is written onto each input as data-tier by build.astro, which
+   reads it from services.js, which transcribes the /plans matrix. There is no
+   second copy of the mapping here on purpose.
+--------------------------------------------------------------------------- */
+(function () {
+  var form = document.getElementById('builder');
+  if (!form) return;
+
+  var RANK  = { select: 1, reserve: 2, custom: 3 };
+  var LABEL = { select: 'Select', reserve: 'Reserve', custom: 'Custom Reserve' };
+  var BLURB = {
+    select:  'Know what matters. One inbox, sorted and summarised, with a daily digest.',
+    reserve: 'Act on what matters. Everything in Select, plus drafting in your voice, scheduling and the Handwritten Layer.',
+    custom:  'Nothing falls through. Everything in Reserve, plus a documented map of your operation and workflows built around it.'
+  };
+  var KEY = 'loque_build_v1';
+
+  var grid   = document.getElementById('resultGrid');
+  var cols   = document.getElementById('resultCols');
+  var title  = document.getElementById('resultTitle');
+  var lede   = document.getElementById('resultLede');
+  var planEl = document.getElementById('resultPlan');
+  var whyEl  = document.getElementById('resultWhy');
+  var cta    = document.getElementById('resultCta');
+
+  var bar = document.createElement('div');
+  bar.className = 'build-bar';
+  bar.innerHTML = '<span class="bb-n"></span><span class="bb-p"></span>' +
+                  '<a href="#result" class="btn btn-primary">See your plan</a>';
+  document.body.appendChild(bar);
+
+  function inputs() {
+    return Array.prototype.slice.call(form.querySelectorAll('input[type=checkbox]'));
+  }
+  function picked() {
+    return inputs().filter(function (i) { return i.checked; });
+  }
+
+  // Tap opens the explanation on touch, where :hover never fires. The label
+  // still toggles the checkbox — this only adds the disclosure.
+  if (window.matchMedia && window.matchMedia('(hover: none)').matches) {
+    form.addEventListener('click', function (e) {
+      var tile = e.target.closest('.svc-tile');
+      if (tile) tile.classList.add('is-open');
+    });
+  }
+
+  function render() {
+    var all = picked();
+    var svc = all.filter(function (i) { return i.name === 'service'; });
+    var add = all.filter(function (i) { return i.name === 'addon'; });
+
+    save(all);
+
+    if (!svc.length && !add.length) {
+      grid.hidden = true;
+      title.textContent = 'Nothing picked yet.';
+      lede.textContent  = 'Tick anything above and the plan that covers it appears here.';
+      bar.classList.remove('in');
+      return;
+    }
+
+    var rank = svc.reduce(function (m, i) {
+      return Math.max(m, RANK[i.dataset.tier] || 0);
+    }, 0);
+    var tier = Object.keys(RANK).filter(function (k) { return RANK[k] === rank; })[0];
+
+    // Group the picks by the tier that introduces them.
+    var byTier = { select: [], reserve: [], custom: [] };
+    svc.forEach(function (i) { byTier[i.dataset.tier].push(i); });
+
+    cols.innerHTML = ['select', 'reserve', 'custom'].map(function (t) {
+      if (!byTier[t].length) return '';
+      return '<div class="result-col"><h4>' + LABEL[t] + ' &mdash; ' + byTier[t].length + '</h4><ul>' +
+        byTier[t].map(function (i) {
+          return '<li><b>' + esc(i.dataset.name) + '</b>' +
+                 '<button type="button" class="result-drop" data-drop="' + i.value +
+                 '" aria-label="Remove ' + esc(i.dataset.name) + '">&times;</button></li>';
+        }).join('') + '</ul></div>';
+    }).join('') + (add.length ? addonCol(add) : '');
+
+    grid.hidden = false;
+    title.textContent = tier ? 'You need ' + LABEL[tier] + '.' : 'Add-ons only.';
+    lede.textContent  = tier ? BLURB[tier]
+      : 'Add-ons sit on top of a plan. Pick at least one service above and we can tell you which.';
+
+    planEl.innerHTML = '<div class="rp-k">Recommended plan</div>' +
+      '<div class="rp-v">' + (tier ? LABEL[tier] : '&mdash;') + '</div>' +
+      '<div class="rp-p">' + svc.length + ' service' + (svc.length === 1 ? '' : 's') +
+      (add.length ? ' &middot; ' + add.length + ' add-on' + (add.length === 1 ? '' : 's') : '') +
+      ' &middot; <a href="/pricing">see the price</a></div>';
+
+    // The useful part: which specific picks are holding the tier up, so
+    // "de-select to change the plan" is an informed choice rather than a hunt.
+    whyEl.innerHTML = tier && byTier[tier].length
+      ? '<b>Why ' + LABEL[tier] + ':</b> ' +
+        listify(byTier[tier].map(function (i) { return esc(i.dataset.name); })) +
+        (tier !== 'select'
+          ? ' ' + (byTier[tier].length === 1 ? 'is' : 'are') +
+            ' only in ' + LABEL[tier] + '. Remove ' +
+            (byTier[tier].length === 1 ? 'it' : 'them') + ' and you drop a plan.'
+          : ' — all of it is in the entry plan.')
+      : '';
+
+    if (cta) cta.href = '/book?plan=' + (tier || 'addons') + '&n=' + svc.length;
+
+    bar.querySelector('.bb-n').textContent =
+      svc.length + ' picked' + (add.length ? ' + ' + add.length : '');
+    bar.querySelector('.bb-p').textContent = tier ? LABEL[tier] : '';
+    bar.classList.add('in');
+  }
+
+  function addonCol(add) {
+    return '<div class="result-col"><h4>Add-ons &mdash; ' + add.length +
+      ' <span style="text-transform:none;letter-spacing:0;font-weight:400">(priced separately)</span></h4><ul>' +
+      add.map(function (i) {
+        return '<li><b>' + esc(i.dataset.name) + '</b>' +
+               '<button type="button" class="result-drop" data-drop="' + i.value +
+               '" aria-label="Remove ' + esc(i.dataset.name) + '">&times;</button></li>';
+      }).join('') + '</ul></div>';
+  }
+
+  function listify(a) {
+    if (a.length === 1) return '<b>' + a[0] + '</b>';
+    if (a.length === 2) return '<b>' + a[0] + '</b> and <b>' + a[1] + '</b>';
+    return '<b>' + a.slice(0, -1).join('</b>, <b>') + '</b> and <b>' + a[a.length - 1] + '</b>';
+  }
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+
+  function save(all) {
+    try {
+      sessionStorage.setItem(KEY, JSON.stringify(all.map(function (i) { return i.value; })));
+    } catch (e) { /* private mode — the page still works, it just won't persist */ }
+  }
+  function restore() {
+    var raw;
+    try { raw = sessionStorage.getItem(KEY); } catch (e) { return; }
+    if (!raw) return;
+    try {
+      var ids = JSON.parse(raw);
+      inputs().forEach(function (i) { if (ids.indexOf(i.value) > -1) i.checked = true; });
+    } catch (e) { /* corrupt value — ignore and start clean */ }
+  }
+
+  form.addEventListener('change', render);
+
+  document.addEventListener('click', function (e) {
+    var drop = e.target.closest('[data-drop]');
+    if (drop) {
+      var box = form.querySelector('input[value="' + drop.dataset.drop + '"]');
+      if (box) { box.checked = false; render(); }
+      return;
+    }
+    if (e.target.id === 'resultClear') {
+      inputs().forEach(function (i) { i.checked = false; });
+      render();
+      document.getElementById('intro').scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+
+  restore();
+  render();
+})();
+
+/* Carry a /build selection into the booking form, so the enquiry says what
+   they picked rather than arriving as an unexplained call request. */
+(function () {
+  var f = document.querySelector('form[data-ajax]');
+  if (!f || !/\/book/.test(location.pathname)) return;
+  var raw;
+  try { raw = sessionStorage.getItem('loque_build_v1'); } catch (e) { return; }
+  if (!raw) return;
+  var ids;
+  try { ids = JSON.parse(raw); } catch (e) { return; }
+  if (!ids || !ids.length) return;
+
+  var plan = new URLSearchParams(location.search).get('plan') || '';
+  [['built_plan', plan], ['built_services', ids.join(', ')]].forEach(function (pair) {
+    var h = document.createElement('input');
+    h.type = 'hidden'; h.name = pair[0]; h.value = pair[1];
+    f.appendChild(h);
+  });
+})();

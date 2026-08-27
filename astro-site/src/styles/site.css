@@ -1316,3 +1316,139 @@
   @media(max-width:760px){
     .sec-light{padding:64px 0 72px;margin:48px 0}
   }
+
+  /* ==========================================================
+     /build — the assistant builder (Phase 8)
+     Tiles are <label>s wrapping a real checkbox, so the whole thing works
+     with a keyboard and without JS the form still reads as a list of
+     services. JS only adds the running answer.
+     ========================================================== */
+
+  .svc-group{margin-top:18px}
+  .svc-group-title{
+    font-family:"Outfit";font-weight:800;font-size:clamp(25px,3vw,38px);
+    line-height:1.08;letter-spacing:-.025em;max-width:22ch;
+  }
+  .svc-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:38px;
+  }
+  @media(max-width:1000px){ .svc-grid{grid-template-columns:repeat(2,1fr)} }
+  @media(max-width:640px){ .svc-grid{grid-template-columns:1fr} }
+
+  .svc-tile{
+    position:relative;display:block;cursor:pointer;
+    background:var(--ink-card);border:1px solid var(--line);border-radius:18px;
+    padding:26px 24px 22px;
+    transition:border-color .25s var(--ease),transform .25s var(--ease),background .25s;
+  }
+  .svc-tile:hover{border-color:#4a4a54;transform:translateY(-3px)}
+  .svc-tile:focus-within{outline:2px solid var(--accent);outline-offset:3px}
+  .svc-tile input{position:absolute;opacity:0;width:0;height:0}
+
+  .svc-check{
+    position:absolute;top:20px;right:20px;width:24px;height:24px;border-radius:7px;
+    border:1.5px solid #4a4a54;display:grid;place-items:center;color:transparent;
+    transition:background .2s,border-color .2s,color .2s;
+  }
+  .svc-check svg{width:15px;height:15px}
+  .svc-tile:has(input:checked){border-color:var(--accent);background:rgba(210,255,77,.05)}
+  .svc-tile:has(input:checked) .svc-check{background:var(--accent);border-color:var(--accent);color:#10100c}
+
+  .svc-art{display:block;width:46px;height:46px;object-fit:contain;margin-bottom:16px}
+  .svc-art-todo{color:#4c4c56}
+  .svc-art-todo svg{width:100%;height:100%}
+
+  .svc-name{
+    display:block;font-family:"Outfit";font-weight:700;font-size:17.5px;
+    letter-spacing:-.015em;line-height:1.25;padding-right:34px;
+  }
+  .svc-short{display:block;margin-top:8px;font-size:14.5px;line-height:1.5;color:var(--muted)}
+
+  /* The long explanation. Present in the DOM for search and screen readers;
+     revealed on hover AND on tap, because a hover-only affordance is
+     invisible on every phone. */
+  .svc-detail{
+    display:block;font-size:14px;line-height:1.55;color:var(--text);
+    max-height:0;opacity:0;overflow:hidden;
+    transition:max-height .3s var(--ease),opacity .25s,margin-top .3s var(--ease);
+  }
+  .svc-tile:hover .svc-detail,
+  .svc-tile:focus-within .svc-detail,
+  .svc-tile.is-open .svc-detail{max-height:220px;opacity:1;margin-top:12px}
+
+  .svc-note{
+    display:block;margin-top:10px;font-size:12.5px;font-weight:600;
+    letter-spacing:.02em;color:var(--accent-dim);
+  }
+  .svc-tier{
+    display:inline-block;margin-top:16px;font-size:10.5px;font-weight:700;
+    letter-spacing:.14em;text-transform:uppercase;padding:5px 10px;border-radius:100px;
+    border:1px solid var(--line);color:var(--muted);
+  }
+  .svc-tier[data-t="reserve"]{color:var(--accent-dim);border-color:rgba(169,207,60,.35)}
+  .svc-tier[data-t="custom"]{color:var(--accent);border-color:rgba(210,255,77,.4)}
+  .svc-tile.is-addon{border-style:dashed}
+
+  /* ---------- the running answer ---------- */
+  .result{scroll-margin-top:90px}
+  .result-grid{display:grid;grid-template-columns:1fr 340px;gap:44px;margin-top:46px;align-items:start}
+  @media(max-width:900px){ .result-grid{grid-template-columns:1fr;gap:30px} }
+
+  .result-col + .result-col{margin-top:26px}
+  .result-col h4{
+    font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+    color:var(--accent);padding-bottom:10px;border-bottom:1px solid var(--line);
+  }
+  .result-col ul{list-style:none;margin:12px 0 0;display:flex;flex-direction:column;gap:2px}
+  .result-col li{
+    display:flex;align-items:center;gap:12px;padding:9px 0;font-size:15.5px;
+    border-bottom:1px solid rgba(20,20,16,.07);
+  }
+  .result-col li b{font-weight:500;flex:1}
+  .result-drop{
+    flex:none;width:24px;height:24px;border-radius:50%;border:1px solid var(--line);
+    background:none;color:var(--muted);cursor:pointer;font-size:15px;line-height:1;
+    transition:border-color .2s,color .2s,background .2s;
+  }
+  .result-drop:hover{border-color:#b9351f;color:#b9351f;background:rgba(185,53,31,.06)}
+
+  .result-side{
+    position:sticky;top:92px;
+    background:var(--ink-card);border:1px solid var(--line);border-radius:20px;padding:30px 28px;
+  }
+  @media(max-width:900px){ .result-side{position:static} }
+  .result-plan .rp-k{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .result-plan .rp-v{
+    font-family:"Outfit";font-weight:800;font-size:34px;letter-spacing:-.03em;
+    margin-top:8px;line-height:1.05;
+  }
+  .result-plan .rp-p{margin-top:8px;font-size:15px;color:var(--text)}
+  .result-why{margin-top:20px;padding-top:18px;border-top:1px solid var(--line);font-size:14.5px;line-height:1.55;color:var(--text)}
+  .result-why b{color:var(--paper);font-weight:600}
+  .result-cta{margin-top:22px;width:100%;text-align:center}
+  .result-fine{margin-top:14px;font-size:13px;line-height:1.5;color:var(--muted)}
+  .result-clear{
+    margin-top:16px;background:none;border:0;padding:0;cursor:pointer;
+    font-size:13.5px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;
+  }
+  .result-clear:hover{color:var(--paper)}
+
+  /* A compact running count that follows you down the page. */
+  .build-bar{
+    position:fixed;left:50%;bottom:22px;transform:translate(-50%,140%);
+    z-index:60;display:flex;align-items:center;gap:18px;
+    background:rgba(28,28,34,.94);backdrop-filter:blur(10px);
+    border:1px solid #40404a;border-radius:100px;padding:11px 12px 11px 22px;
+    box-shadow:0 12px 40px rgba(0,0,0,.45);
+    transition:transform .35s var(--ease);
+  }
+  .build-bar.in{transform:translate(-50%,0)}
+  .build-bar .bb-n{font-family:"Outfit";font-weight:700;font-size:15px;white-space:nowrap}
+  .build-bar .bb-p{font-size:13.5px;color:var(--accent);font-weight:600;white-space:nowrap}
+  .build-bar .btn{padding:9px 18px;font-size:14px}
+  @media(max-width:560px){
+    .build-bar{left:14px;right:14px;transform:translateY(140%);width:auto;
+      justify-content:space-between;padding-left:18px}
+    .build-bar.in{transform:translateY(0)}
+    .build-bar .bb-p{display:none}
+  }

@@ -1,0 +1,120 @@
+---
+// /build — "Build your AI assistant". Phase 8, the assessment rung.
+//
+// The framing matters and is load-bearing: this is NOT an à la carte
+// configurator. ADR-W09 fixed the three plan prices and ADR-P03 bounds what
+// Custom Reserve includes, so a page that reads as "assemble your own bundle"
+// would invite exactly the negotiation those decisions exist to prevent.
+// What it does is the reverse — you pick what you need, and it tells you
+// which of three fixed plans already covers it.
+//
+// Tiers come from src/data/services.js, which transcribes the /plans matrix.
+// audit.py fails if the two ever disagree.
+import Base from '../layouts/Base.astro';
+import ServiceArt from '../components/ServiceArt.astro';
+import { groups, addons } from '../data/services.js';
+
+const TIER_LABEL = { select: 'Select', reserve: 'Reserve', custom: 'Custom Reserve' };
+---
+<Base
+  title="Build your AI assistant | Loque Agent"
+  description="Pick the work you want handled and see which plan covers it. Nothing here is priced à la carte — the three plans are fixed, and this shows you which one you actually need."
+  path="/build"
+>
+<div class="page-top">
+
+<section id="intro">
+  <div class="sec-head">
+    <div class="sec-tag reveal">Build your assistant</div>
+    <h1 class="sec-title reveal" style="transition-delay:.06s">Pick the work you want off your desk.</h1>
+    <p class="sec-sub reveal" style="transition-delay:.1s">
+      Tick what you want handled and we&rsquo;ll show you which of the three plans covers it.
+      Nothing is priced piece by piece &mdash; the plans are fixed, and this just tells you
+      which one you land in. Change your mind as often as you like; the answer updates as you go.
+    </p>
+  </div>
+</section>
+
+<form id="builder" class="builder" novalidate>
+
+  {groups.map((g) => (
+    <section class="svc-group" id={`grp-${g.key}`}>
+      <div class="sec-head">
+        <div class="sec-tag reveal">{g.name}</div>
+        <h2 class="svc-group-title reveal" style="transition-delay:.06s">{g.lede}</h2>
+      </div>
+      <div class="wrap">
+        <div class="svc-grid">
+          {g.services.map((s, i) => (
+            <label class="svc-tile reveal" style={`transition-delay:${(i % 3) * 0.05}s`} data-tier={s.tier}>
+              <input type="checkbox" name="service" value={s.id} data-tier={s.tier} data-name={s.name} />
+              <span class="svc-check" aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5 6.5 11.5 12.5 5" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <ServiceArt id={s.id} label={s.name} />
+              <span class="svc-name">{s.name}</span>
+              <span class="svc-short">{s.short}</span>
+              <span class="svc-detail">{s.detail}</span>
+              {s.note && <span class="svc-note">{s.note}</span>}
+              <span class="svc-tier" data-t={s.tier}>{TIER_LABEL[s.tier]}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="svc-group" id="grp-addons">
+    <div class="sec-head">
+      <div class="sec-tag reveal">Add-ons</div>
+      <h2 class="svc-group-title reveal" style="transition-delay:.06s">Priced on top of the plan, not inside it.</h2>
+      <p class="sec-sub reveal" style="transition-delay:.1s">
+        These sit alongside whichever plan you land in, so they don&rsquo;t change the answer below.
+        Tick them and we&rsquo;ll bring them to the call.
+      </p>
+    </div>
+    <div class="wrap">
+      <div class="svc-grid">
+        {addons.map((a, i) => (
+          <label class="svc-tile is-addon reveal" style={`transition-delay:${(i % 3) * 0.05}s`}>
+            <input type="checkbox" name="addon" value={a.id} data-name={a.name} />
+            <span class="svc-check" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5 6.5 11.5 12.5 5" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <ServiceArt id={a.art} label={a.name} />
+            <span class="svc-name">{a.name}</span>
+            <span class="svc-short">{a.short}</span>
+            <span class="svc-detail">{a.detail}</span>
+            <span class="svc-tier" data-t="addon">Add-on</span>
+          </label>
+        ))}
+      </div>
+    </div>
+  </section>
+</form>
+
+{/* Results. Populated by site.js; server-rendered empty state below. */}
+<section id="result" class="sec-light result">
+  <div class="sec-head">
+    <div class="sec-tag reveal">Your plan</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s" id="resultTitle">Nothing picked yet.</h2>
+    <p class="sec-sub reveal" style="transition-delay:.1s" id="resultLede">
+      Tick anything above and the plan that covers it appears here.
+    </p>
+  </div>
+  <div class="wrap">
+    <div class="result-grid" id="resultGrid" hidden>
+      <div class="result-cols" id="resultCols"></div>
+      <aside class="result-side">
+        <div class="result-plan" id="resultPlan"></div>
+        <div class="result-why" id="resultWhy"></div>
+        <a href="/book" class="btn btn-primary result-cta" id="resultCta">Book a free consultation</a>
+        <p class="result-fine">The first conversation is short and free. We&rsquo;ll bring your list to it &mdash; nothing is committed by choosing here.</p>
+        <button type="button" class="result-clear" id="resultClear">Clear everything</button>
+      </aside>
+    </div>
+  </div>
+</section>
+
+</div>
+</Base>
