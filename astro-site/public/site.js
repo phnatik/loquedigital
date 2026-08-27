@@ -588,11 +588,18 @@
     // are where the click happened, so returning there looks like nothing.
     var home = document.getElementById('grp-email');
 
+    // Nothing left to add means this is a step DOWN a tier: every box the
+    // smaller plan wants is already ticked, so there would be nothing to
+    // cascade and the click would look dead. Wipe the slate instead and play
+    // the whole plan back in, which is also the more honest picture — you are
+    // being shown what the plan you just chose actually contains.
+    if (!pending.length && !reduced) {
+      svc.forEach(function (i) { i.checked = false; });
+      pending = svc.filter(function (i) { return RANK[i.dataset.tier] <= RANK[key]; });
+      render();
+    }
+
     if (reduced || !pending.length) {
-      // Nothing to add happens whenever you step DOWN a tier: every box the
-      // smaller plan wants is already ticked. The change is real but it all
-      // happens below the fold, which is why this read as "nothing happens".
-      // Still take them to the list so the change is witnessed.
       pending.forEach(function (i) { i.checked = true; });
       render();
       if (home && !reduced) home.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -608,7 +615,7 @@
     // and no accidental clicks on a tile sliding under the cursor.
     document.body.classList.add('is-cascading');
 
-    var TICK = 500;                // ms between boxes — two a second, one at a time
+    var TICK = 650;                // ms between boxes — about 1.5 a second
     var idx = 0;
     var t0 = Date.now();
     var interrupted = false;
@@ -659,7 +666,7 @@
           var target = next.getBoundingClientRect().top + window.scrollY
                      - window.innerHeight * 0.45;
           var y = window.scrollY;
-          var step = (target - y) * 0.055;
+          var step = (target - y) * 0.042;
           if (Math.abs(step) > 0.5) window.scrollTo(0, y + step);
         }
       }
