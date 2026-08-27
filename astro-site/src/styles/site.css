@@ -1375,12 +1375,14 @@
   .svc-back{transform:rotateY(180deg)}
 
   .svc-tile:focus-within .svc-face{outline:2px solid var(--accent);outline-offset:3px}
-  /* Selected reads as a raised, lighter card rather than a coloured edge.
-     The border only lifts to match, so nothing on the tile competes with the
-     lime in the illustration above it. */
-  .svc-tile:has(input:checked) .svc-face{
-    background:#2c2c35;border-color:#43434f;
-  }
+  /* Selected reads as a raised, lighter card rather than a coloured edge, so
+     nothing on the tile competes with the lime in the illustration above it.
+
+     The lift is on the FRONT only. The back carries the description, and
+     muted body text on a lighter ground is where this stops being readable —
+     so a turned card stays dark and the border does the signalling. */
+  .svc-tile:has(input:checked) .svc-front{background:#3a3a45}
+  .svc-tile:has(input:checked) .svc-face{border-color:#55555f}
 
   .svc-check{
     position:absolute;top:20px;right:20px;width:24px;height:24px;border-radius:7px;
@@ -1449,6 +1451,7 @@
   .svc-back .svc-check,
     .svc-back .svc-back-name,
     .svc-front .svc-tier{display:none}
+    .svc-tile:has(input:checked) .svc-front{background:var(--ink-card)}
     .svc-artwrap{flex:none;padding:0}
     .svc-art{max-height:200px}
   }
