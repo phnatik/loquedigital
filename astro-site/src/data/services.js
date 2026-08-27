@@ -283,7 +283,7 @@ export const addons = [
   // sell. site.js enforces the exclusivity via `exclusive`.
   {
     id: 'addon-regulated-legal',
-    name: 'Regulated Practice Layer',
+    name: 'Legal Practice Layer',
     subtitle: 'Legal | Zero Data Retention',
     minTier: 'reserve',
     exclusive: 'rpl',
@@ -294,7 +294,7 @@ export const addons = [
   },
   {
     id: 'addon-regulated-health',
-    name: 'Regulated Practice Layer',
+    name: 'HIPAA Practice Layer',
     subtitle: 'HIPAA | Healthcare',
     minTier: 'reserve',
     exclusive: 'rpl',
@@ -305,7 +305,7 @@ export const addons = [
   },
   {
     id: 'addon-regulated-prof',
-    name: 'Regulated Practice Layer',
+    name: 'Confidential Practice Layer',
     subtitle: 'Professional Services | ZDR',
     minTier: 'reserve',
     exclusive: 'rpl',

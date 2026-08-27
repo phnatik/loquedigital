@@ -13,7 +13,7 @@
 import Base from '../layouts/Base.astro';
 import ServiceTile from '../components/ServiceTile.astro';
 import { groups, addons, allServices } from '../data/services.js';
-import { pricing, TERMS } from '../data/pricing.js';
+import { pricing, TERMS, addonPricing } from '../data/pricing.js';
 
 // Presets are cumulative, the way the plans are: Reserve includes everything
 // in Select, Custom Reserve includes everything. Counted from the data so the
@@ -122,6 +122,7 @@ const PRESETS = [
             detail={a.detail}
             note={a.note}
             exclusive={a.exclusive}
+            price={addonPricing[a.id]}
             art={a.art}
             group="addon"
             delay={(i % 3) * 0.05}

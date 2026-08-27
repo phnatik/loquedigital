@@ -37,3 +37,15 @@ export const pricing = {
     semi:      { setup: '$2,500', monthly: '$1,600' },
   },
 };
+
+// Add-on prices, transcribed from the add-on table on /pricing. Same rule as
+// the plans above: change §9 first, then pricing.astro, then here. audit.py
+// compares these against that table and fails on a mismatch.
+export const addonPricing = {
+  'addon-regulated-legal':  '$250/mo Reserve · $400/mo Custom Reserve',
+  'addon-regulated-health': '$250/mo Reserve · $400/mo Custom Reserve',
+  'addon-regulated-prof':   '$250/mo Reserve · $400/mo Custom Reserve',
+  'addon-accounts':         '$150 / month',
+  'addon-travel':           '$200 / month',
+  'addon-dev':              'Quoted before we build',
+};

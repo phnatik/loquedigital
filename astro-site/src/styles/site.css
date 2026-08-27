@@ -1550,12 +1550,12 @@
     transition:border-color .25s var(--ease);
   }
   .preset-name{font-family:"Outfit";font-weight:800;font-size:23px;letter-spacing:-.025em}
-  .preset-line{margin-top:10px;font-size:15px;line-height:1.5;color:var(--muted)}
+  .preset-line{flex:1;margin-top:10px;font-size:15px;line-height:1.5;color:var(--muted)}
   .preset-n{
-    margin-top:14px;font-size:11.5px;font-weight:700;letter-spacing:.14em;
+    margin-top:16px;margin-bottom:20px;font-size:11.5px;font-weight:700;letter-spacing:.14em;
     text-transform:uppercase;color:var(--accent-dim);
   }
-  .preset-btn{margin-top:20px;width:100%;text-align:center;background:none;
+  .preset-btn{margin-top:auto;width:100%;text-align:center;background:none;
     border:1px solid var(--line);color:var(--paper);cursor:pointer}
   .preset-btn:hover{border-color:var(--accent);color:var(--accent)}
   /* Marked only while the ticks match the preset exactly, so it stops
@@ -1600,3 +1600,15 @@
   .result-actions{margin-top:22px;display:flex;flex-direction:column;gap:10px}
   .result-actions .btn{width:100%;text-align:center}
   .result-email{cursor:pointer;font:inherit}
+
+  /* Add-on price, on the back of the tile. Sits above the "one add-on,
+     priced once" note so the figure reads before the caveat. */
+  .svc-price{
+    display:block;margin-top:12px;padding-top:11px;border-top:1px solid var(--line);
+    font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+    font-weight:700;color:var(--muted);
+  }
+  .svc-price b{
+    display:block;margin-top:5px;font-family:"Outfit",sans-serif;font-weight:700;
+    font-size:15.5px;letter-spacing:-.01em;text-transform:none;color:var(--accent);
+  }

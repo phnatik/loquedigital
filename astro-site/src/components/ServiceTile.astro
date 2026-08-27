@@ -19,6 +19,7 @@ const {
   tier = '',        // '' for add-ons, which never move the plan
   art = null,
   exclusive = '',
+  price = '',
   group = 'service',
   delay = 0,
 } = Astro.props;
@@ -54,6 +55,9 @@ const badgeKey = tier || 'addon';
       <span class="svc-back-name">{name}{subtitle ? ` — ${subtitle}` : ''}</span>
       <span class="svc-short">{short}</span>
       <span class="svc-detail">{detail}</span>
+      {price && (
+        <span class="svc-price">Price<b>{price}</b></span>
+      )}
       {note && <span class="svc-note">{note}</span>}
       <span class="svc-tier" data-t={badgeKey}>{badge}</span>
     </span>

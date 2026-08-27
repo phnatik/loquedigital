@@ -7,6 +7,7 @@
 # and the placeholder inventory (gate 13a).
 import os, re, glob, collections
 D = os.path.join(os.path.dirname(os.path.abspath(__file__)), "dist")
+SRC = os.path.join(os.path.dirname(os.path.abspath(__file__)), "src")
 pages = sorted(glob.glob(D + "/*.html"))
 issues = collections.defaultdict(list)
 
@@ -139,7 +140,6 @@ for _d, _ext, _label in ((os.path.join(SRC, "assets", "svc"), ".png", "icon"),
 # services.js transcribes its tiers from the comparison matrix in plans.astro.
 # If the two disagree, two public pages are making contradictory claims about
 # what a plan includes. Checked against source, not the build.
-SRC = os.path.join(os.path.dirname(os.path.abspath(__file__)), "src")
 try:
     _plans = open(os.path.join(SRC, "pages", "plans.astro")).read()
     _body = _plans[_plans.index("<tbody>"):_plans.index("</tbody>")]
@@ -195,6 +195,26 @@ try:
                 add("build-pricing",
                     f"{_plan}/{_k}: /pricing says {_setup}+{_monthly}, "
                     f"data/pricing.js says {_m.group(1)}+{_m.group(2)}")
+    # add-ons too — same table, same risk of drifting apart
+    _rows = re.findall(r'<li><span>([^<]+)</span><b>([^<]+)</b></li>', _pr)
+    _apage = {n.strip(): v.strip() for n, v in _rows}
+    _ajs = dict(re.findall(r"'(addon-[\w-]+)':\s*'([^']+)'", _js))
+    _map = {'addon-regulated-legal': 'Regulated Practice Layer',
+            'addon-regulated-health': 'Regulated Practice Layer',
+            'addon-regulated-prof': 'Regulated Practice Layer',
+            'addon-accounts': 'Additional inbox or calendar',
+            'addon-travel': 'Travel coordination workflows',
+            'addon-dev': 'Additional custom development'}
+    for _id, _label in _map.items():
+        _want = _apage.get(_label)
+        _got = _ajs.get(_id)
+        if _want is None:
+            add("build-pricing", f"{_label}: not in the /pricing add-on table")
+        elif _got is None:
+            add("build-pricing", f"{_id}: missing from addonPricing")
+        elif _got.replace('\u00b7', '·') != _want.replace('&middot;', '·'):
+            add("build-pricing",
+                f"{_id}: /pricing says '{_want}', addonPricing says '{_got}'")
 except FileNotFoundError:
     pass
 
