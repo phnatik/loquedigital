@@ -1,7 +1,14 @@
 ---
 // The six categories from WEBSITE_PROCESS §4 / Blueprint §03.
 // Same six, same order, on every vertical page. Copy is per-vertical.
-const { items } = Astro.props;
+//
+// `images` interleaves image tiles into the card grid rather than stacking a
+// band above or below it. Six text cards on their own render as a 3x2 wall;
+// three tiles turn it into a 3x3 where no row is all type. Positions are
+// indices in the *combined* grid, chosen so the images sit on a diagonal.
+import ImageSlot from './ImageSlot.astro';
+
+const { items, images = [] } = Astro.props;
 const LABELS = [
   'Hours returned',
   'Administrative load removed',
@@ -10,12 +17,37 @@ const LABELS = [
   'Deliverables — due and owed',
   'Process automation',
 ];
+
+// Build the combined cell list: text cards in order, images dropped in at
+// their requested positions.
+const byPos = new Map(images.map((im) => [im.pos, im]));
+const total = LABELS.length + images.length;
+const cells = [];
+let t = 0;
+for (let i = 0; i < total; i++) {
+  if (byPos.has(i)) {
+    cells.push({ kind: 'img', ...byPos.get(i) });
+  } else {
+    cells.push({ kind: 'text', label: LABELS[t], body: items[t], n: t + 1 });
+    t++;
+  }
+}
 ---
 <div class="build-grid gain-grid">
-  {LABELS.map((label, i) => (
-    <article class="build reveal" style={`transition-delay:${(i % 2) * 0.06}s`}>
-      <h4><span class="k">{String(i + 1).padStart(2, '0')}</span>{label}</h4>
-      <p>{items[i]}</p>
-    </article>
+  {cells.map((c, i) => (
+    c.kind === 'img' ? (
+      <ImageSlot
+        id={c.id}
+        brief={c.brief}
+        tone={c.tone}
+        variant="tile"
+        delay={(i % 3) * 0.06}
+      />
+    ) : (
+      <article class="build reveal" style={`transition-delay:${(i % 3) * 0.06}s`}>
+        <h4><span class="k">{String(c.n).padStart(2, '0')}</span>{c.label}</h4>
+        <p>{c.body}</p>
+      </article>
+    )
   ))}
 </div>

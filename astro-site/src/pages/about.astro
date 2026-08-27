@@ -1,4 +1,46 @@
 ---
-import InBuild from '../layouts/InBuild.astro';
+// Split out of the original index.html in Phase 1. Content is ported as-is;
+// only asset paths, cross-page links and the singular brand name changed.
+import Base from '../layouts/Base.astro';
+import ImageSlot from '../components/ImageSlot.astro';
+import PageCta from '../components/PageCta.astro';
 ---
-<InBuild title="About" path="/about" phase="Split off the homepage in Phase 1. Partner bio outstanding — BLK-W06." />
+<Base title="About — operators, not consultants | Loque Agent" description="Loque Agent is run by people who have spent twenty years running companies rather than advising them, and who built the systems those companies ran on." path="/about">
+<div class="page-top">
+
+<section id="why" class="sec-light">
+  <div class="sec-head">
+    <div class="sec-tag reveal">Why us</div>
+    <h1 class="sec-title reveal" style="transition-delay:.06s">Loque is run by operators, not consultants.</h1>
+  </div>
+  <div class="wrap">
+    <div class="why-grid">
+      <div class="why-copy reveal">
+        <p class="big">Chris Barbieri has spent over twenty years <b>running companies rather than advising them</b> — CEO, CRO and COO across healthcare, marketing, professional services and software.</p>
+        <p>Along the way he taught himself to build the systems those companies ran on: the databases, the CRMs, the automations. At one healthcare supply company he built the tools that automated patient intake, inside a HIPAA-regulated operation.</p>
+        <p>Automation projects don't fail because the technology doesn't work. They fail because someone built something that didn't match how the business actually runs, or broke something that was working fine. We've been on the receiving end of that.</p>
+      </div>
+      <div class="reveal" style="transition-delay:.06s">
+        <div class="why-stat">
+          <div class="val">30%</div>
+          <div class="label">reduction in intake workload, with errors nearly eliminated, inside a HIPAA-regulated operation</div>
+        </div>
+        <div class="why-line">Keeping your business running comes first. <b>Optimization comes second.</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ImageSlot
+  id="about-chris"
+  variant="feature"
+  ratio="3 / 2"
+  brief="Environmental portrait of Chris Barbieri at a desk or on a shop floor — working, not posed against a backdrop. Should look like an operator, which is the whole argument of this page."
+  tone="Natural light. No stock-photo handshake energy."
+  caption="Chris Barbieri, founder."
+/>
+
+
+</div>
+<PageCta line="The first conversation is short and free." />
+</Base>

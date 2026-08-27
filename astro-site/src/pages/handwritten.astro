@@ -1,4 +1,60 @@
 ---
-import InBuild from '../layouts/InBuild.astro';
+// Split out of the original index.html in Phase 1. Content is ported as-is;
+// only asset paths, cross-page links and the singular brand name changed.
+import Base from '../layouts/Base.astro';
+import ImageSlot from '../components/ImageSlot.astro';
+import PageCta from '../components/PageCta.astro';
 ---
-<InBuild title="The Handwritten Layer" path="/handwritten" phase="Split off the homepage in Phase 1." />
+<Base title="The Handwritten Layer | Loque Agent" description="Real pen, real ink, written by machine rather than printed. A monthly allowance of handwritten cards on Reserve, cards and letters on Custom Reserve." path="/handwritten">
+<div class="page-top">
+
+<section id="handwritten" class="sec-light">
+  <div class="sec-head">
+    <div class="sec-tag reveal">The Handwritten Layer</div>
+    <h1 class="sec-title reveal" style="transition-delay:.06s">The one part of this you can actually hold.</h1>
+  </div>
+  <div class="wrap">
+    <div class="hw-grid">
+      <div class="hw-copy reveal">
+        <p>Reserve and Custom Reserve include a monthly allowance of handwritten cards, and Custom Reserve includes handwritten letters. They look like what they are: something a person took the time to send.</p>
+        <p class="hw-quote">Real pen, real ink, written by machine rather than printed.</p>
+        <p>At Custom Reserve, qualifying external meetings can trigger a thank-you card automatically, drawn from a template library you approve once during onboarding. You'll get a weekly digest of what went out. There's also a dedicated address you or your assistant can email when you want something specific sent.</p>
+      </div>
+      <div class="hw-card reveal" style="transition-delay:.06s">
+        <div class="kicker">Included each month</div>
+        <ul class="hw-rows">
+          <li><span>Select</span><b>Not included</b></li>
+          <li><span>Reserve</span><b>10 cards</b></li>
+          <li><span>Custom Reserve</span><b>20 cards · 5 letters</b></li>
+          <li><span>Extra pieces</span><b>$3 per card · $5 per letter</b></li>
+        </ul>
+        <div class="hw-ceiling">
+          <h4>You set the ceiling</h4>
+          <p>You tell us how many extra pieces per month we can send without asking. Past that, we email you for approval. Nobody gets a surprise invoice.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ImageSlot
+  id="handwritten-card"
+  variant="band"
+  brief="A finished handwritten card and envelope on a plain surface, shot from above. Legible enough to read as handwriting, cropped so no name or address is identifiable."
+  tone="Warm paper tones against the dark page. The one moment of physical texture on the site."
+/>
+
+
+<ImageSlot
+  id="handwritten-macro"
+  variant="feature"
+  ratio="3 / 2"
+  brief="Macro of the ink itself — pen stroke on card stock at an angle that catches the ridge where the ink sits on top of the paper. This is the shot that proves it is not printed."
+  tone="Raking light, very shallow depth of field. Must be a real card we produced."
+  caption="Real pen, real ink, written by machine rather than printed."
+/>
+
+
+</div>
+<PageCta line="The one part of this you can actually hold." />
+</Base>

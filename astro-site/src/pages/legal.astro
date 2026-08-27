@@ -3,6 +3,8 @@
 // Blocks 02, 03, 06 and 09 are new; the rest are ported from the previous
 // legal.html and left substantially intact. See WEBSITE_PROCESS.md.
 import Base from '../layouts/Base.astro';
+import ImageSlot from '../components/ImageSlot.astro';
+import { FORM_KEY } from '../data/site.js';
 import GetBack from '../components/GetBack.astro';
 import ProofPlaceholder from '../components/ProofPlaceholder.astro';
 
@@ -14,11 +16,26 @@ const getBack = [
   `Everything you told a client or a court you would do, tracked to closure. Everything others owe you — documents, signatures, discovery responses — chased on a schedule, so you are not the one remembering.`,
   `Intake through conflict check through engagement letter, running as one flow instead of six reminders. Escalation rules built around what actually constitutes an emergency in your practice.`
 ];
+
+// Image tiles interleaved into the six 'what you get back' cards, so the
+// grid reads 3x3 with no row entirely made of type (see ImageSlot).
+const gainImages = [
+  { pos: 1, id: 'legal-gain-hands',
+    brief: 'Hands closing a matter file, shot close. No readable text on the tab or the page.',
+    tone: 'Detail or texture, not a scene. These three sit among text cards, so they should read at tile size — one subject, close in, shallow depth of field.' },
+  { pos: 5, id: 'legal-gain-light',
+    brief: 'Late afternoon light across an empty desk surface — grain of the wood, one pen. Almost abstract.',
+    tone: 'Detail or texture, not a scene. These three sit among text cards, so they should read at tile size — one subject, close in, shallow depth of field.' },
+  { pos: 6, id: 'legal-gain-door',
+    brief: 'An office door being pulled shut from the outside, warm hallway light. Leaving on time, told without a face.',
+    tone: 'Detail or texture, not a scene. These three sit among text cards, so they should read at tile size — one subject, close in, shallow depth of field.' },
+];
 ---
 <Base
   title="Loque Agent for law firms — deadlines, matters and privilege"
   description="An executive assistant built around how a legal practice actually runs. Anything touching a filing date escalates the moment it lands; everything else files itself by client and matter. Nothing goes out under your name without your approval."
   path="/legal"
+  vertical="Legal"
 >
 
 {/* 01 */}
@@ -90,6 +107,14 @@ const getBack = [
   </div>
 </section>
 
+<ImageSlot
+  id="legal-world"
+  variant="band"
+  brief="Wide, low-light interior of a working law office after hours — one desk lamp, stacked matter files, a legal pad mid-sentence. Nobody in frame, or one figure small and out of focus."
+  tone="Sets the world of the practice. Desaturated, film grain, lime accent only if it occurs naturally."
+/>
+
+
 {/* 02 — where the hours go */}
 <section id="hours">
   <div class="sec-head">
@@ -103,6 +128,15 @@ const getBack = [
         <h4><span class="k">01</span>The triage tax</h4>
         <p>Ninety unread by mid-morning. The sorting is hard to hand off, because deciding what matters means knowing the matters &mdash; so it lands on you, at the moment you are least able to do it carefully.</p>
       </article>
+
+      <ImageSlot
+        id="legal-drain-stack"
+        variant="tile"
+        delay={0.06}
+        brief="A stack of unopened mail or files photographed straight down, edge-on and tight. Reads as accumulation."
+        tone="Tile inside the card grid — one subject, tight crop, reads at small size."
+      />
+
       <article class="drain reveal" style="transition-delay:.06s">
         <h4><span class="k">02</span>Chasing what you are owed</h4>
         <p>Signatures, records, discovery responses, the client who was going to send the documents last week. None of it is the practice of law. All of it is yours to remember.</p>
@@ -111,6 +145,15 @@ const getBack = [
         <h4><span class="k">03</span>Writing the same thing down twice</h4>
         <p>Call notes, matter updates, what you told the client you would do. It either gets written up after hours or it lives in your head until the day it doesn&rsquo;t.</p>
       </article>
+
+      <ImageSlot
+        id="legal-drain-clock"
+        variant="tile"
+        delay={0}
+        brief="A wall clock or watch face at an unsociable hour, cropped so only part of the dial shows."
+        tone="Tile inside the card grid — one subject, tight crop, reads at small size."
+      />
+
       <article class="drain reveal" style="transition-delay:.06s">
         <h4><span class="k">04</span>Negotiating a calendar you don&rsquo;t control</h4>
         <p>The court sets the dates. Everything else gets arranged around them one email thread at a time, and every reschedule starts the thread again.</p>
@@ -123,14 +166,14 @@ const getBack = [
 </section>
 
 {/* 03 — what you get back */}
-<section id="gain">
+<section id="gain" class="sec-light">
   <div class="sec-head">
     <div class="sec-tag reveal">What changes</div>
     <h2 class="sec-title reveal" style="transition-delay:.06s">What you get back.</h2>
     <p class="sec-sub reveal" style="transition-delay:.1s">Six things, in the same six categories on every page of this site. What differs by practice is what they look like &mdash; here is what they look like in a law firm.</p>
   </div>
   <div class="wrap">
-    <GetBack items={getBack} />
+    <GetBack items={getBack} images={gainImages} />
   </div>
 </section>
 
@@ -292,7 +335,7 @@ const getBack = [
 <ProofPlaceholder vertical="legal" />
 
 {/* 10 — which plan legal takes */}
-<section id="plans">
+<section id="plans" class="sec-light">
   <div class="sec-head">
     <div class="sec-tag reveal">Where this lives</div>
     <h2 class="sec-title reveal" style="transition-delay:.06s">Which plan legal practices take.</h2>
@@ -344,7 +387,7 @@ const getBack = [
              autoresponder or swap this form for a direct download link. -->
         <form action="https://api.web3forms.com/submit" method="POST" class="magnet-req" data-ajax
               data-success="Thanks — we'll email it over shortly.">
-          <input type="hidden" name="access_key" value="c8b900d1-4085-4a4b-9b99-5bcbce6175b3">
+          <input type="hidden" name="access_key" value={FORM_KEY}>
           <input type="hidden" name="subject" value="Lead magnet request — Legal deadline checklist">
           <input type="hidden" name="from_name" value="Loque Agent Website">
           <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
@@ -387,7 +430,7 @@ const getBack = [
 
       <div class="form-card reveal" style="transition-delay:.06s">
         <form id="contactForm" action="https://api.web3forms.com/submit" method="POST" data-ajax>
-          <input type="hidden" name="access_key" value="c8b900d1-4085-4a4b-9b99-5bcbce6175b3">
+          <input type="hidden" name="access_key" value={FORM_KEY}>
           <input type="hidden" name="subject" value="New enquiry — Loque Agent (Legal)">
           <input type="hidden" name="from_name" value="Loque Agent Website">
           <input type="hidden" name="vertical" value="Legal">

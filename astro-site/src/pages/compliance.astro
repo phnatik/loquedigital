@@ -1,4 +1,66 @@
 ---
-import InBuild from '../layouts/InBuild.astro';
+// Split out of the original index.html in Phase 1. Content is ported as-is;
+// only asset paths, cross-page links and the singular brand name changed.
+import Base from '../layouts/Base.astro';
+import ImageSlot from '../components/ImageSlot.astro';
+import PageCta from '../components/PageCta.astro';
 ---
-<InBuild title="The Regulated Practice Layer" path="/compliance" phase="Split off the homepage in Phase 1." />
+<Base title="The Regulated Practice Layer | Loque Agent" description="Zero data retention or a HIPAA-ready configuration with a signed BAA — two separate configurations, a vetted tool stack, and a written map of where your data travels." path="/compliance">
+<div class="page-top">
+
+<section id="compliance" class="sec-light">
+  <div class="sec-head">
+    <div class="sec-tag reveal">If your data can't leave</div>
+    <h1 class="sec-title reveal" style="transition-delay:.06s">The Regulated Practice Layer.</h1>
+  </div>
+  <div class="wrap">
+    <div class="rpl-grid">
+      <div class="rpl-copy reveal">
+        <p>For practices with real compliance obligations, we offer this as a paid add-on. Depending on your situation you take one path or the other — they are two different configurations, and they aren't combinable.</p>
+        <div class="rpl-paths">
+          <div class="rpl-path">
+            <div class="pk">Path one</div>
+            <h4>Zero data retention</h4>
+            <p>Prompts and responses are never stored. The usual choice for legal, finance and HR work.</p>
+          </div>
+          <div class="rpl-path">
+            <div class="pk">Path two</div>
+            <h4>HIPAA-ready</h4>
+            <p>A signed Business Associate Agreement, with documented retention rules. The path for practices handling PHI.</p>
+          </div>
+        </div>
+        <div class="rpl-price">$250 / month on Reserve <span>·</span> $400 / month on Custom Reserve</div>
+        <div class="rpl-flag">
+          <b>Why we charge for it.</b> Zero retention at the model layer means nothing if the meeting recorder, CRM and mail vendor all retain data. An honest end-to-end claim means auditing every vendor in the chain — which is work, and which is why it isn't bundled free.
+        </div>
+      </div>
+      <div class="rpl-card reveal" style="transition-delay:.06s">
+        <div class="kicker">What's included</div>
+        <ul class="ticks">
+          <li>Zero data retention <em>or</em> HIPAA-ready configuration</li>
+          <li>DPA or BAA as applicable</li>
+          <li>A restricted, vetted tool stack — every vendor in the chain checked for how they handle retention</li>
+          <li>Documented retention and deletion rules by data type</li>
+          <li>Audit logging</li>
+          <li>A written data flow map</li>
+        </ul>
+        <div class="hw-ceiling">
+          <h4>The document worth having on its own</h4>
+          <p>A written map showing exactly where your information travels and what is kept at each step. Most practices need one for their own compliance posture and can't produce it.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ImageSlot
+  id="compliance-vault"
+  variant="feature"
+  brief="A closed door, a locked cabinet, or a server cage — one clean architectural object standing for containment. No stock padlock icons, no hooded-figure security clichés."
+  tone="Restrained and literal. Understatement is the point on this page."
+/>
+
+
+</div>
+<PageCta line="If your data can't leave, start with a conversation about where it goes." />
+</Base>

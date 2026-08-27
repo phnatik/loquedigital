@@ -1,4 +1,125 @@
 ---
-import InBuild from '../layouts/InBuild.astro';
+// Split out of the original index.html in Phase 1. Content is ported as-is;
+// only asset paths, cross-page links and the singular brand name changed.
+import Base from '../layouts/Base.astro';
+import ImageSlot from '../components/ImageSlot.astro';
+import PageCta from '../components/PageCta.astro';
 ---
-<InBuild title="Pricing" path="/pricing" phase="Split off the homepage in Phase 1. Blocked on the pricing decision — ADR-W09." />
+<Base title="Pricing — setup, monthly and what prepaying saves | Loque Agent" description="Setup fees, monthly rates, what quarterly and semi-annual prepayment saves, the add-ons, and the setup-fee guarantee." path="/pricing">
+<div class="page-top">
+
+{/*
+  PRICING — RATIFIED 2026-08-25 (ADR-W09).
+  Fixed prices on all three plans. Custom Reserve is a fixed price, not a
+  "from". The source of truth for every figure below is WEBSITE_PROCESS.md §9.
+  Change a price THERE first, recompute the quarterly and semi-annual columns
+  from the prepay ladder (30/10 and 50/20), then apply it here. Never edit a
+  single cell — the columns are derived, and a lone edit desynchronises them.
+*/}
+<section id="pricing" class="sec-light">
+  <div class="sec-head">
+    <div class="sec-tag reveal">What it costs</div>
+    <h1 class="sec-title reveal" style="transition-delay:.06s">Setup, monthly, and what prepaying saves you.</h1>
+    <p class="sec-sub reveal" style="transition-delay:.1s">Prepaying reduces both numbers. Quarterly takes 30% off setup and 10% off monthly. Semi-annual cuts setup in half and takes 20% off monthly.</p>
+  </div>
+  <div class="wrap pricing">
+    <div class="price-grid">
+
+      <article class="price-card reveal">
+        <div class="pname">Select</div>
+        <div class="plan-job">Know what matters</div>
+        <div class="psub">Your inbox, sorted and prioritized</div>
+        <ul class="price-rows">
+          <li class="prh"><span class="rl">Plan</span><span class="rs">Setup</span><span class="rm">Monthly</span></li>
+          <li><span class="rl">Month to month</span><span class="rs">$1,000</span><span class="rm">$300</span></li>
+          <li><span class="rl">Quarterly</span><span class="rs">$700</span><span class="rm">$270</span></li>
+          <li class="best"><span class="rl">Semi-annual<small>What most people take</small></span><span class="rs">$500</span><span class="rm">$240</span></li>
+        </ul>
+        <div class="trust-pills">
+          <span class="trust-pill"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>Deploys in about a week</span>
+          <span class="trust-pill"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>Setup-fee guarantee</span>
+        </div>
+        <a href="/book" class="btn btn-ghost">Start with Select</a>
+      </article>
+
+      <article class="price-card featured reveal" style="transition-delay:.06s">
+        <div class="badge">Most chosen</div>
+        <div class="pname">Reserve</div>
+        <div class="plan-job">Act on what matters</div>
+        <div class="psub">Drafts in your voice, calendar handled, meetings captured</div>
+        <ul class="price-rows">
+          <li class="prh"><span class="rl">Plan</span><span class="rs">Setup</span><span class="rm">Monthly</span></li>
+          <li><span class="rl">Month to month</span><span class="rs">$2,500</span><span class="rm">$650</span></li>
+          <li><span class="rl">Quarterly</span><span class="rs">$1,750</span><span class="rm">$585</span></li>
+          <li class="best"><span class="rl">Semi-annual<small>What most people take</small></span><span class="rs">$1,250</span><span class="rm">$520</span></li>
+        </ul>
+        <div class="trust-pills">
+          <span class="trust-pill"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>Includes 10 handwritten cards</span>
+          <span class="trust-pill"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>Founding rates available</span>
+        </div>
+        <a href="/book" class="btn btn-primary">Start with Reserve</a>
+      </article>
+
+      <article class="price-card reveal" style="transition-delay:.12s">
+        <div class="pname">Custom Reserve</div>
+        <div class="plan-job">So nothing falls through</div>
+        <div class="psub">Discovery, a documented workflow map, and a build around your operation</div>
+        <ul class="price-rows">
+          <li class="prh"><span class="rl">Plan</span><span class="rs">Setup</span><span class="rm">Monthly</span></li>
+          <li><span class="rl">Month to month</span><span class="rs">$5,000</span><span class="rm">$2,000</span></li>
+          <li><span class="rl">Quarterly</span><span class="rs">$3,500</span><span class="rm">$1,800</span></li>
+          <li class="best"><span class="rl">Semi-annual<small>What most people take</small></span><span class="rs">$2,500</span><span class="rm">$1,600</span></li>
+        </ul>
+        <p class="price-note">Every engagement includes discovery and a documented workflow map, up to three custom process flows, one escalation matrix, up to two custom reports, and one industry configuration. Anything beyond that is scoped and quoted separately before we build it.</p>
+        <a href="/book" class="btn btn-ghost">Scope an engagement</a>
+      </article>
+
+    </div>
+
+    <div class="addon-wrap">
+      <div class="addon-card reveal">
+        <div class="kicker">Everything else you can bolt on</div>
+        <ul class="addon-rows">
+          <li><span>Regulated Practice Layer</span><b>$250/mo Reserve · $400/mo Custom Reserve</b></li>
+          <li><span>Additional inbox or calendar</span><b>$150 / month</b></li>
+          <li><span>Travel coordination workflows</span><b>$200 / month</b></li>
+          <li><span>Extra handwritten pieces</span><b>$3 per card · $5 per letter</b></li>
+          <li><span>Additional custom development</span><b>Quoted before we build</b></li>
+        </ul>
+      </div>
+      <div class="guarantee reveal" style="transition-delay:.06s">
+        <div class="kicker">Our guarantee</div>
+        <h4>If you're not saving real hours by month two, we refund your setup fee.</h4>
+        <p>Claimable through the end of month two. Any prepaid months you haven't used convert to credit you can put toward anything we do.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ImageSlot
+  id="pricing-desk"
+  variant="feature"
+  brief="Two chairs at a small table, one occupied, mid-conversation. Should feel like an agreement being reached, not a sale being closed."
+  tone="Sits between the price tables and the founding-client offer."
+/>
+
+
+<section class="founding">
+  <div class="wrap">
+    <div class="founding-box reveal">
+      <div class="kicker">Limited availability</div>
+      <h2>Additional discount for founding clients.</h2>
+      <p>We're taking on a limited number of founding clients at reduced pricing, and those rates are permanent for as long as you stay with us. In exchange we ask for honest feedback, a testimonial once you've used it for a couple of months, and the ability to talk about the results.</p>
+      <div class="founding-facts">
+        <span>Permanent rates</span>
+        <span>Reserve and Custom Reserve only</span>
+        <span>Custom Reserve builds are capacity limited</span>
+      </div>
+      <a href="/book" class="btn">Ask about founding rates</a>
+    </div>
+  </div>
+</section>
+
+</div>
+<PageCta line="If you're not saving real hours by month two, we refund your setup fee." />
+</Base>

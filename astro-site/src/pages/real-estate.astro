@@ -1,4 +1,438 @@
 ---
-import InBuild from '../layouts/InBuild.astro';
+// Real estate — producing agents, team leads and brokerages, on the
+// twelve-block vertical template. Block 07 is a data-handling block rather
+// than a compliance layer: there is no regulator here, but a transaction
+// inbox carries client financial documents. See WEBSITE_PROCESS.md.
+import Base from '../layouts/Base.astro';
+import ImageSlot from '../components/ImageSlot.astro';
+import { FORM_KEY } from '../data/site.js';
+import GetBack from '../components/GetBack.astro';
+import ProofPlaceholder from '../components/ProofPlaceholder.astro';
+
+const getBack = [
+  `The transaction admin stops being yours. You open the inbox knowing which files need you today and which dates are close, instead of reading nine threads to find out.`,
+  `Correspondence filed by property and transaction. Lender, title, inspection and co-op mail routed to whoever owns it. Showing and appointment coordination handled without a thread.`,
+  `A daily digest that leads with anything sitting on a contract date, and a short brief before every client call showing exactly where the file stands.`,
+  `Dates, addenda, approvals and disclosures logged against the transaction as they arrive, so the file&rsquo;s history exists without anyone stopping to build it.`,
+  `Everything you told a client or a co-op agent you would do, tracked to closure. Everything you are waiting on &mdash; clear-to-close, signatures, repair receipts &mdash; chased on a schedule rather than when you remember.`,
+  `Contract to close as one flow: the date set extracted the moment a contract is executed, and every reminder and request sequenced from it rather than from memory.`
+];
+
+// Image tiles interleaved into the six 'what you get back' cards, so the
+// grid reads 3x3 with no row entirely made of type (see ImageSlot).
+const gainImages = [
+  { pos: 1, id: 'real-estate-gain-keys',
+    brief: 'A set of house keys on a countertop, shot close with warm light. The moment the work paid off.',
+    tone: 'Detail or texture, not a scene. These three sit among text cards, so they should read at tile size — one subject, close in, shallow depth of field.' },
+  { pos: 5, id: 'real-estate-gain-road',
+    brief: 'Through-the-windscreen view of an ordinary residential street, slightly out of focus. The drive between showings.',
+    tone: 'Detail or texture, not a scene. These three sit among text cards, so they should read at tile size — one subject, close in, shallow depth of field.' },
+  { pos: 6, id: 'real-estate-gain-porch',
+    brief: 'A front door and porch light at dusk, tight crop. Warm, domestic, no address visible.',
+    tone: 'Detail or texture, not a scene. These three sit among text cards, so they should read at tile size — one subject, close in, shallow depth of field.' },
+];
 ---
-<InBuild title="Real estate" path="/real-estate" phase="Built in Phase 4." />
+<Base title="Loque Agent for real estate — contingencies, closings and clients" description="An executive assistant built around how your transactions actually move. Every contractual date tracked to the day, lender, title and client correspondence routed to whoever owns it, and follow-up that happens whether or not you remembered. Nothing goes out under your name without your approval." path="/real-estate" vertical="Real estate">
+
+{/* 01 */}
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <img src="/img/hero-bg.jpg" alt="" />
+    <div class="hero-grid"></div>
+    <div class="hero-aurora"></div>
+    <div class="hero-cursor" id="heroCursor"></div>
+  </div>
+  <div class="wrap">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <span class="eyebrow reveal"><span class="dot"></span>For producing agents, team leads and brokerages</span>
+        <h1 class="reveal" style="transition-delay:.06s">A contingency date should not live in <em>an email thread</em>.</h1>
+        <p class="lead reveal" style="transition-delay:.14s">We build and run an assistant around how your transactions actually move. Every date from every contract tracked to the day, lender, title and client correspondence routed to whoever owns it, and the follow-up happening whether or not you remembered it.</p>
+        <div class="hero-actions reveal" style="transition-delay:.22s">
+          <a href="#contact" class="btn btn-primary">Book a call</a>
+          <a href="#map" class="btn btn-ghost">See the workflow map</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track"><span>Contract date extraction</span><span>Lender and title routing</span><span>Waiting-on tracking</span><span>Client communication rules</span><span>Drafts in your voice</span><span>Follow-through to closing</span><span>Contract date extraction</span><span>Lender and title routing</span><span>Waiting-on tracking</span><span>Client communication rules</span><span>Drafts in your voice</span><span>Follow-through to closing</span></div>
+  </div>
+</section>
+
+<ImageSlot
+  id="real-estate-world"
+  variant="band"
+  brief="Exterior of a house at golden hour with a sold sign, shot wide and slightly low. Warm, aspirational, no people. Should read as a closing, not a listing photo."
+  tone="Sets the world of the practice. Desaturated, film grain, lime accent only if it occurs naturally."
+/>
+
+
+{/* 02 — where the hours go */}
+<section id="hours">
+  <div class="sec-head">
+    <div class="sec-tag reveal">Where the week goes</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">You get paid at closing. The week is spent everywhere else.</h2>
+    <p class="sec-sub reveal" style="transition-delay:.1s">None of the following is selling, and all of it decides whether the deal closes on the day it was supposed to.</p>
+  </div>
+  <div class="wrap">
+    <div class="drain-grid">
+      <article class="drain reveal">
+        <h4><span class="k">01</span>Every transaction is its own inbox</h4>
+        <p>Lender, title, inspector, co-op agent, client, HOA. Each one arrives on its own thread, none of them talk to each other, and you are the only place they meet.</p>
+      </article>
+
+      <ImageSlot
+        id="real-estate-drain-phone"
+        variant="tile"
+        delay={0.06}
+        brief="A phone held in one hand with a long call log or message list, angled so nothing is readable."
+        tone="Tile inside the card grid — one subject, tight crop, reads at small size."
+      />
+
+      <article class="drain reveal" style="transition-delay:.06s">
+        <h4><span class="k">02</span>Dates buried inside documents</h4>
+        <p>Inspection, appraisal, financing, closing. They live in a PDF and in your head, and the message that starts one of those clocks looks like every other message in the thread.</p>
+      </article>
+      <article class="drain reveal">
+        <h4><span class="k">03</span>Chasing every party in the deal</h4>
+        <p>The lender for the clear-to-close, the client for a signature, the other side for an addendum. Unbillable, unavoidable, and entirely on you.</p>
+      </article>
+
+      <ImageSlot
+        id="real-estate-drain-paper"
+        variant="tile"
+        delay={0}
+        brief="Contract pages fanned across a passenger seat or table. Volume is the subject; no text legible."
+        tone="Tile inside the card grid — one subject, tight crop, reads at small size."
+      />
+
+      <article class="drain reveal" style="transition-delay:.06s">
+        <h4><span class="k">04</span>Lead follow-up that loses to today</h4>
+        <p>The people who will transact in six months get whatever is left after today&rsquo;s closing, which during a busy month is nothing.</p>
+      </article>
+    </div>
+    <div class="drain-sum reveal">
+      <p>None of this is selling. <b>All of it decides whether the deal closes on time</b> &mdash; and whether there is another one after it.</p>
+    </div>
+  </div>
+</section>
+
+{/* 03 — what you get back */}
+<section id="gain" class="sec-light">
+  <div class="sec-head">
+    <div class="sec-tag reveal">What changes</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">What you get back.</h2>
+    <p class="sec-sub reveal" style="transition-delay:.1s">Six things, in the same six categories on every page of this site. Here is what they look like when you are carrying nine transactions at once.</p>
+  </div>
+  <div class="wrap">
+    <GetBack items={getBack} images={gainImages} />
+  </div>
+</section>
+
+{/* 04 — what goes wrong */}
+<section id="risk">
+  <div class="sec-head">
+    <div class="sec-tag reveal">And the part that isn&rsquo;t about time</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">The dates don&rsquo;t move. Everything else does.</h2>
+  </div>
+  <div class="wrap">
+    <div class="prob-grid">
+      <div class="reveal">
+        <p class="big">Every contract sets a small number of dates that cannot be renegotiated after the fact. <b>Missing one is not a delay</b> &mdash; it can cost your client their earnest money, or cost everyone the deal.</p>
+        <p class="body">An inspection objection window that closes. A financing deadline that lapses and has to be re-cut. A clear-to-close that arrives two days late and turns a Friday closing into a Monday one, with a moving truck already booked and a family already packed.</p>
+        <p class="body">None of these are hard to track on their own. They are hard to track across nine simultaneous transactions, inside threads, while you are out showing property.</p>
+      </div>
+      <div class="alt-card reveal" style="transition-delay:.06s">
+        <div class="kicker">What a missed date costs</div>
+        <h4>The downside lands on your client first.</h4>
+        <p>Which is also where the referrals come from, so it lands on you twice.</p>
+        <ul class="alt-rows">
+          <li><span class="v">Earnest money</span><span class="l">at risk when an objection window closes</span></li>
+          <li><span class="v">The deal</span><span class="l">when financing lapses and has to be re-cut</span></li>
+          <li><span class="v">The referral</span><span class="l">from a client whose closing moved</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* 05 — the workflow map */}
+<section id="map">
+  <div class="sec-head">
+    <div class="sec-tag reveal">Pre-built workflow map</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">What we&rsquo;ve already built for real estate.</h2>
+    <p class="sec-sub reveal" style="transition-delay:.1s">This configuration exists before your first onboarding session. Discovery tunes it to your market, your team and your thresholds &mdash; it doesn&rsquo;t start from a blank page.</p>
+  </div>
+  <div class="wrap">
+    <div class="map">
+      <div class="map-head">
+        <div>Column one<b>What arrives</b></div>
+        <div>Column two<b>What the system checks</b></div>
+        <div>Column three<b>What happens next</b></div>
+      </div>
+      <div class="map-row reveal">
+        <div class="map-cell"><span class="n">01</span><div><h4>An executed contract</h4></div></div>
+        <div class="map-cell"><div><h4>Date-set extraction</h4><p>Every contractual date is read out of the contract at execution rather than transcribed by hand into a calendar afterwards.</p></div></div>
+        <div class="map-cell act"><div><p>The transaction is created with its parties attached and every date tracked to the day, with the sequence of what has to happen before each one.</p></div></div>
+      </div>
+      <div class="map-row reveal">
+        <div class="map-cell"><span class="n">02</span><div><h4>Anything referencing a date</h4></div></div>
+        <div class="map-cell"><div><h4>Deadline sensitivity</h4><p>Dates are detected in the subject line and in the body, not only in a calendar invite or an attachment.</p></div></div>
+        <div class="map-cell act"><div><p>Escalated ahead of everything else, with the property and the date surfaced at the top of your digest.</p></div></div>
+      </div>
+      <div class="map-row reveal">
+        <div class="map-cell"><span class="n">03</span><div><h4>Lender and title correspondence</h4></div></div>
+        <div class="map-cell"><div><h4>Party classification</h4><p>Distinct handling rules for lender, title, escrow, inspection, co-op agent and client. The system knows which is which before it does anything.</p></div></div>
+        <div class="map-cell act"><div><p>Routed to whoever owns it on your team, tracked separately from client mail, with anything outstanding flagged.</p></div></div>
+      </div>
+      <div class="map-row reveal">
+        <div class="map-cell"><span class="n">04</span><div><h4>Client correspondence</h4></div></div>
+        <div class="map-cell"><div><h4>Transaction identification</h4><p>Client and property matched from the thread, the sending address and any reference in the body.</p></div></div>
+        <div class="map-cell act"><div><p>Filed to the transaction, with response time by client tracked &mdash; the number that quietly drives referrals.</p></div></div>
+      </div>
+      <div class="map-row reveal">
+        <div class="map-cell"><span class="n">05</span><div><h4>Anything you are waiting on</h4></div></div>
+        <div class="map-cell"><div><h4>Waiting-on tracking</h4><p>Clear-to-close, signatures, repair receipts and addenda are captured the moment they are promised, with who owes them and when.</p></div></div>
+        <div class="map-cell act"><div><p>Chased on a cadence you set, so nothing sits for a week because everyone assumed somebody else had it.</p></div></div>
+      </div>
+      <div class="map-row reveal">
+        <div class="map-cell"><span class="n">06</span><div><h4>A new lead or referral</h4></div></div>
+        <div class="map-cell"><div><h4>Pipeline routing</h4><p>New-business mail is separated from transaction mail rather than sorted by whoever opens the inbox first.</p></div></div>
+        <div class="map-cell act"><div><p>Surfaced on its own with a follow-up sequence, so it doesn&rsquo;t sit behind today&rsquo;s closing until it goes cold.</p></div></div>
+      </div>
+    </div>
+    <p class="map-note">On Custom Reserve this becomes your own escalation matrix and team assignment map &mdash; who owns which file, which dates escalate to whom, and what a transaction coordinator sees versus what reaches you.</p>
+  </div>
+</section>
+
+{/* 06 — the economics */}
+<section id="economics">
+  <div class="sec-head">
+    <div class="sec-tag reveal">The arithmetic</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">Run this with your own numbers.</h2>
+  </div>
+  <div class="wrap">
+    <div class="prob-grid">
+      <div class="reveal">
+        <p class="big">We are not going to tell you how many hours you will get back. <b>We have not delivered enough engagements to put an honest number on it</b> &mdash; and a vendor who quotes you one hasn&rsquo;t either.</p>
+        <p class="body">Use the numbers you already know. Take your average commission. Take the number of transactions you carried simultaneously last quarter, and the number of leads that went cold while you were carrying them. Multiply that second number by your conversion rate and look at what it comes to.</p>
+        <p class="body">Then the referral question, which is the one that compounds: what share of your business comes from past clients, and what does one closing that moved cost you in that column? Finally &mdash; how much of the admin needs <em>you</em> to do it, and how much needs you to approve it?</p>
+      </div>
+      <div class="alt-card reveal" style="transition-delay:.06s">
+        <div class="kicker">What it actually competes with</div>
+        <h4>Three alternatives, all of which you have considered.</h4>
+        <p>Every agent we talk to has already tried at least one of them.</p>
+        <ul class="alt-rows">
+          <li><span class="v">A transaction coordinator</span><span class="l">a real cost per file, and your inbox is still your inbox</span></li>
+          <li><span class="v">The CRM you already pay for</span><span class="l">half configured, and it never touches the mail</span></li>
+          <li><span class="v">Absorbing it</span><span class="l">into evenings, between showings</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* 07 — client data handling */}
+<section id="security">
+  <div class="sec-head">
+    <div class="sec-tag reveal">Before anyone asks</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">Client financial documents don&rsquo;t go anywhere you haven&rsquo;t signed for.</h2>
+  </div>
+  <div class="wrap">
+    <div class="prob-grid">
+      <div class="reveal">
+        <p class="big">A transaction inbox carries more sensitive information than most people stop to think about. <b>Bank statements, loan applications, identity documents, pay stubs</b> &mdash; all of it arriving as attachments, in threads, from six different parties.</p>
+        <p class="body">For agents and brokerages who want it handled properly, the Regulated Practice Layer adds a zero-data-retention configuration &mdash; prompts and responses are never stored &mdash; along with a restricted, vetted tool stack where every vendor in the chain has been checked for how it handles retention rather than taken on trust.</p>
+        <p class="body">Every engagement produces a written data flow map showing exactly where information travels and what is kept at each step. Most brokerages need one and can&rsquo;t produce one.</p>
+      </div>
+      <div class="alt-card reveal" style="transition-delay:.06s">
+        <div class="kicker">The control question</div>
+        <h4>Nothing is ever sent under your name.</h4>
+        <p>This is a product policy rather than a setting, and it is usually the answer a broker actually wants.</p>
+        <ul class="alt-rows">
+          <li><span class="v">Drafts only</span><span class="l">the system writes, you approve, then it sends</span></li>
+          <li><span class="v">Reversible</span><span class="l">filing is label-and-archive; nothing is deleted</span></li>
+          <li><span class="v">Documented</span><span class="l">retention and deletion rules by data type, with audit logging</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* 08 — the approval promise */}
+<section class="promise">
+  <div class="wrap">
+    <div class="promise-box reveal">
+      <div class="sec-tag">One thing we want to be clear about</div>
+      <h2>Nothing goes out under your name without <em>your approval</em>. Ever.</h2>
+      <p>The system drafts. You approve. There is no mode where it decides on its own to answer a client, respond to a partner, or send anything at all on your behalf. We don't offer that, and we're not planning to.</p>
+      <div class="flow">
+        <span class="flow-step">System drafts</span>
+        <span class="flow-arrow" aria-hidden="true">→</span>
+        <span class="flow-step key">You approve</span>
+        <span class="flow-arrow" aria-hidden="true">→</span>
+        <span class="flow-step">It sends</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* 09 — proof */}
+<ProofPlaceholder vertical="real estate" />
+
+{/* 10 — which plan */}
+<section id="plans" class="sec-light">
+  <div class="sec-head">
+    <div class="sec-tag reveal">Where this lives</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">Which plan agents and teams take.</h2>
+    <p class="sec-sub reveal" style="transition-delay:.1s">Solo agents usually start on Reserve, because drafting and scheduling are where the day goes. Custom Reserve is the one to look at for teams and brokerages, where the routing has to know who owns which file.</p>
+  </div>
+  <div class="wrap">
+    <div class="fit-grid">
+      <article class="fit reveal">
+        <h4>Select</h4>
+        <div class="fj">Know what matters</div>
+        <p>Your inbox sorted and prioritised, with a daily digest and protected focus blocks. No drafting, no transaction routing.</p>
+        <a class="flink" href="/pricing">See pricing &rarr;</a>
+      </article>
+      <article class="fit reveal" style="transition-delay:.06s">
+        <h4>Reserve</h4>
+        <div class="fj">Act on what matters</div>
+        <p>Adds replies drafted in your voice, client and co-op routing, showing coordination and meeting capture. Where most producing agents start.</p>
+        <a class="flink" href="/pricing">See pricing &rarr;</a>
+      </article>
+      <article class="fit featured reveal" style="transition-delay:.12s">
+        <h4>Custom Reserve</h4>
+        <div class="fj">So nothing falls through</div>
+        <p>Contract-date extraction, transaction routing across lender, title and co-op, waiting-on tracking and team assignment, built from a documented map of how your files move.</p>
+        <a class="flink" href="/pricing">See pricing &rarr;</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+{/* 11 — the resource */}
+<section id="resource">
+  <div class="wrap" style="padding-top:110px">
+    <div class="magnet reveal">
+      <div class="magnet-copy">
+        <div class="kicker">Free resource</div>
+        <h3>The Transaction Deadline Checklist</h3>
+        <p>A one-page map of every date a contract sets, what has to happen before each one, and which inbound messages are actually the clock starting. It's drawn from the date sets we build during discovery, and it's useful whether or not you ever work with us.</p>
+        <ul class="ticks" style="margin-top:22px">
+          <li>Every contractual date, and what has to be true before it lands</li>
+          <li>Which inbound messages are the countdown starting rather than an update</li>
+          <li>Where the handoffs sit between lender, title, inspection and client</li>
+        </ul>
+      </div>
+      <div class="magnet-form">
+        <!-- LEAD MAGNET PLACEHOLDER -------------------------------------------
+             The asset itself is not written yet. This form captures the request
+             and emails it through the existing Web3Forms endpoint; fulfilment is
+             manual until the PDF exists. When it does, either attach it to the
+             autoresponder or swap this form for a direct download link. -->
+        <form action="https://api.web3forms.com/submit" method="POST" class="magnet-req" data-ajax
+              data-success="Thanks — we'll email it over shortly.">
+          <input type="hidden" name="access_key" value={FORM_KEY}>
+          <input type="hidden" name="subject" value="Lead magnet request — Transaction Deadline Checklist">
+          <input type="hidden" name="from_name" value="Loque Agent Website">
+          <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+          <div class="field">
+            <label for="lm-name">Name <span class="req">*</span></label>
+            <input type="text" id="lm-name" name="name" placeholder="Jane Doe" required>
+          </div>
+          <div class="field">
+            <label for="lm-email">Work email <span class="req">*</span></label>
+            <input type="email" id="lm-email" name="email" placeholder="jane@brokerage.com" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Send me the checklist</button>
+          <div class="magnet-fine">One email with the resource. No sequence, no sharing your address.</div>
+          <div class="form-status" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* 12 — book */}
+<section id="contact" class="approach">
+  <div class="sec-head">
+    <div class="sec-tag reveal">Where to start</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">The first conversation is short and free.</h2>
+  </div>
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-copy reveal">
+        <p class="big">We'll look at how your transactions, mail and follow-ups actually move right now, and tell you honestly <b>whether this makes sense for you</b> and which plan fits. If it doesn't make sense, we'll say so.</p>
+        <ul class="contact-points">
+          <li><svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>A straight read on where your transaction risk actually sits.</li>
+          <li><svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>A recommendation on Select, Reserve or a custom build — including &quot;none of these yet&quot;.</li>
+          <li><svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>If you're not saving real hours by month two, we refund your setup fee.</li>
+        </ul>
+        <div class="contact-direct">
+          Prefer email? Reach us directly at <a href="mailto:questions@loquelogic.com">questions@loquelogic.com</a>
+        </div>
+      </div>
+
+      <div class="form-card reveal" style="transition-delay:.06s">
+        <form id="contactForm" action="https://api.web3forms.com/submit" method="POST" data-ajax>
+          <input type="hidden" name="access_key" value={FORM_KEY}>
+          <input type="hidden" name="subject" value="New enquiry — Loque Agent (Real estate)">
+          <input type="hidden" name="from_name" value="Loque Agent Website">
+          <input type="hidden" name="vertical" value="Real estate">
+          <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="cf-name">Name <span class="req">*</span></label>
+              <input type="text" id="cf-name" name="name" placeholder="Jane Doe" required>
+            </div>
+            <div class="field">
+              <label for="cf-email">Email <span class="req">*</span></label>
+              <input type="email" id="cf-email" name="email" placeholder="jane@brokerage.com" required>
+            </div>
+            <div class="field">
+              <label for="cf-company">Brokerage</label>
+              <input type="text" id="cf-company" name="company" placeholder="Brokerage name">
+            </div>
+            <div class="field">
+              <label for="cf-phone">Phone</label>
+              <input type="tel" id="cf-phone" name="phone" placeholder="(435) 243-5808">
+            </div>
+            <div class="field">
+              <label for="cf-plan">I'm interested in</label>
+              <select id="cf-plan" name="plan">
+                <option value="Not sure yet — help me decide">Not sure yet — help me decide</option>
+                <option value="Select — know what matters">Select — know what matters</option>
+                <option value="Reserve — act on what matters">Reserve — act on what matters</option>
+                <option value="Custom Reserve — a custom build">Custom Reserve — a custom build</option>
+                <option value="Founding client rates">Founding client rates</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="cf-size">Transactions in flight, typically</label>
+              <select id="cf-size" name="size">
+                <option value="Not given">Prefer not to say</option>
+                <option value="1-3">1&ndash;3</option>
+                <option value="4-9">4&ndash;9</option>
+                <option value="10-20">10&ndash;20</option>
+                <option value="21+">21+</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="cf-message">What's actually eating your time? <span class="req">*</span></label>
+              <textarea id="cf-message" name="message" placeholder="Roughly how much email you get, what keeps slipping, and whether anyone helps you with it today." required></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="cf-submit">Book the first conversation</button>
+          <div class="form-fine">We'll only use your details to follow up about your enquiry. No spam, ever.</div>
+          <div class="form-status" id="cf-status" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+</Base>
