@@ -1663,3 +1663,31 @@
      and a click would land on a card the reader never chose. */
   body.is-cascading .svc-tile{pointer-events:none}
   body.is-cascading .svc-tile .svc-flip{transform:none !important}
+
+  /* Opt out of the walkthrough. Defaults on, but someone who already knows
+     what they want should not have to sit through it. */
+  .auto-toggle{
+    display:inline-flex;align-items:flex-start;gap:12px;cursor:pointer;
+    margin-top:26px;padding:14px 18px;border-radius:14px;
+    border:1px solid var(--line);background:var(--ink-card);
+    transition:border-color .2s var(--ease);
+  }
+  .auto-toggle:hover{border-color:var(--accent-dim)}
+  .auto-toggle input{position:absolute;opacity:0;width:0;height:0}
+  .at-box{
+    flex:none;width:22px;height:22px;border-radius:6px;margin-top:1px;
+    border:1.5px solid var(--muted);display:grid;place-items:center;color:transparent;
+    transition:background .2s,border-color .2s,color .2s;
+  }
+  .at-box svg{width:14px;height:14px}
+  .auto-toggle:has(input:checked) .at-box{
+    background:var(--accent);border-color:var(--accent);color:var(--ink);
+  }
+  .at-txt{
+    font-family:"Outfit",sans-serif;font-weight:600;font-size:15.5px;
+    letter-spacing:-.01em;line-height:1.3;color:var(--paper);
+  }
+  .at-txt small{
+    display:block;margin-top:4px;font-family:"Hanken Grotesk",sans-serif;
+    font-weight:400;font-size:13.5px;letter-spacing:0;color:var(--muted);max-width:46ch;
+  }

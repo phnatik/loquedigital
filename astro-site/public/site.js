@@ -573,33 +573,25 @@
     stopCascade();
 
     var svc = inputs().filter(function (i) { return i.name === 'service'; });
-    // removals are not something to dramatise
-    svc.forEach(function (i) {
-      if (RANK[i.dataset.tier] > RANK[key]) i.checked = false;
-    });
 
-    var pending = svc.filter(function (i) {
-      return RANK[i.dataset.tier] <= RANK[key] && !i.checked;
-    });
+    // Every preset starts from a clean slate. Ticking only the difference
+    // meant a step down a tier had nothing to show, and it meant two people
+    // on the same plan could see different runs depending on what they had
+    // picked before. Clearing first makes the run mean one thing: here is
+    // what this plan contains.
+    svc.forEach(function (i) { i.checked = false; });
+    var pending = svc.filter(function (i) { return RANK[i.dataset.tier] <= RANK[key]; });
+    render();
 
     var reduced = window.matchMedia &&
                   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var toggle = document.getElementById('autoDemo');
+    var walk = !toggle || toggle.checked;
     // Back to the top of the service list, not to the presets — the presets
     // are where the click happened, so returning there looks like nothing.
     var home = document.getElementById('grp-email');
 
-    // Nothing left to add means this is a step DOWN a tier: every box the
-    // smaller plan wants is already ticked, so there would be nothing to
-    // cascade and the click would look dead. Wipe the slate instead and play
-    // the whole plan back in, which is also the more honest picture — you are
-    // being shown what the plan you just chose actually contains.
-    if (!pending.length && !reduced) {
-      svc.forEach(function (i) { i.checked = false; });
-      pending = svc.filter(function (i) { return RANK[i.dataset.tier] <= RANK[key]; });
-      render();
-    }
-
-    if (reduced || !pending.length) {
+    if (reduced || !walk || !pending.length) {
       pending.forEach(function (i) { i.checked = true; });
       render();
       if (home && !reduced) home.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -615,7 +607,10 @@
     // and no accidental clicks on a tile sliding under the cursor.
     document.body.classList.add('is-cascading');
 
-    var TICK = 650;                // ms between boxes — about 1.5 a second
+    // Custom Reserve is 29 boxes against Select's 6. At one pace for all
+    // three it is the only run that outstays its welcome, so it goes 50%
+    // faster — same gesture, proportionate length.
+    var TICK = key === 'custom' ? 433 : 650;
     // The first tiles of the email group are already just below the presets,
     // so without a head start they satisfy the on-screen gate and tick while
     // the page is still travelling — by the time you arrive they are done.
@@ -717,6 +712,20 @@
   presets.forEach(function (b) {
     b.addEventListener('click', function () { applyPreset(b.dataset.preset); });
   });
+
+  // Remember the walkthrough preference for the session — someone who turned
+  // it off once should not have to turn it off again on the next preset.
+  var autoBox = document.getElementById('autoDemo');
+  if (autoBox) {
+    try {
+      var saved = sessionStorage.getItem('loque_build_walk');
+      if (saved !== null) autoBox.checked = saved === '1';
+    } catch (e) { /* private mode — the default stands */ }
+    autoBox.addEventListener('change', function () {
+      try { sessionStorage.setItem('loque_build_walk', autoBox.checked ? '1' : '0'); }
+      catch (e) { /* nothing to do */ }
+    });
+  }
 
   // Some add-ons are alternatives rather than a menu. The three Regulated
   // Practice Layer paths are the case that matters: a HIPAA-ready BAA
