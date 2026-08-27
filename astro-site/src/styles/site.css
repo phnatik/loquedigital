@@ -1562,6 +1562,11 @@
      claiming to describe the selection the moment you change one. */
   .preset.is-on{border-color:var(--accent)}
   .preset.is-on .preset-btn{background:var(--accent);border-color:var(--accent);color:#10100c}
+  /* On paper --accent is olive, and #10100c on olive is unreadable. Use the
+     section's own ground as the text colour, the way .btn-primary does. */
+  .sec-light .preset.is-on .preset-btn{color:var(--ink)}
+  .sec-light .preset-btn{color:var(--paper)}
+  .sec-light .preset-btn:hover{border-color:var(--accent);color:var(--accent)}
 
   /* Second line on a tile title — the vertical and its data path. Smaller
      and white against the lime name above it. */
