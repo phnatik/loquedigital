@@ -1,0 +1,335 @@
+---
+// The homepage. Its job is to route, not to sell (ADR-W03): the vertical
+// router is section 02, and the argument lives on the five vertical pages.
+// Section order follows the Overview deck — problem, what we do, why us,
+// approval promise — with credibility ahead of plans. See the Blueprint §07.
+import Base from '../layouts/Base.astro';
+import ImageSlot from '../components/ImageSlot.astro';
+---
+<Base
+  title="Loque Agent — an executive AI assistant we build and run"
+  description="You don't get software and a login. You get an assistant that already knows your priorities, drafts replies that sound like you, protects your calendar, and makes sure nothing you committed to quietly disappears. Nothing goes out under your name without your approval."
+  path="/"
+>
+
+{/* 01 */}
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <img src="/img/hero-bg.jpg" alt="">
+    <div class="hero-grid"></div>
+    <div class="hero-aurora"></div>
+    <div class="hero-cursor" id="heroCursor"></div>
+  </div>
+  <div class="wrap">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <span class="eyebrow reveal"><span class="dot"></span>Bespoke Executive AI Assistant</span>
+        <h1 class="reveal" style="transition-delay:.06s">We build and run the system <em>for you</em>.</h1>
+        <p class="lead reveal" style="transition-delay:.14s">
+          You don't get software and a login. You get an assistant that already knows your priorities, drafts replies that sound like you, protects your calendar, and makes sure nothing you committed to quietly disappears.
+        </p>
+        <div class="hero-actions reveal" style="transition-delay:.22s">
+          <a href="/book" class="btn btn-primary">Book the first conversation</a>
+          <a href="/plans" class="btn btn-ghost">Find your practice</a>
+        </div>
+      </div>
+
+      <div class="demo" id="demo" aria-hidden="true">
+        <span class="demo-badge b1"><span class="d"></span>Sorted before you open it</span>
+        <span class="demo-badge b2"><span class="d"></span>Nothing sends unapproved</span>
+        <div class="demo-card" id="demoCard">
+          <div class="demo-bar">
+            <span class="demo-dots"><i></i><i></i><i></i></span>
+            <span class="demo-live">Your inbox</span>
+          </div>
+
+          <div class="demo-mail">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"></rect><path d="m3.5 6.5 8.5 6 8.5-6"></path></svg>
+            <div class="demo-mailtxt">
+              <div class="demo-from" id="demoFrom">Incoming</div>
+              <div class="demo-subj" id="demoSubj"><span class="caret"></span></div>
+            </div>
+          </div>
+
+          <div class="demo-tags" id="demoTags"></div>
+
+          <div class="demo-draft" id="demoDraft">
+            <div class="dh">
+              <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.8 9.94l-3.75-3.75zM20.7 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75z"/></svg>
+              <span>Drafted in your voice</span>
+            </div>
+            <div class="demo-dtext" id="demoDraftText"></div>
+            <div class="demo-approve">
+              <span class="demo-abtn ok">Approve &amp; send</span>
+              <span class="demo-abtn edit">Edit</span>
+              <span class="demo-wait">Waiting on you</span>
+            </div>
+          </div>
+
+          <div class="demo-foot">
+            <span class="demo-surface">Handled as <b id="demoRule">a client deadline</b></span>
+            <span class="demo-progress" id="demoProg"><i class="on"></i><i></i><i></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>Email triage</span><span>Drafts in your voice</span><span>Calendar defended</span><span>Meetings captured</span><span>Commitments tracked</span><span>The Handwritten Layer</span>
+      <span>Email triage</span><span>Drafts in your voice</span><span>Calendar defended</span><span>Meetings captured</span><span>Commitments tracked</span><span>The Handwritten Layer</span>
+    </div>
+  </div>
+</section>
+
+<div class="wrap platforms reveal">
+  <div class="plat-label">We own the part that never gets done</div>
+  <div class="plat-row">
+    <span class="pl"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2 3 6v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V6l-9-4z"/></svg>Setup</span>
+    <span class="pl"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm9 4a9 9 0 0 1-.1 1.3l2 1.5-2 3.5-2.4-1a9 9 0 0 1-2.2 1.3L16 21H8l-.3-2.4a9 9 0 0 1-2.2-1.3l-2.4 1-2-3.5 2-1.5A9 9 0 0 1 3 12l-.1-1.3-2-1.5 2-3.5 2.4 1a9 9 0 0 1 2.2-1.3L8 3h8l.3 2.4a9 9 0 0 1 2.2 1.3l2.4-1 2 3.5-2 1.5z"/></svg>Tuning</span>
+    <span class="pl"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 4V1L8 5l4 4V6a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z"/></svg>Ongoing refinement</span>
+    <span class="pl"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M21.7 18.6 13.4 4.2a1.6 1.6 0 0 0-2.8 0L2.3 18.6A1.6 1.6 0 0 0 3.7 21h16.6a1.6 1.6 0 0 0 1.4-2.4zM13 18h-2v-2h2zm0-4h-2V9h2z"/></svg>Fixing drift</span>
+    <span class="pl"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>Keeping it right</span>
+  </div>
+</div>
+
+{/* 02 — the router: the page's real job */}
+<section id="verticals" class="sec-light">
+  <div class="sec-head">
+    <div class="sec-tag reveal">Who we build for</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">Built around your practice, not a generic template.</h2>
+    <p class="sec-sub reveal" style="transition-delay:.1s">Start with the one that looks like your week. Legal and healthcare are where we&rsquo;ve built the most, because the deadlines are real and the compliance obligations aren&rsquo;t optional &mdash; but the same engine runs underneath all five.</p>
+  </div>
+  <div class="wrap">
+    <div class="ind-grid router-grid">
+      <a class="ind reveal" href="/legal" style="transition-delay:.00s">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2a1 1 0 0 1 1 1v1.2l6.4 1.7a1 1 0 1 1-.5 1.9L13 6.3V19h3a1 1 0 1 1 0 2H8a1 1 0 1 1 0-2h3V6.3L5.1 7.8a1 1 0 0 1-.5-1.9L11 4.2V3a1 1 0 0 1 1-1zM5.5 9l2.6 5.2a1 1 0 0 1-.1 1A3.7 3.7 0 0 1 5.5 17a3.7 3.7 0 0 1-2.5-1.8 1 1 0 0 1-.1-1L5.5 9zm13 0 2.6 5.2a1 1 0 0 1-.1 1 3.7 3.7 0 0 1-2.5 1.8 3.7 3.7 0 0 1-2.5-1.8 1 1 0 0 1-.1-1L18.5 9z"/></svg></span>
+        <h3>Legal</h3>
+        <div class="isub">Deadlines, matters and privilege</div>
+        <p>Anything referencing a filing, hearing or date escalates the moment it lands. Everything else files itself by client and matter number.</p>
+        <ul>
+          <li>Deadline and docket escalation</li>
+          <li>Matter-based routing and filing</li>
+          <li>Privilege-aware handling</li>
+          <li>Zero data retention available</li>
+        </ul>
+        <span class="go">See the legal build <span class="arw" aria-hidden="true">&rarr;</span></span>
+      </a>
+
+      <a class="ind reveal" href="/healthcare" style="transition-delay:.06s">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 2h4a1 1 0 0 1 1 1v4h4a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-4v4a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-4H5a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h4V3a1 1 0 0 1 1-1z"/></svg></span>
+        <h3>Healthcare</h3>
+        <div class="isub">PHI, referrals and payers</div>
+        <p>Protected health information is detected and held inside the compliant path. Referrals, prior authorisations and payer correspondence get tracked to closure.</p>
+        <ul>
+          <li>PHI detection and routing</li>
+          <li>Referral intake and source tracking</li>
+          <li>Prior authorisation and claims tracking</li>
+          <li>HIPAA-ready with a signed BAA</li>
+        </ul>
+        <span class="go">See the healthcare build <span class="arw" aria-hidden="true">&rarr;</span></span>
+      </a>
+
+      <ImageSlot
+        id="home-practices"
+        variant="tile"
+        delay={0.12}
+        brief="Wide frame that could belong to any of the five practices — a street of professional offices at dawn, or a lobby before anyone arrives. Deliberately non-specific."
+        tone="Sits as the sixth cell in the router grid. Desaturated, film grain."
+      />
+
+
+      <a class="ind reveal" href="/professional-services" style="transition-delay:.12s">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 3h6a2 2 0 0 1 2 2v2h3a2 2 0 0 1 2 2v3H2V9a2 2 0 0 1 2-2h3V5a2 2 0 0 1 2-2zm0 4h6V5H9v2zM2 14h20v5a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5z"/></svg></span>
+        <h3>Professional services</h3>
+        <div class="isub">Finance, consulting and agencies</div>
+        <p>The work that isn&rsquo;t billable and isn&rsquo;t optional. Client follow-through, scope creep and the admin that quietly eats your utilisation.</p>
+        <ul>
+          <li>Client and engagement routing</li>
+          <li>Commitment and waiting-on tracking</li>
+          <li>Scope and follow-through visibility</li>
+          <li>Zero data retention available</li>
+        </ul>
+        <span class="go">See the professional services build <span class="arw" aria-hidden="true">&rarr;</span></span>
+      </a>
+
+      <a class="ind reveal" href="/real-estate" style="transition-delay:.00s">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.6a1 1 0 0 1 .64.23l9 7.6A1 1 0 0 1 21 12.2h-2v8a1 1 0 0 1-1 1h-4.5v-6h-3v6H6a1 1 0 0 1-1-1v-8H3a1 1 0 0 1-.64-1.77l9-7.6A1 1 0 0 1 12 2.6z"/></svg></span>
+        <h3>Real estate</h3>
+        <div class="isub">Contingencies, closings and clients</div>
+        <p>Contingency dates and closing deadlines that currently live inside an email thread, tracked to the day &mdash; alongside lender, title and client correspondence.</p>
+        <ul>
+          <li>Transaction deadline escalation</li>
+          <li>Lender, title and escrow routing</li>
+          <li>Client and agent communication rules</li>
+          <li>Follow-through to closing</li>
+        </ul>
+        <span class="go">See the real estate build <span class="arw" aria-hidden="true">&rarr;</span></span>
+      </a>
+
+      <a class="ind reveal" href="/executives" style="transition-delay:.06s">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 3h9a1 1 0 0 1 1 1v6h5a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm2 3v2h2V6H6zm4 0v2h2V6h-2zM6 10v2h2v-2H6zm4 0v2h2v-2h-2zm-4 4v2h2v-2H6zm4 0v2h2v-2h-2zm6-2v2h2v-2h-2zm0 4v2h2v-2h-2z"/></svg></span>
+        <h3>Corporate executives</h3>
+        <div class="isub">Triage, drafting, prep and follow-through</div>
+        <p>Mail triaged before you open it, replies drafted in your voice, a prep brief before every call, and every commitment tracked to closure. Runs on its own or alongside your existing assistant.</p>
+        <ul>
+          <li>Board and investor correspondence</li>
+          <li>Direct-report escalation rules</li>
+          <li>Meeting prep and commitment tracking</li>
+          <li>Works with or without an EA</li>
+        </ul>
+        <span class="go">See the executive build <span class="arw" aria-hidden="true">&rarr;</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+{/* 03 — where the week goes */}
+<section id="problem">
+  <div class="sec-head">
+    <div class="sec-tag reveal">The problem you already know about</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">The work isn&rsquo;t the problem. The work around the work is.</h2>
+  </div>
+  <div class="wrap">
+    <div class="prob-grid">
+      <div class="reveal">
+        <p class="big">Nobody built a practice, or took the job, to spend their mornings sorting mail, chasing signatures and rearranging a calendar. <b>That is where the week goes anyway.</b></p>
+        <p class="body">Triage, filing, scheduling and rescheduling, following up on what other people owe you, writing down what was said so it isn&rsquo;t lost. None of it is the work you are actually paid for. All of it has to happen &mdash; and it lands on the person in the building whose hour costs the most.</p>
+        <p class="body">You have probably already tried a tool for it. It is sitting in a browser tab right now, half configured, doing maybe <b>a tenth of what it promised</b> &mdash; not because the software is bad, but because making it work takes an afternoon nobody has, and the person who needs it most is the person least able to spend one.</p>
+      </div>
+      <div class="alt-card reveal" style="transition-delay:.06s">
+        <div class="kicker">The alternative most people consider</div>
+        <h4>Hiring an assistant.</h4>
+        <p>That works. It also costs real money, takes months, and still leaves gaps.</p>
+        <ul class="alt-rows">
+          <li><span class="v">$40K&ndash;$150K</span><span class="l">per year for an executive assistant</span></li>
+          <li><span class="v">Months</span><span class="l">to train one to be useful</span></li>
+          <li><span class="v">Zero</span><span class="l">coverage at 6am or on a Sunday</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ImageSlot
+  id="home-overflow"
+  variant="feature"
+  brief="The work around the work, made physical: a desk where the paper has outgrown the surface. Shot from directly above, tight and slightly claustrophobic."
+  tone="The only frame on the site allowed to feel cluttered."
+/>
+
+
+{/* 04 — what we do */}
+<section id="how" class="approach">
+  <div class="sec-head">
+    <div class="sec-tag reveal">What we do</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">We build and run the system for you.</h2>
+  </div>
+  <div class="wrap">
+    <div class="ap-grid">
+      <div class="reveal">
+        <p class="big">We do the setup, the tuning, and the ongoing refinement. <b>When it drifts, we fix it. When your business changes, we change it.</b></p>
+        <div class="own">
+          <span>Setup</span><span>Tuning</span><span>Ongoing refinement</span><span>Fixing drift</span>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="step reveal"><div class="k">01</div><div><h4>Discovery</h4><p>We look at how your email, calendar and follow-ups actually work today. On Custom Reserve this produces a documented map of your operation — most practices have never had one.</p></div></div>
+        <div class="step reveal" style="transition-delay:.05s"><div class="k">02</div><div><h4>Build</h4><p>Rules, routing and voice modelling configured around your business. On Reserve, voice training runs on your last six to twelve months of sent mail.</p></div></div>
+        <div class="step reveal" style="transition-delay:.1s"><div class="k">03</div><div><h4>Staged deploy</h4><p>It goes in piece by piece, so nothing breaks while it's going in. One week for Select, four to eight for a full custom build.</p></div></div>
+        <div class="step reveal" style="transition-delay:.15s"><div class="k">04</div><div><h4>Refinement</h4><p>Monthly, every two weeks, or a weekly call — depending on your plan. This is the part that never happens when you buy software.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* 05 — why us, compressed; the long version is /about */}
+<section id="why">
+  <div class="sec-head">
+    <div class="sec-tag reveal">Why us</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">Loque is run by operators, not consultants.</h2>
+  </div>
+  <div class="wrap">
+    <div class="why-grid">
+      <div class="why-copy reveal">
+        <p class="big">Chris Barbieri has spent over twenty years <b>running companies rather than advising them</b> — CEO, CRO and COO across healthcare, marketing, professional services and software.</p>
+        <p>Automation projects don't fail because the technology doesn't work. They fail because someone built something that didn't match how the business actually runs, or broke something that was working fine. We've been on the receiving end of that.</p>
+              <p class="why-more"><a href="/about">The longer version, and why automation projects fail &rarr;</a></p>
+      </div>
+      <div class="reveal" style="transition-delay:.06s">
+        <div class="why-stat">
+          <div class="val">30%</div>
+          <div class="label">reduction in intake workload, with errors nearly eliminated, inside a HIPAA-regulated operation</div>
+        </div>
+        <div class="why-line">Keeping your business running comes first. <b>Optimization comes second.</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* 06 — the approval promise */}
+<section class="promise">
+  <div class="wrap">
+    <div class="promise-box reveal">
+      <div class="sec-tag">One thing we want to be clear about</div>
+      <h2>Nothing goes out under your name without <em>your approval</em>. Ever.</h2>
+      <p>The system drafts. You approve. There is no mode where it decides on its own to answer a client, respond to a partner, or send anything at all on your behalf. We don't offer that, and we're not planning to.</p>
+      <p>Your name and your relationships are not worth the risk — and any vendor comfortable with that risk is telling you something about how they'll treat the rest of your data.</p>
+      <div class="flow">
+        <span class="flow-step">System drafts</span>
+        <span class="flow-arrow" aria-hidden="true">→</span>
+        <span class="flow-step key">You approve</span>
+        <span class="flow-arrow" aria-hidden="true">→</span>
+        <span class="flow-step">It sends</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* 07 — plans at a glance */}
+<section id="plans-glance" class="sec-light">
+  <div class="sec-head">
+    <div class="sec-tag reveal">The three plans</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">Three levels. One of them isn&rsquo;t a plan at all.</h2>
+    <p class="sec-sub reveal" style="transition-delay:.1s">Select and Reserve are productized &mdash; fast to deploy and consistent. Custom Reserve is a build, designed around how your operation actually runs.</p>
+  </div>
+  <div class="wrap">
+    <div class="glance-grid">
+      <a class="glance reveal" href="/plans">
+        <div class="gname">Select</div>
+        <div class="gjob">Know what matters</div>
+        <p>Your inbox, sorted and prioritised. You open your email already knowing what needs you.</p>
+        <div class="gwhen">Deploys in about a week</div>
+      </a>
+      <a class="glance featured reveal" href="/plans" style="transition-delay:.06s">
+        <div class="gname">Reserve</div>
+        <div class="gjob">Act on what matters</div>
+        <p>The system starts doing the work instead of just organising it. Drafts in your voice, calendar handled, meetings captured.</p>
+        <div class="gwhen">2 to 3 weeks, staged</div>
+      </a>
+      <a class="glance reveal" href="/plans" style="transition-delay:.12s">
+        <div class="gname">Custom Reserve</div>
+        <div class="gjob">So nothing falls through</div>
+        <p>Not a bigger version of Reserve. A build, starting with discovery and a documented map of how your operation works.</p>
+        <div class="gwhen">4 to 8 weeks, staged</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+{/* 08 — close */}
+<section class="close-band">
+  <div class="wrap">
+    <div class="close-box reveal">
+      <h2>The first conversation is short and free.</h2>
+      <p>We&rsquo;ll look at how your email, calendar and follow-ups actually work right now, and tell you honestly whether this makes sense for you and which plan fits. If it doesn&rsquo;t make sense, we&rsquo;ll say so.</p>
+      <div class="close-actions">
+        <a href="/book" class="btn btn-primary">Book the first conversation</a>
+        <a href="#verticals" class="btn btn-ghost">Start with your practice</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</Base>

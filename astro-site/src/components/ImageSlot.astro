@@ -1,0 +1,112 @@
+---
+// An image position on the site. Renders the real photograph when the asset
+// exists, and an art-direction placeholder when it does not.
+//
+// Installing an image is dropping src/assets/img/<id>.jpg into place — no
+// markup change, no edit here. The `id` IS the filename, and image-brief.csv /
+// gemini-prompts.md are generated from these same ids.
+//
+// Assets live in src/assets rather than public so Astro's pipeline processes
+// them: AVIF and WebP with a JPEG fallback, a responsive srcset per variant,
+// and intrinsic width/height so nothing shifts while the page loads. A file in
+// public/ would be served byte-for-byte as generated, which for these is
+// roughly three times the weight.
+//
+// Deliberately NOT [data-placeholder]: those blocks mark an unearned *claim*
+// and are blocked on case-study rights (launch gates #11 / #13a). A missing
+// photograph is a production task, so these carry data-image-slot and are
+// inventoried separately by audit.py.
+import { Picture } from 'astro:assets';
+
+// Eager glob so the lookup is a plain object at build time. Vite requires a
+// literal pattern here — it cannot be built from the id.
+const assets = import.meta.glob('../assets/img/*.jpg', { eager: true });
+
+const {
+  id,
+  brief,
+  variant = 'feature',   // tile | band | feature | split | portrait
+  ratio,                 // optional override, e.g. '16 / 9'
+  caption = '',          // real caption; survives to launch if set
+  tone = '',             // art-direction note; placeholder only
+  delay = 0,             // reveal stagger, to match the cards around it
+  alt,                   // overrides the alt derived from the brief
+  loading = 'lazy',
+} = Astro.props;
+
+const RATIOS = {
+  band: '21 / 8',
+  feature: '16 / 9',
+  split: '4 / 5',
+  portrait: '3 / 4',
+};
+// A tile has no ratio of its own — it fills the grid cell it lands in.
+const ar = variant === 'tile' ? null : (ratio || RATIOS[variant] || '16 / 9');
+
+const mod = assets[`../assets/img/${id}.jpg`];
+const src = mod?.default;
+
+// What the browser actually needs to download, per placement. A band is
+// full-bleed; a feature is capped at the 1180px wrap minus its padding; a tile
+// is a grid cell that is at most half the wrap and usually a third of it.
+const SIZING = {
+  band: {
+    widths: [640, 960, 1280, 1920, 2560],
+    sizes: '100vw',
+  },
+  feature: {
+    widths: [640, 960, 1116, 1600, 2232],
+    sizes: '(max-width: 1180px) calc(100vw - 64px), 1116px',
+  },
+  tile: {
+    widths: [400, 560, 760, 1120],
+    sizes: '(max-width: 640px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 41px), 33vw',
+  },
+};
+const sizing = SIZING[variant] || SIZING.feature;
+
+// The brief's first sentence describes what is in the frame, which is exactly
+// what alt text should say. Pass `alt` explicitly to override.
+const altText = alt || (brief || '').split(/(?<=\.)\s/)[0].trim();
+
+const style = [ar && `aspect-ratio:${ar}`, delay && `transition-delay:${delay}s`]
+  .filter(Boolean).join(';');
+---
+<figure
+  class={`img-figure img-${variant}${src ? ' is-live' : ''}`}
+  data-image-slot={id}
+  data-ratio={ar || 'fill'}
+>
+  {src ? (
+    <Picture
+      src={src}
+      alt={altText}
+      widths={sizing.widths}
+      sizes={sizing.sizes}
+      formats={['avif', 'webp']}
+      fallbackFormat="jpg"
+      loading={loading}
+      decoding="async"
+      class="reveal"
+      style={style}
+    />
+  ) : (
+    <div class="img-slot reveal" style={style}>
+      <span class="img-slot-hatch" aria-hidden="true"></span>
+      <div class="img-slot-body">
+        <svg class="img-slot-mark" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="2.5" y="4.5" width="19" height="15" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.4"/>
+          <circle cx="8.5" cy="10" r="1.9" fill="currentColor"/>
+          <path d="M3 17.5 9 12l3.5 3 3-2.5 5.5 5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <p class="img-brief">{brief}</p>
+        {tone && <p class="img-tone">{tone}</p>}
+      </div>
+      <div class="img-spec">
+        <span class="img-spec-id">{id}.jpg</span>
+        <span class="img-spec-ar">{ar ? ar.replace(/\s/g, '') : 'fills cell'}</span>
+      </div>
+    </div>
+  )}
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

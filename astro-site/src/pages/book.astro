@@ -1,0 +1,108 @@
+---
+// The booking page. Ported from the homepage contact section in Phase 1.
+// Every CTA on the site points here (ADR-W08).
+import Base from '../layouts/Base.astro';
+import ImageSlot from '../components/ImageSlot.astro';
+import { FORM_KEY } from '../data/site.js';
+---
+<Base
+  title="Book a call | Loque Agent"
+  description="A short, free first conversation. We look at how your email, calendar and follow-ups actually work right now and tell you honestly whether this makes sense for you."
+  path="/book"
+>
+<div class="page-top">
+
+<section id="contact" class="approach">
+  <div class="sec-head">
+    <div class="sec-tag reveal">Where to start</div>
+    <h1 class="sec-title reveal" style="transition-delay:.06s">The first conversation is short and free.</h1>
+  </div>
+  <div class="wrap">
+    <div class="contact-grid">
+
+      <div class="contact-copy reveal">
+        <p class="big">We'll look at how your email, calendar and follow-ups actually work right now, and tell you honestly <b>whether this makes sense for you</b> and which plan fits. If it doesn't make sense, we'll say so.</p>
+        <ul class="contact-points">
+          <li><svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>A straight read on where your time is actually going.</li>
+          <li><svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>A recommendation on Select, Reserve or a custom build — including "none of these yet".</li>
+          <li><svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>If you're not saving real hours by month two, we refund your setup fee.</li>
+        </ul>
+        <div class="contact-direct">
+          Prefer email? Reach us directly at <a href="mailto:questions@loquelogic.com">questions@loquelogic.com</a>
+        </div>
+      </div>
+
+      <div class="form-card reveal" style="transition-delay:.06s">
+        <form id="contactForm" action="https://api.web3forms.com/submit" method="POST" data-ajax>
+          <!-- Web3Forms config -->
+          <input type="hidden" name="access_key" value={FORM_KEY}>
+          <input type="hidden" name="subject" value="New enquiry — Loque Agent">
+          <input type="hidden" name="from_name" value="Loque Agent Website">
+          <!-- Honeypot spam filter -->
+          <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="cf-name">Name <span class="req">*</span></label>
+              <input type="text" id="cf-name" name="name" placeholder="Jane Doe" required>
+            </div>
+            <div class="field">
+              <label for="cf-email">Email <span class="req">*</span></label>
+              <input type="email" id="cf-email" name="email" placeholder="jane@firm.com" required>
+            </div>
+            <div class="field">
+              <label for="cf-company">Company or practice</label>
+              <input type="text" id="cf-company" name="company" placeholder="Practice name">
+            </div>
+            <div class="field">
+              <label for="cf-phone">Phone</label>
+              <input type="tel" id="cf-phone" name="phone" placeholder="(435) 243-5808">
+            </div>
+            <div class="field">
+              <label for="cf-plan">I'm interested in</label>
+              <select id="cf-plan" name="plan">
+                <option value="Not sure yet — help me decide">Not sure yet — help me decide</option>
+                <option value="Select — know what matters">Select — know what matters</option>
+                <option value="Reserve — act on what matters">Reserve — act on what matters</option>
+                <option value="Custom Reserve — a custom build">Custom Reserve — a custom build</option>
+                <option value="Founding client rates">Founding client rates</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="cf-industry">Industry</label>
+              <select id="cf-industry" name="industry">
+                <option value="Not listed">Not listed</option>
+                <option value="Legal">Legal</option>
+                <option value="Healthcare">Healthcare</option>
+                <option value="Professional services">Professional services</option>
+                <option value="Finance">Finance</option>
+                <option value="Software / technology">Software / technology</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="cf-message">What's actually eating your time? <span class="req">*</span></label>
+              <textarea id="cf-message" name="message" placeholder="Roughly how much email you get, what keeps slipping, and whether anyone helps you with it today." required></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="cf-submit">Book the first conversation</button>
+          <div class="form-fine">We'll only use your details to follow up about your enquiry. No spam, ever.</div>
+          <div class="form-status" id="cf-status" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<ImageSlot
+  id="book-call"
+  variant="band"
+  brief="A phone on a desk beside a notepad with two lines written on it. Quiet and ordinary — the first call is short and low-stakes, and the image should say that."
+  tone="Sits under the form so the page does not end on a field."
+/>
+
+
+</div>
+</Base>

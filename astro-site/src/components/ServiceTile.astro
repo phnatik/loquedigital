@@ -1,0 +1,75 @@
+---
+// A flip tile for /build. Front: the illustration, large and centred, with the
+// title beneath it. Back: what the service actually does. Hover or keyboard
+// focus turns the card over.
+//
+// The whole tile is a <label> around a real checkbox, so a click anywhere on
+// either face selects — which is why the tick indicator is drawn on both.
+//
+// Touch has no hover, and a tap cannot both turn the card over and select it
+// without one of the two feeling broken. So on touch the card does not flip at
+// all: the two faces un-stack into one taller card with the description already
+// visible, and a tap just selects. See the (hover: none) block in site.css.
+import ServiceArt from './ServiceArt.astro';
+
+const TIER_LABEL = { select: 'Select', reserve: 'Reserve', custom: 'Custom Reserve' };
+
+const {
+  id, name, subtitle = '', short, detail, note = '',
+  tier = '',        // '' for add-ons, which never move the plan
+  art = null,
+  exclusive = '',
+  price = '',
+  group = 'service',
+  delay = 0,
+} = Astro.props;
+
+const badge = tier ? TIER_LABEL[tier] : 'Add-on';
+const badgeKey = tier || 'addon';
+---
+<label class={`svc-tile${tier ? '' : ' is-addon'} reveal`} style={`transition-delay:${delay}s`} data-tier={tier}>
+  <input
+    type="checkbox"
+    name={group === 'addon' ? 'addon' : 'service'}
+    value={id}
+    data-tier={tier}
+    data-name={subtitle ? `${name} — ${subtitle}` : name}
+    data-exclusive={exclusive || undefined}
+  />
+  <span class="svc-flip">
+
+    <span class="svc-face svc-front">
+      <span class="svc-check" aria-hidden="true">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5 6.5 11.5 12.5 5" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="svc-artwrap"><ServiceArt id={art || id} label={name} /></span>
+      <span class="svc-name">{name}</span>
+      {subtitle && <span class="svc-sub">{subtitle}</span>}
+      {/* The front used to carry the tier here, which read as a button
+          labelled "Select" on every Select-tier card — next to a card whose
+          whole surface selects. It now says what it does. The tier is still
+          on the back, and the results panel groups by it. */}
+      <span class="svc-more">More
+        <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M4 2.5 8 6l-4 3.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+    </span>
+
+    <span class="svc-face svc-back">
+      <span class="svc-check" aria-hidden="true">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5 6.5 11.5 12.5 5" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      {/* Name only. Appending the subtitle here pushed the practice-layer
+          backs past the card once the type went up, and the detail below
+          already explains the path. */}
+      <span class="svc-back-name">{name}</span>
+      <span class="svc-short">{short}</span>
+      <span class="svc-detail">{detail}</span>
+      {price && (
+        <span class="svc-price"><b>{price}</b></span>
+      )}
+      {note && <span class="svc-note">{note}</span>}
+      <span class="svc-tier" data-t={badgeKey}>{badge}</span>
+    </span>
+
+  </span>
+</label>

@@ -1,0 +1,37 @@
+---
+// Tile illustration for /build. Same presence-driven contract as ImageSlot
+// (ADR-W18): renders the artwork if src/assets/svc/<id>.png exists, and a
+// quiet marker if it does not, so the page is usable before the set is drawn.
+//
+// PNG rather than JPG because these are line illustrations on a transparent
+// ground — they have to sit on the dark card and on a light one. Astro still
+// processes them, so the transparency survives and the weight does not.
+import { Image } from 'astro:assets';
+
+const art = import.meta.glob('../assets/svc/*.png', { eager: true });
+
+const { id, label = '', size = 207 } = Astro.props;
+const mod = art[`../assets/svc/${id}.png`];
+const src = mod?.default;
+---
+{src ? (
+  <Image
+    src={src}
+    alt=""
+    width={size * 2}
+    height={size * 2}
+    loading="lazy"
+    decoding="async"
+    class="svc-art"
+    aria-hidden="true"
+  />
+) : (
+  <span class="svc-art svc-art-todo" data-art-slot={id} aria-hidden="true" title={`${id}.png`}>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"
+         stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="3" width="18" height="18" rx="4" stroke-dasharray="3 3"/>
+      <path d="M8 14.5 10.8 11.5 13 13.6 15.6 10.5 18 13"/>
+      <circle cx="9" cy="8.6" r="1.1" fill="currentColor" stroke="none"/>
+    </svg>
+  </span>
+)}

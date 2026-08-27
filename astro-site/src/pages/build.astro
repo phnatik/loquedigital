@@ -1,0 +1,177 @@
+---
+// /build — "Build your AI assistant". Phase 8, the assessment rung.
+//
+// The framing matters and is load-bearing: this is NOT an à la carte
+// configurator. ADR-W09 fixed the three plan prices and ADR-P03 bounds what
+// Custom Reserve includes, so a page that reads as "assemble your own bundle"
+// would invite exactly the negotiation those decisions exist to prevent.
+// What it does is the reverse — you pick what you need, and it tells you
+// which of three fixed plans already covers it.
+//
+// Tiers come from src/data/services.js, which transcribes the /plans matrix.
+// audit.py fails if the two ever disagree.
+import Base from '../layouts/Base.astro';
+import ServiceTile from '../components/ServiceTile.astro';
+import { groups, addons, allServices } from '../data/services.js';
+import { pricing, TERMS, addonPricing } from '../data/pricing.js';
+
+// Presets are cumulative, the way the plans are: Reserve includes everything
+// in Select, Custom Reserve includes everything. Counted from the data so the
+// numbers on the page cannot drift from what the buttons actually tick.
+const RANK = { select: 1, reserve: 2, custom: 3 };
+const PRESETS = [
+  { key: 'select',  name: 'Select',
+    line: 'Know what matters. The inbox sorted, scored and summarised, with a daily digest.' },
+  { key: 'reserve', name: 'Reserve',
+    line: 'Act on what matters. Everything in Select, plus drafting in your voice, scheduling, and the Handwritten Layer.' },
+  { key: 'custom',  name: 'Custom Reserve',
+    line: 'Nothing falls through. Everything in Reserve, plus a documented map of your operation and workflows built around it.' },
+].map((p) => ({
+  ...p,
+  count: allServices.filter((s) => RANK[s.tier] <= RANK[p.key]).length,
+}));
+
+---
+<Base
+  title="Build your AI assistant | Loque Agent"
+  description="Pick the work you want handled and see which plan covers it. Nothing here is priced à la carte — the three plans are fixed, and this shows you which one you actually need."
+  path="/build"
+>
+<div class="page-top">
+
+<section id="intro">
+  <div class="sec-head">
+    <div class="sec-tag reveal">Build your assistant</div>
+    <h1 class="sec-title reveal" style="transition-delay:.06s">Pick the work you want off your desk.</h1>
+    <p class="sec-sub reveal" style="transition-delay:.1s">
+      Tick what you want handled and we&rsquo;ll show you which of the three plans covers it.
+      Nothing is priced piece by piece &mdash; the plans are fixed, and this just tells you
+      which one you land in. Change your mind as often as you like; the answer updates as you go.
+    </p>
+  </div>
+</section>
+
+<section id="start" class="sec-light">
+  <div class="sec-head">
+    <div class="sec-tag reveal">Start here</div>
+    <h2 class="svc-group-title reveal" style="transition-delay:.06s">Start from a plan, then change anything.</h2>
+    <p class="sec-sub reveal" style="transition-delay:.1s">
+      Or skip this and just tick what you want below &mdash; these only save you the first few clicks.
+      Nothing is committed either way.
+    </p>
+  </div>
+  <div class="wrap">
+    <div class="preset-grid">
+      {PRESETS.map((p, i) => (
+        <article class="preset reveal" style={`transition-delay:${i * 0.06}s`} data-preset={p.key}>
+          <div class="preset-name">{p.name}</div>
+          <p class="preset-line">{p.line}</p>
+          <div class="preset-n">{p.count} services</div>
+          <button type="button" class="btn preset-btn" data-preset={p.key}>
+            Start with {p.name}
+          </button>
+        </article>
+      ))}
+    </div>
+    <label class="auto-toggle">
+      <input type="checkbox" id="autoDemo" checked />
+      <span class="at-box" aria-hidden="true">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5 6.5 11.5 12.5 5" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="at-txt">Walk me through the plan
+        <small>Ticks each service one at a time. Turn this off to fill the list instantly.</small>
+      </span>
+    </label>
+  </div>
+</section>
+
+<form id="builder" class="builder" novalidate>
+
+  {groups.map((g) => (
+    <section class="svc-group" id={`grp-${g.key}`}>
+      <div class="sec-head">
+        <div class="sec-tag reveal">{g.name}</div>
+        <h2 class="svc-group-title reveal" style="transition-delay:.06s">{g.lede}</h2>
+      </div>
+      <div class="wrap">
+        <div class="svc-grid">
+          {g.services.map((s, i) => (
+            <ServiceTile
+              id={s.id}
+              name={s.name}
+              short={s.short}
+              detail={s.detail}
+              note={s.note}
+              tier={s.tier}
+              delay={(i % 3) * 0.05}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="svc-group" id="grp-addons">
+    <div class="sec-head">
+      <div class="sec-tag reveal">Add-ons</div>
+      <h2 class="svc-group-title reveal" style="transition-delay:.06s">Priced on top of the plan, not inside it.</h2>
+      <p class="sec-sub reveal" style="transition-delay:.1s">
+        These sit alongside whichever plan you land in, so they don&rsquo;t change the answer below.
+        Tick them and we&rsquo;ll bring them to the call.
+      </p>
+    </div>
+    <div class="wrap">
+      <div class="svc-grid">
+        {addons.map((a, i) => (
+          <ServiceTile
+            id={a.id}
+            name={a.name}
+            subtitle={a.subtitle}
+            short={a.short}
+            detail={a.detail}
+            note={a.note}
+            exclusive={a.exclusive}
+            price={addonPricing[a.id]}
+            art={a.art}
+            group="addon"
+            delay={(i % 3) * 0.05}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</form>
+
+{/* Results. Populated by site.js; server-rendered empty state below. */}
+<section id="result" class="sec-light result">
+  <div class="sec-head">
+    <div class="sec-tag reveal">Your plan</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s" id="resultTitle">Nothing picked yet.</h2>
+    <p class="sec-sub reveal" style="transition-delay:.1s" id="resultLede">
+      Tick anything above and the plan that covers it appears here.
+    </p>
+  </div>
+  <div class="wrap">
+    <div class="result-grid" id="resultGrid" hidden
+         data-pricing={JSON.stringify(pricing)} data-terms={JSON.stringify(TERMS)}>
+      <div class="result-cols" id="resultCols"></div>
+      <aside class="result-side">
+        <div class="result-plan" id="resultPlan"></div>
+        <div class="result-price" id="resultPrice"></div>
+        <div class="result-why" id="resultWhy"></div>
+        <div class="result-actions">
+          <a href="#" class="btn btn-ghost result-email" id="resultEmail">Email me this plan</a>
+          <a href="/book" class="btn btn-primary result-cta" id="resultCta">Book a free consultation</a>
+        </div>
+        <p class="result-fine">
+          The first conversation is short and free, and nothing is committed by choosing here.
+          Emailing opens your own mail app with the summary already written &mdash; we don&rsquo;t see it.
+        </p>
+        <button type="button" class="result-clear" id="resultClear">Clear everything</button>
+      </aside>
+    </div>
+  </div>
+</section>
+
+</div>
+</Base>

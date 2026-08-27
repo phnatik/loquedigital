@@ -1,0 +1,157 @@
+---
+// /proof — the case studies, plus the part of the proof story that is real
+// today. The four case-study slots are data-placeholder and must be filled or
+// honestly relabelled before launch (ADR-W13, launch gates #11 and #13a).
+// Everything in the "how it's built" and "the run that failed" blocks is
+// verifiable from the delivery system's own record and carries no unearned
+// numbers — see WEBSITE_PROCESS.md §8.
+import Base from '../layouts/Base.astro';
+import ImageSlot from '../components/ImageSlot.astro';
+import PageCta from '../components/PageCta.astro';
+
+const slots = [
+  {
+    title: 'A legal practice',
+    body: 'What was drowning them, what we built, and what changed. Deadline escalation, matter-based filing and the conflict-check hold.',
+  },
+  {
+    title: 'A medical practice',
+    body: 'Referral intake, prior authorisation tracking and the PHI path, with what it did to days-in-AR and referral response time.',
+  },
+  {
+    title: 'A professional services firm',
+    body: 'Scope changes caught in the thread rather than at invoicing, and what that did to realisation over a quarter.',
+  },
+  {
+    title: 'An executive team',
+    body: 'Commitment and waiting-on tracking across a leadership group, and what stopped getting routed around the executive.',
+  },
+];
+
+const principles = [
+  {
+    n: '01',
+    h: 'Nothing is ever deleted',
+    p: 'The system labels and archives. It does not delete mail, and it does not move anything into spam. Every action it takes is reversible, and undoing an entire run is a single search.',
+  },
+  {
+    n: '02',
+    h: 'Every write is read back',
+    p: 'A connector returning “success” is not evidence that the change landed. Each write is read back from the mailbox itself before the message is marked processed. If the read-back disagrees, the message stays unprocessed and the next pass picks it up.',
+  },
+  {
+    n: '03',
+    h: 'Nothing sends under your name',
+    p: 'The system drafts, you approve, then it sends. There is no mode in which it decides on its own to answer a client or a partner. This is not a setting that is switched off — there is no setting.',
+  },
+  {
+    n: '04',
+    h: 'It fails toward doing nothing',
+    p: 'When something goes wrong the system stops rather than continues. Four failed attempts on a message and it parks it for a person instead of retrying forever. An authentication error aborts the whole run rather than half-processing your mailbox.',
+  },
+];
+
+// Two image tiles interleaved with the four principles, so the grid reads 2x3
+// with no row entirely made of type.
+const buildCells = [
+  principles[0],
+  { img: true, id: 'proof-rack',
+    brief: 'A server rack or patch panel photographed at an angle, low light. Nothing legible.',
+    tone: 'Cold and technical — the only machine-room frame on the site.' },
+  principles[1],
+  principles[2],
+  { img: true, id: 'proof-log',
+    brief: 'A monitor showing a scrolling log or dashboard, shot off-axis so it reads as activity rather than as data.',
+    tone: 'Same cold palette as the rack tile. No readable text.' },
+  principles[3],
+];
+---
+<Base
+  title="Proof — what we can show you, and what we can't | Loque Agent"
+  description="Case studies, the design principles that govern what this system can and cannot do to your mail, and an honest account of what we are not able to claim yet."
+  path="/proof"
+>
+<div class="page-top">
+
+<section id="intro">
+  <div class="sec-head">
+    <div class="sec-tag reveal">Proof</div>
+    <h1 class="sec-title reveal" style="transition-delay:.06s">What we can show you, and what we can&rsquo;t yet.</h1>
+    <p class="sec-sub reveal" style="transition-delay:.1s">We are early, and dressing that up would be the wrong first impression to make on someone deciding whether to let software touch their mail. So: here are the engagements, and here is the part you can evaluate today without taking anyone&rsquo;s word for it &mdash; how the system is built, and what it is structurally incapable of doing.</p>
+  </div>
+</section>
+
+<section id="cases">
+  <div class="wrap">
+    <div class="ph-grid">
+      {slots.map((s) => (
+        <div class="placeholder reveal" data-placeholder>
+          <div class="ph-tag">Placeholder — not for launch</div>
+          <h4>{s.title}</h4>
+          <p class="ph-body">{s.body}</p>
+          <p class="ph-note">Blocked on case-study rights (BLK-W07). Anonymous is acceptable in the interim. Launch gate #11.</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section id="built" class="sec-light">
+  <div class="sec-head">
+    <div class="sec-tag reveal">How it&rsquo;s built</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">Four things it cannot do to your mailbox.</h2>
+    <p class="sec-sub reveal" style="transition-delay:.1s">Not promises about how carefully we work. Properties of the design, which is a different and more useful kind of assurance.</p>
+  </div>
+  <div class="wrap">
+    <div class="build-grid">
+      {buildCells.map((c, i) => (
+        c.img ? (
+          <ImageSlot id={c.id} brief={c.brief} tone={c.tone} variant="tile" delay={(i % 2) * 0.06} />
+        ) : (
+          <article class="build reveal" style={`transition-delay:${(i % 2) * 0.06}s`}>
+            <h4><span class="k">{c.n}</span>{c.h}</h4>
+            <p>{c.p}</p>
+          </article>
+        )
+      ))}
+    </div>
+  </div>
+</section>
+
+<section id="incident">
+  <div class="sec-head">
+    <div class="sec-tag reveal">The useful part</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">The most useful thing we can tell you is about a run that failed.</h2>
+  </div>
+  <div class="wrap">
+    <div class="prob-grid">
+      <div class="reveal">
+        <p class="big">Early in the build, a run reported changes it had not actually made. <b>The connector returned success for work it never performed.</b></p>
+        <p class="body">We caught it because the design does not trust the system&rsquo;s own account of itself. The following run rebuilt its work list from the state of the mailbox rather than from what the previous run claimed, and everything reconciled. Nothing was lost, because nothing had been deleted &mdash; there was nothing to recover, only state to re-derive.</p>
+        <p class="body">That is the whole principle, and it is why we would rather show you this than a testimonial: <b>read back from the system of record, never from the writer&rsquo;s report.</b> Every vendor in this category will tell you their system is careful. Ask them what happens when a write silently doesn&rsquo;t land.</p>
+      </div>
+      <div class="alt-card reveal" style="transition-delay:.06s">
+        <div class="kicker">What we run it on</div>
+        <h4>Our own mail, first.</h4>
+        <p>Every rule on this page runs against our own inbox before it runs against a client&rsquo;s. That is where this failure was found.</p>
+        <ul class="alt-rows">
+          <li><span class="v">Reversible</span><span class="l">label and archive only, nothing deleted</span></li>
+          <li><span class="v">Verified</span><span class="l">every write read back before it commits</span></li>
+          <li><span class="v">Bounded</span><span class="l">four failures and it stops, rather than retrying blind</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cannot">
+  <div class="wrap">
+    <div class="drain-sum reveal" style="margin-top:80px">
+      <p><b>What we are not going to show you:</b> an hours-saved figure, an ROI calculation, or an accuracy percentage. We have not delivered enough engagements to state any of those honestly &mdash; and a vendor who quotes you one hasn&rsquo;t either. When the numbers are real, they will be on this page.</p>
+    </div>
+  </div>
+</section>
+
+</div>
+<PageCta line="Ask us the hard version of any of this on the first call." />
+</Base>

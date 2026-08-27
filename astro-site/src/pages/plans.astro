@@ -1,0 +1,223 @@
+---
+// Split out of the original index.html in Phase 1. Content is ported as-is;
+// only asset paths, cross-page links and the singular brand name changed.
+import Base from '../layouts/Base.astro';
+import ImageSlot from '../components/ImageSlot.astro';
+import PageCta from '../components/PageCta.astro';
+---
+<Base title="Plans — Select, Reserve and Custom Reserve | Loque Agent" description="Two productized plans and one custom build. Select sorts your inbox, Reserve does the work, Custom Reserve is designed around how your operation actually runs." path="/plans">
+<div class="page-top">
+
+<section id="plans">
+  <div class="sec-head">
+    <div class="sec-tag reveal">The three plans</div>
+    <h1 class="sec-title reveal" style="transition-delay:.06s">Three levels. One of them isn't a plan at all.</h1>
+    <p class="sec-sub reveal" style="transition-delay:.1s">Select and Reserve are productized — fast to deploy and consistent. Custom Reserve is a build, designed around how your operation actually runs.</p>
+  </div>
+  <div class="wrap">
+    <div class="plan-grid">
+
+      <article class="plan reveal">
+        <div class="pnum">PLAN ONE</div>
+        <h3>Select</h3>
+        <div class="job">Know what matters</div>
+        <div class="kind">High-end personalized solution</div>
+        <p class="blurb">Your inbox, sorted and prioritized. You open your email already knowing what needs you.</p>
+        <ul class="ticks">
+          <li>Classification and smart foldering</li>
+          <li>Spam, noise and newsletter suppression</li>
+          <li>Importance and urgency scoring</li>
+          <li>Daily priority digest</li>
+          <li>Unsubscribe hygiene</li>
+          <li>Protected focus blocks on your calendar</li>
+        </ul>
+        <div class="deploy">
+          <span class="dl">Deploys in</span>
+          <span class="dv">About 1 week</span>
+        </div>
+        <ul class="runrows">
+          <li><span>Onboarding</span><b>One session</b></li>
+          <li><span>Refinement</span><b>Monthly tuning</b></li>
+          <li><span>Support</span><b>Within 2 business days</b></li>
+          <li><span>Accounts</span><b>1 inbox</b></li>
+        </ul>
+        <div class="btn-wrap"><a href="/pricing" class="btn btn-ghost">See pricing</a></div>
+      </article>
+
+      <article class="plan featured reveal" style="transition-delay:.06s">
+        <div class="badge">Most chosen</div>
+        <div class="pnum">PLAN TWO</div>
+        <h3>Reserve</h3>
+        <div class="job">Act on what matters</div>
+        <div class="kind">Semi-custom / bespoke solution</div>
+        <p class="blurb">Everything in Select, plus the system starts doing the work instead of just organizing it.</p>
+        <ul class="ticks">
+          <li>Replies drafted in your actual voice, queued for one-click approval</li>
+          <li>VIP routing, so the people who matter never wait</li>
+          <li>Tasks pulled out of email automatically</li>
+          <li>Scheduling, rescheduling and conflict resolution handled</li>
+          <li>Meeting notes and summaries, with action items extracted and assigned</li>
+          <li>A monthly allowance of genuinely handwritten cards</li>
+        </ul>
+        <div class="deploy">
+          <span class="dl">Deploys in</span>
+          <span class="dv">2 to 3 weeks, staged</span>
+        </div>
+        <ul class="runrows">
+          <li><span>Onboarding</span><b>2–3 sessions plus voice training</b></li>
+          <li><span>Refinement</span><b>Every two weeks</b></li>
+          <li><span>Support</span><b>1 business day</b></li>
+          <li><span>Accounts</span><b>1 inbox, 1 calendar</b></li>
+        </ul>
+        <div class="btn-wrap"><a href="/pricing" class="btn btn-primary">See pricing</a></div>
+      </article>
+
+      <article class="plan reveal" style="transition-delay:.12s">
+        <div class="pnum">PLAN THREE</div>
+        <h3>Custom Reserve</h3>
+        <div class="job">So nothing falls through</div>
+        <div class="kind">Custom-built bespoke solution</div>
+        <p class="blurb">Not a bigger version of Reserve. It's a build — and it starts with a real discovery process.</p>
+        <ul class="ticks">
+          <li>Meeting prep briefs before every call, with full relationship context and open items</li>
+          <li>Calendar audit and time analysis</li>
+          <li>Commitment tracking, so everything you promised gets closed out</li>
+          <li>Waiting-on tracking, so everything others owe you gets chased</li>
+          <li>CRM sync</li>
+          <li>Vendor and subscription renewal tracking</li>
+        </ul>
+        <div class="deploy">
+          <span class="dl">Deploys in</span>
+          <span class="dv">4 to 8 weeks, staged</span>
+        </div>
+        <ul class="runrows">
+          <li><span>Onboarding</span><b>Full discovery, works with your assistant</b></li>
+          <li><span>Refinement</span><b>Weekly call</b></li>
+          <li><span>Support</span><b>Same day, priority</b></li>
+          <li><span>Accounts</span><b>Up to 2 inboxes, 2 calendars</b></li>
+        </ul>
+        <div class="btn-wrap"><a href="#custom" class="btn btn-ghost">What makes it custom</a></div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="custom">
+  <div class="sec-head">
+    <div class="sec-tag reveal">Custom Reserve</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">Then the part that makes it yours.</h2>
+  </div>
+  <div class="wrap">
+    <div class="build-grid">
+      <article class="build reveal">
+        <h4><span class="k">01</span>Custom escalation logic</h4>
+        <p>Not a generic urgency score. Rules built around what actually constitutes an emergency in your business — a filing deadline, a payer denial, a key client going quiet for eleven days, a specific name in a subject line.</p>
+      </article>
+      <article class="build reveal" style="transition-delay:.06s">
+        <h4><span class="k">02</span>Custom assignment and routing</h4>
+        <p>Who handles what, encoded. Which paralegal owns which matter type, which biller handles which payer, what goes to the office manager, what waits for the weekly review. Most things shouldn't reach you at all.</p>
+      </article>
+      <article class="build reveal">
+        <h4><span class="k">03</span>Custom process flows</h4>
+        <p>Multi-step workflows that mirror how your business actually moves work, start to finish. Intake through conflict check through engagement letter. Referral through insurance verification through pre-visit packet.</p>
+      </article>
+      <article class="build reveal" style="transition-delay:.06s">
+        <h4><span class="k">04</span>Custom analytics and reporting</h4>
+        <p>Built around the numbers you actually manage by — response time by client tier, matter activity aging, referral source performance, payer correspondence aging — delivered in the format and on the schedule you'll actually read.</p>
+      </article>
+    </div>
+    <div class="build-note reveal">
+      <p>Every Custom Reserve engagement starts with a real discovery process and produces <b>a documented map of how your operation currently works</b>. Most practices have never had one. It's useful before we automate a single thing.</p>
+    </div>
+  </div>
+</section>
+
+<ImageSlot
+  id="plans-build"
+  variant="band"
+  brief="A build in progress — index cards or sticky notes arranged in a sequence on a wall, some clearly rearranged. Reads as a system being designed for one business."
+  tone="Breaks the two comparison tables apart."
+/>
+
+
+<section id="compare" class="sec-light">
+  <div class="sec-head">
+    <div class="sec-tag reveal">At a glance</div>
+    <h2 class="sec-title reveal" style="transition-delay:.06s">What's in each plan.</h2>
+  </div>
+  <div class="wrap">
+    <div class="matrix-wrap reveal">
+      <div class="matrix-scroll">
+        <table class="matrix">
+          <thead>
+            <tr>
+              <th scope="col">Feature</th>
+              <th scope="col">Select<small>Know what matters</small></th>
+              <th scope="col" class="hi">Reserve<small>Act on what matters</small></th>
+              <th scope="col">Custom Reserve<small>Nothing falls through</small></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="grp"><td colspan="4">Email</td></tr>
+            <tr><td class="feat">Classification and smart foldering</td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Spam, noise and newsletter suppression</td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Importance and urgency scoring</td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Daily priority digest</td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Unsubscribe hygiene</td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">VIP routing and escalation</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Replies drafted in your voice</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Task extraction from email</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td></tr>
+
+            <tr class="grp"><td colspan="4">Calendar</td></tr>
+            <tr><td class="feat">Protected focus blocks</td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Scheduling and booking coordination</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Conflict resolution and rescheduling</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Meeting prep briefs</td><td class="val mno">—</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Calendar audit and time analysis</td><td class="val mno">—</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td></tr>
+
+            <tr class="grp"><td colspan="4">Meetings and follow-through</td></tr>
+            <tr><td class="feat">Meeting notes and summaries</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Action item extraction and assignment</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Commitment tracking</td><td class="val mno">—</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Waiting-on tracking</td><td class="val mno">—</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">CRM sync</td><td class="val mno">—</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Vendor and subscription renewal tracking</td><td class="val mno">—</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td></tr>
+
+            <tr class="grp"><td colspan="4">The Handwritten Layer</td></tr>
+            <tr><td class="feat">Handwritten cards included</td><td class="val mno">—</td><td class="val">10 / month</td><td class="val">20 / month</td></tr>
+            <tr><td class="feat">Handwritten letters included</td><td class="val mno">—</td><td class="val mno">—</td><td class="val">5 / month</td></tr>
+            <tr><td class="feat">Automatic post-meeting thank-you</td><td class="val mno">—</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Request address for custom sends</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td><td class="val"><i class="mdot"></i></td></tr>
+
+            <tr class="grp"><td colspan="4">Custom build</td></tr>
+            <tr><td class="feat">Documented workflow map</td><td class="val mno">—</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Custom escalation logic</td><td class="val mno">—</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Custom assignment and routing</td><td class="val mno">—</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Custom process flows</td><td class="val mno">—</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Custom analytics and reporting</td><td class="val mno">—</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td></tr>
+            <tr><td class="feat">Industry configuration</td><td class="val mno">—</td><td class="val mno">—</td><td class="val"><i class="mdot"></i></td></tr>
+
+            <tr class="grp"><td colspan="4">Service</td></tr>
+            <tr><td class="feat">Onboarding</td><td class="val">1 session</td><td class="val">2–3 sessions plus voice training</td><td class="val">Full discovery, works with your assistant</td></tr>
+            <tr><td class="feat">Refinement</td><td class="val">Monthly</td><td class="val">Every two weeks</td><td class="val">Weekly call</td></tr>
+            <tr><td class="feat">Support response</td><td class="val">2 business days</td><td class="val">1 business day</td><td class="val">Same day, priority</td></tr>
+            <tr><td class="feat">Accounts covered</td><td class="val">1 inbox</td><td class="val">1 inbox, 1 calendar</td><td class="val">Up to 2 inboxes, 2 calendars</td></tr>
+            <tr><td class="feat">Time to deploy</td><td class="val">About 1 week</td><td class="val">2–3 weeks, staged</td><td class="val">4–8 weeks, staged</td></tr>
+
+            <tr class="grp"><td colspan="4">Add-ons</td></tr>
+            <tr><td class="feat">Regulated Practice Layer</td><td class="val mno">—</td><td class="val">Available</td><td class="val">Available</td></tr>
+            <tr><td class="feat">Additional inbox or calendar</td><td class="val">Available</td><td class="val">Available</td><td class="val">Available</td></tr>
+            <tr><td class="feat">Travel coordination workflows</td><td class="val">Available</td><td class="val">Available</td><td class="val">Available</td></tr>
+            <tr><td class="feat">Additional custom development</td><td class="val mno">—</td><td class="val mno">—</td><td class="val">Available</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p class="matrix-hint">Scroll the table sideways to compare all three plans.</p>
+  </div>
+</section>
+
+</div>
+<PageCta line="Not sure which one fits? That's what the first call is for." />
+</Base>
