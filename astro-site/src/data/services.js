@@ -275,13 +275,41 @@ export const groups = [
 // Priced separately from the plan — never folded into the tier calculation,
 // because doing so would imply they are included in the plan price.
 export const addons = [
+  // One priced add-on (see /pricing), configured three ways. They are
+  // mutually exclusive in the UI, not merely presented as alternatives:
+  // ADR-P07 says ZDR and a HIPAA-ready BAA are never both and never a menu,
+  // and a BAA requires retaining data for a defined window, so ticking the
+  // legal and healthcare paths together would describe something we do not
+  // sell. site.js enforces the exclusivity via `exclusive`.
   {
-    id: 'addon-regulated',
-    name: 'Regulated Practice Layer',
+    id: 'addon-regulated-legal',
+    name: 'Regulated Practice Layer — Legal',
     minTier: 'reserve',
-    short: 'ZDR or a HIPAA-ready BAA, on Reserve and above.',
-    detail: 'Zero data retention, or a signed business associate agreement for practices handling PHI. These are alternatives, not a menu — you take one path or the other.',
-    art: 'addon-regulated',
+    exclusive: 'rpl',
+    short: 'Zero data retention, for privileged material.',
+    detail: 'Nothing is retained once it has been processed — zero data retention, documented end to end. The path most firms take, because privilege makes retention the exposure rather than access.',
+    note: 'One add-on, priced once — see /pricing',
+    art: 'addon-regulated-legal',
+  },
+  {
+    id: 'addon-regulated-health',
+    name: 'Regulated Practice Layer — Healthcare / HIPAA',
+    minTier: 'reserve',
+    exclusive: 'rpl',
+    short: 'A signed BAA before anything touches PHI.',
+    detail: 'A HIPAA-ready business associate agreement executed first, with retention, deletion and encryption rules documented per data type. A BAA requires retaining data for a defined window, so this and zero data retention aren\u2019t combinable — practices handling PHI take this one instead.',
+    note: 'One add-on, priced once — see /pricing',
+    art: 'addon-regulated-health',
+  },
+  {
+    id: 'addon-regulated-prof',
+    name: 'Regulated Practice Layer — Professional services',
+    minTier: 'reserve',
+    exclusive: 'rpl',
+    short: 'Zero data retention, for client security reviews.',
+    detail: 'Zero data retention, documented end to end — which is what a client\u2019s IT team is actually asking for in the security questionnaire that arrives before you can be onboarded.',
+    note: 'One add-on, priced once — see /pricing',
+    art: 'addon-regulated-prof',
   },
   {
     id: 'addon-accounts',

@@ -506,7 +506,20 @@
     b.addEventListener('click', function () { applyPreset(b.dataset.preset); });
   });
 
-  form.addEventListener('change', render);
+  // Some add-ons are alternatives rather than a menu. The three Regulated
+  // Practice Layer paths are the case that matters: a HIPAA-ready BAA
+  // requires retaining data for a defined window, so it cannot coexist with
+  // zero data retention (ADR-P07). Presenting them as alternatives is not
+  // enough if the UI lets you tick two, so ticking one clears its siblings.
+  form.addEventListener('change', function (e) {
+    var t = e.target;
+    if (t && t.checked && t.dataset.exclusive) {
+      inputs().forEach(function (i) {
+        if (i !== t && i.dataset.exclusive === t.dataset.exclusive) i.checked = false;
+      });
+    }
+    render();
+  });
 
   document.addEventListener('click', function (e) {
     var drop = e.target.closest('[data-drop]');

@@ -18,6 +18,7 @@ const {
   id, name, short, detail, note = '',
   tier = '',        // '' for add-ons, which never move the plan
   art = null,
+  exclusive = '',
   group = 'service',
   delay = 0,
 } = Astro.props;
@@ -32,6 +33,7 @@ const badgeKey = tier || 'addon';
     value={id}
     data-tier={tier}
     data-name={name}
+    data-exclusive={exclusive || undefined}
   />
   <span class="svc-flip">
 
