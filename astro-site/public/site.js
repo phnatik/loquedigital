@@ -407,7 +407,8 @@
 
     cols.innerHTML = ['select', 'reserve', 'custom'].map(function (t) {
       if (!byTier[t].length) return '';
-      return '<div class="result-col"><h4>' + LABEL[t] + ' &mdash; ' + byTier[t].length + '</h4><ul>' +
+      return '<div class="result-col"><h4><span class="rc-name">' + LABEL[t] +
+        '</span><span class="rc-n">' + byTier[t].length + '</span></h4><ul>' +
         byTier[t].map(function (i) {
           return '<li><b>' + esc(i.dataset.name) + '</b>' +
                  '<button type="button" class="result-drop" data-drop="' + i.value +
@@ -509,8 +510,9 @@
   function pad(s, n) { s = String(s); while (s.length < n) s += ' '; return s; }
 
   function addonCol(add) {
-    return '<div class="result-col"><h4>Add-ons &mdash; ' + add.length +
-      ' <span style="text-transform:none;letter-spacing:0;font-weight:400">(priced separately)</span></h4><ul>' +
+    return '<div class="result-col"><h4><span class="rc-name">Add-ons' +
+      '<small>priced separately</small></span>' +
+      '<span class="rc-n">' + add.length + '</span></h4><ul>' +
       add.map(function (i) {
         return '<li><b>' + esc(i.dataset.name) + '</b>' +
                '<button type="button" class="result-drop" data-drop="' + i.value +
