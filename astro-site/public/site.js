@@ -380,6 +380,8 @@
 
     save(all);
 
+    markPresets();
+
     if (!svc.length && !add.length) {
       grid.hidden = true;
       title.textContent = 'Nothing picked yet.';
@@ -473,6 +475,36 @@
       inputs().forEach(function (i) { if (ids.indexOf(i.value) > -1) i.checked = true; });
     } catch (e) { /* corrupt value — ignore and start clean */ }
   }
+
+  // --- presets -------------------------------------------------------
+  // Cumulative, matching how the plans nest: Reserve ticks everything in
+  // Select too. Add-ons are deliberately untouched — they are priced on top
+  // of a plan, so a plan preset has nothing to say about them.
+  var presets = Array.prototype.slice.call(document.querySelectorAll('.preset-btn'));
+
+  function applyPreset(key) {
+    inputs().forEach(function (i) {
+      if (i.name !== 'service') return;
+      i.checked = RANK[i.dataset.tier] <= RANK[key];
+    });
+    render();
+  }
+
+  function markPresets() {
+    var on = picked().filter(function (i) { return i.name === 'service'; })
+                     .map(function (i) { return i.value; }).sort().join('|');
+    document.querySelectorAll('.preset').forEach(function (card) {
+      var key = card.dataset.preset;
+      var want = inputs().filter(function (i) {
+        return i.name === 'service' && RANK[i.dataset.tier] <= RANK[key];
+      }).map(function (i) { return i.value; }).sort().join('|');
+      card.classList.toggle('is-on', on !== '' && on === want);
+    });
+  }
+
+  presets.forEach(function (b) {
+    b.addEventListener('click', function () { applyPreset(b.dataset.preset); });
+  });
 
   form.addEventListener('change', render);
 

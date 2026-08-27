@@ -1523,3 +1523,25 @@
     .build-bar.in{transform:translateY(0)}
     .build-bar .bb-p{display:none}
   }
+
+  /* ---------- /build presets ---------- */
+  .preset-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:38px}
+  @media(max-width:900px){ .preset-grid{grid-template-columns:1fr} }
+  .preset{
+    background:var(--ink-card);border:1px solid var(--line);border-radius:18px;
+    padding:26px 24px 24px;display:flex;flex-direction:column;
+    transition:border-color .25s var(--ease);
+  }
+  .preset-name{font-family:"Outfit";font-weight:800;font-size:23px;letter-spacing:-.025em}
+  .preset-line{margin-top:10px;font-size:15px;line-height:1.5;color:var(--muted)}
+  .preset-n{
+    margin-top:14px;font-size:11.5px;font-weight:700;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--accent-dim);
+  }
+  .preset-btn{margin-top:20px;width:100%;text-align:center;background:none;
+    border:1px solid var(--line);color:var(--paper);cursor:pointer}
+  .preset-btn:hover{border-color:var(--accent);color:var(--accent)}
+  /* Marked only while the ticks match the preset exactly, so it stops
+     claiming to describe the selection the moment you change one. */
+  .preset.is-on{border-color:var(--accent)}
+  .preset.is-on .preset-btn{background:var(--accent);border-color:var(--accent);color:#10100c}

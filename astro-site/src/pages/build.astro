@@ -12,7 +12,23 @@
 // audit.py fails if the two ever disagree.
 import Base from '../layouts/Base.astro';
 import ServiceTile from '../components/ServiceTile.astro';
-import { groups, addons } from '../data/services.js';
+import { groups, addons, allServices } from '../data/services.js';
+
+// Presets are cumulative, the way the plans are: Reserve includes everything
+// in Select, Custom Reserve includes everything. Counted from the data so the
+// numbers on the page cannot drift from what the buttons actually tick.
+const RANK = { select: 1, reserve: 2, custom: 3 };
+const PRESETS = [
+  { key: 'select',  name: 'Select',
+    line: 'Know what matters. The inbox sorted, scored and summarised, with a daily digest.' },
+  { key: 'reserve', name: 'Reserve',
+    line: 'Act on what matters. Everything in Select, plus drafting in your voice, scheduling, and the Handwritten Layer.' },
+  { key: 'custom',  name: 'Custom Reserve',
+    line: 'Nothing falls through. Everything in Reserve, plus a documented map of your operation and workflows built around it.' },
+].map((p) => ({
+  ...p,
+  count: allServices.filter((s) => RANK[s.tier] <= RANK[p.key]).length,
+}));
 
 ---
 <Base
@@ -31,6 +47,31 @@ import { groups, addons } from '../data/services.js';
       Nothing is priced piece by piece &mdash; the plans are fixed, and this just tells you
       which one you land in. Change your mind as often as you like; the answer updates as you go.
     </p>
+  </div>
+</section>
+
+<section id="start">
+  <div class="sec-head">
+    <div class="sec-tag reveal">Start here</div>
+    <h2 class="svc-group-title reveal" style="transition-delay:.06s">Start from a plan, then change anything.</h2>
+    <p class="sec-sub reveal" style="transition-delay:.1s">
+      Or skip this and just tick what you want below &mdash; these only save you the first few clicks.
+      Nothing is committed either way.
+    </p>
+  </div>
+  <div class="wrap">
+    <div class="preset-grid">
+      {PRESETS.map((p, i) => (
+        <article class="preset reveal" style={`transition-delay:${i * 0.06}s`} data-preset={p.key}>
+          <div class="preset-name">{p.name}</div>
+          <p class="preset-line">{p.line}</p>
+          <div class="preset-n">{p.count} services</div>
+          <button type="button" class="btn preset-btn" data-preset={p.key}>
+            Start with {p.name}
+          </button>
+        </article>
+      ))}
+    </div>
   </div>
 </section>
 
