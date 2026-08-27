@@ -87,7 +87,9 @@ for f in pages:
         add("gate15", f"{n}: og:image missing or wrong")
     h1s = re.findall(r'<h1[^>]*>', s)
     if len(h1s) != 1: add("a11y", f"{n}: {len(h1s)} <h1> elements")
-    for m in re.finditer(r'<img (?![^>]*\balt=)[^>]*>', s):
+    # `alt` with no value is valid HTML and means the same as alt="" — Astro
+    # emits the bare form. Decorative images use it deliberately, so accept it.
+    for m in re.finditer(r'<img (?![^>]*\balt(?:=|[\s>]))[^>]*>', s):
         add("a11y", f"{n}: <img> without alt — {m.group(0)[:70]}")
 for t, ns in titles.items():
     if len(ns) > 1: add("seo", f"duplicate title across {ns}: {t[:60]}")

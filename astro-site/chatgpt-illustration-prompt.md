@@ -73,6 +73,12 @@ Reply "ready" and I'll send the first.
 the sheet. Everything after it is matched to it, so if it isn't right, fix it
 before going on — otherwise 32 icons inherit the problem.
 
+**On "readable at 46 pixels".** The tiles now render the icons at 138px, not 46.
+The line in the spec is deliberately left alone anyway: it is what keeps them to
+three or four shapes, and the first ten were drawn under it. Loosening it now
+would make the remaining twenty busier than the ten already done, which is worse
+than either level of detail applied consistently. Keep the spec as written.
+
 **The three that fight back.** Calendar grids attract date numerals, clock faces
 attract hour numbers, and anything with "notes" or "script" attracts real
 lettering. `cal-focus`, `cal-audit`, `hw-cards` and `email-digest` carry notes

@@ -10,7 +10,7 @@ import { Image } from 'astro:assets';
 
 const art = import.meta.glob('../assets/svc/*.png', { eager: true });
 
-const { id, label = '', size = 64 } = Astro.props;
+const { id, label = '', size = 138 } = Astro.props;
 const mod = art[`../assets/svc/${id}.png`];
 const src = mod?.default;
 ---
