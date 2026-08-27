@@ -175,6 +175,75 @@
     run();
   })();
 
+  // ---------------------------------------------------------------------
+  // form instrumentation — WEBSITE_PROCESS.md Phase 9, ADR-W08.
+  // Every form carries where the visitor entered, which vertical page they
+  // are on, where they came from, and which rung of the ladder they reached.
+  // Filled at load rather than at submit, so it does not depend on listener
+  // order with the AJAX handler below.
+  // ---------------------------------------------------------------------
+  function loqueSession(){
+    var s = {};
+    try {
+      var q = new URLSearchParams(location.search);
+      var src = q.get('src') || q.get('utm_source') || '';
+      if (!src && document.referrer) {
+        try {
+          var h = new URL(document.referrer).hostname;
+          src = (h && h !== location.hostname) ? h : '';
+        } catch (e) {}
+      }
+      s.source = sessionStorage.getItem('loque_source') || src || 'direct';
+      s.landed = sessionStorage.getItem('loque_landed') || location.pathname;
+      s.campaign = sessionStorage.getItem('loque_campaign') || q.get('utm_campaign') || '';
+      var bodyVert = document.body && document.body.getAttribute('data-vertical');
+      if (bodyVert) sessionStorage.setItem('loque_vertical', bodyVert);
+      s.vertical = bodyVert || sessionStorage.getItem('loque_vertical') || '';
+      sessionStorage.setItem('loque_source', s.source);
+      sessionStorage.setItem('loque_landed', s.landed);
+      if (s.campaign) sessionStorage.setItem('loque_campaign', s.campaign);
+    } catch (e) {
+      // private mode, blocked storage — fall back to this pageview only
+      s.source = s.source || 'direct';
+      s.landed = s.landed || location.pathname;
+      s.campaign = s.campaign || '';
+      s.vertical = (document.body && document.body.getAttribute('data-vertical')) || '';
+    }
+    return s;
+  }
+
+  window.loqueFormMeta = function (form) {
+    var s = loqueSession();
+    var body = document.body;
+    var existing = form.querySelector('input[name="vertical"]');
+    return {
+      page: (body && body.getAttribute('data-page')) || location.pathname,
+      vertical: (existing && existing.value) || s.vertical ||
+                (body && body.getAttribute('data-vertical')) || '',
+      source: s.source,
+      landed_on: s.landed,
+      campaign: s.campaign,
+      rung: form.classList.contains('magnet-req') ? 'resource' : 'call'
+    };
+  };
+
+  (function stampForms(){
+    document.querySelectorAll('form[data-ajax]').forEach(function (form) {
+      var meta = window.loqueFormMeta(form);
+      Object.keys(meta).forEach(function (k) {
+        if (!meta[k]) return;
+        var input = form.querySelector('input[name="' + k + '"]');
+        if (!input) {
+          input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = k;
+          form.appendChild(input);
+        }
+        input.value = meta[k];
+      });
+    });
+  })();
+
   // forms — Web3Forms AJAX submit with inline status.
   // Binds every form[data-ajax], so the contact form and the lead-magnet
   // forms on the vertical pages all behave the same way.
@@ -202,10 +271,19 @@
           const data = await res.json();
           if (res.ok && data.success){
             if (status){ status.textContent = done; status.className = 'form-status ok show'; }
+            var m = window.loqueFormMeta ? window.loqueFormMeta(form) : {};
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+              event: 'loque_form_submit',
+              form_rung: m.rung, form_vertical: m.vertical,
+              form_page: m.page, form_source: m.source, form_landed_on: m.landed_on
+            });
             form.reset();
           } else if (status) {
             status.textContent = data.message || 'Something went wrong. Please email questions@loquelogic.com.';
             status.className = 'form-status err show';
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({ event: 'loque_form_error', form_page: location.pathname });
           }
         } catch (err) {
           if (status){

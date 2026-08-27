@@ -1,0 +1,12 @@
+---
+// Every split page ends with one primary ask (ADR-W08).
+const { line = 'The first conversation is short and free.' } = Astro.props;
+---
+<section class="page-cta">
+  <div class="wrap">
+    <div class="page-cta-box reveal">
+      <p>{line}</p>
+      <a href="/book" class="btn btn-primary">Book a call</a>
+    </div>
+  </div>
+</section>
