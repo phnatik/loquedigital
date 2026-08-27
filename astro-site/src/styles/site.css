@@ -1391,7 +1391,7 @@
   }
   .svc-check svg{width:15px;height:15px}
   .svc-tile:has(input:checked) .svc-check{
-    background:var(--paper);border-color:var(--paper);color:var(--ink);
+    background:var(--accent);border-color:var(--accent);color:#10100c;
   }
 
   /* front — art centred in the space above the title */
