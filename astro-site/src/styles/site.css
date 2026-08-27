@@ -9,6 +9,11 @@
     --text-strong:#d6d5cf;   /* emphasis inside body copy */
     --accent:#d2ff4d;
     --accent-dim:#a9cf3c;
+    /* Selection state. Deliberately NOT the brand accent: lime is already the
+       title, the icon accent and the brand, so a lime tick reads as more of
+       the same rather than as "chosen". */
+    --select:#5ad1e8;
+    --select-ink:#06181c;
     --maxw:1180px;
     --ease:cubic-bezier(.2,.7,.2,1);
   }
@@ -1298,6 +1303,8 @@
     --accent-dim:#7f9c1f;
     --text:#50504a;
     --text-strong:#262621;
+    --select:#0f7f96;      /* #5ad1e8 fails contrast on paper */
+    --select-ink:#fffefa;
 
     background:var(--ink);
     color:var(--paper);
@@ -1376,7 +1383,7 @@
 
   .svc-tile:focus-within .svc-face{outline:2px solid var(--accent);outline-offset:3px}
   .svc-tile:has(input:checked) .svc-face{
-    border-color:var(--accent);background:rgba(210,255,77,.05);
+    border-color:var(--select);background:rgba(90,209,232,.06);
   }
 
   .svc-check{
@@ -1386,7 +1393,7 @@
   }
   .svc-check svg{width:15px;height:15px}
   .svc-tile:has(input:checked) .svc-check{
-    background:var(--accent);border-color:var(--accent);color:#10100c;
+    background:var(--select);border-color:var(--select);color:var(--select-ink);
   }
 
   /* front — art centred in the space above the title */
