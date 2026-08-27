@@ -112,6 +112,11 @@ def png_pixels(path):
 def lime_fraction(path):
     """Share of opaque pixels that are the acid-lime accent.
 
+    The ceiling is deliberately loose. A gear, a shield's cross or a lightning
+    bolt is a physically large shape, so "one element" can legitimately be a
+    third of the opaque pixels — an earlier 30% ceiling flagged eight good
+    icons and one bad one, which is a check nobody would keep reading.
+
     Counts fully opaque pixels only. Anti-aliased edges between off-white
     linework and transparency drift through intermediate hues and will read as
     lime if you let them in — which is how a first pass at this reported an
@@ -170,9 +175,9 @@ for flow in FLOWS:
             elif frac < 0.002:
                 warn.append(f"{clean}: NO LIME ACCENT — every opaque pixel is the "
                             f"linework colour; the brief asks for one lime element")
-            elif frac > 0.30:
-                warn.append(f"{clean}: {frac:.0%} lime — the accent should be one "
-                            f"element, not the whole icon")
+            elif frac > 0.60:
+                warn.append(f"{clean}: {frac:.0%} lime — the accent has taken over "
+                            f"the icon rather than marking one element")
         if flow["alpha"] and info.get("hasAlpha") != "yes":
             warn.append(f"{clean}: NO ALPHA CHANNEL — will render as a solid "
                         f"block on the tile; regenerate with a transparent background")
