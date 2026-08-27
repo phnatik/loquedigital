@@ -9,6 +9,7 @@
     --text-strong:#d6d5cf;   /* emphasis inside body copy */
     --accent:#d2ff4d;
     --accent-dim:#a9cf3c;
+    --danger:#e0523c;        /* removal — the only destructive action on /build */
     --maxw:1180px;
     --ease:cubic-bezier(.2,.7,.2,1);
   }
@@ -1298,6 +1299,7 @@
     --accent-dim:#7f9c1f;
     --text:#50504a;
     --text-strong:#262621;
+    --danger:#b8341f;        /* #e0523c is too light on paper */
 
     background:var(--ink);
     color:var(--paper);
@@ -1517,12 +1519,18 @@
     border-bottom:1px solid rgba(20,20,16,.07);
   }
   .result-col li b{font-weight:500;flex:1}
+  /* The cross is red at rest so removal is legible without hunting; the whole
+     circle fills on hover so the target you are about to hit is unambiguous. */
   .result-drop{
     flex:none;width:24px;height:24px;border-radius:50%;border:1px solid var(--line);
-    background:none;color:var(--muted);cursor:pointer;font-size:15px;line-height:1;
-    transition:border-color .2s,color .2s,background .2s;
+    background:none;color:var(--danger);cursor:pointer;
+    font-size:15px;line-height:1;font-weight:700;
+    transition:border-color .18s,color .18s,background .18s;
   }
-  .result-drop:hover{border-color:#b9351f;color:#b9351f;background:rgba(185,53,31,.06)}
+  .result-drop:hover,
+  .result-drop:focus-visible{
+    background:var(--danger);border-color:var(--danger);color:#fffefa;
+  }
 
   .result-side{
     position:sticky;top:92px;
