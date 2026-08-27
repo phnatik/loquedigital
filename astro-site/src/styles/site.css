@@ -1657,3 +1657,9 @@
     display:block;font-family:"Outfit",sans-serif;font-weight:700;
     font-size:15.5px;letter-spacing:-.01em;text-transform:none;color:var(--accent);
   }
+
+  /* While a preset is ticking its way down the page, the tiles are moving
+     under a stationary pointer. Hovering would flip whatever slid beneath it
+     and a click would land on a card the reader never chose. */
+  body.is-cascading .svc-tile{pointer-events:none}
+  body.is-cascading .svc-tile .svc-flip{transform:none !important}

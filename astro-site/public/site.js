@@ -584,11 +584,18 @@
 
     var reduced = window.matchMedia &&
                   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var home = document.getElementById('start');
+    // Back to the top of the service list, not to the presets — the presets
+    // are where the click happened, so returning there looks like nothing.
+    var home = document.getElementById('grp-email');
 
     if (reduced || !pending.length) {
+      // Nothing to add happens whenever you step DOWN a tier: every box the
+      // smaller plan wants is already ticked. The change is real but it all
+      // happens below the fold, which is why this read as "nothing happens".
+      // Still take them to the list so the change is witnessed.
       pending.forEach(function (i) { i.checked = true; });
       render();
+      if (home && !reduced) home.scrollIntoView({ behavior: 'smooth', block: 'start' });
       return;
     }
 
@@ -597,6 +604,9 @@
     var root = document.documentElement;
     var prevBehavior = root.style.scrollBehavior;
     root.style.scrollBehavior = 'auto';
+    // No flipping on hover while the page scrolls itself past the pointer,
+    // and no accidental clicks on a tile sliding under the cursor.
+    document.body.classList.add('is-cascading');
 
     var TICK = 500;                // ms between boxes — two a second, one at a time
     var idx = 0;
@@ -614,6 +624,7 @@
       pending.forEach(function (i) { i.checked = true; });
       render();
       root.style.scrollBehavior = prevBehavior;
+      document.body.classList.remove('is-cascading');
       if (!interrupted && home) {
         // back to where the button was clicked, so the list is ready to adjust
         setTimeout(function () {
