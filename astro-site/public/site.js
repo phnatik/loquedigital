@@ -616,6 +616,10 @@
     document.body.classList.add('is-cascading');
 
     var TICK = 650;                // ms between boxes — about 1.5 a second
+    // The first tiles of the email group are already just below the presets,
+    // so without a head start they satisfy the on-screen gate and tick while
+    // the page is still travelling — by the time you arrive they are done.
+    var LEAD = 500;
     var idx = 0;
     var t0 = Date.now();
     var interrupted = false;
@@ -643,7 +647,9 @@
     var lastTick = Date.now();
 
     function frame() {
-      if (idx < pending.length) {
+      var leading = Date.now() - t0 < LEAD;
+
+      if (idx < pending.length && !leading) {
         var el = pending[idx].closest('.svc-tile');
         var r = el.getBoundingClientRect();
         var onScreen = r.top < window.innerHeight * 0.92 && r.bottom > 0;
@@ -671,8 +677,19 @@
         }
       }
 
-      if (idx >= pending.length) finish();
+      if (leading && !interrupted && idx < pending.length) {
+        var lead = pending[idx].closest('.svc-tile');
+        var lt = lead.getBoundingClientRect().top + window.scrollY
+               - window.innerHeight * 0.45;
+        var ly = window.scrollY;
+        var lstep = (lt - ly) * 0.042;
+        if (Math.abs(lstep) > 0.5) window.scrollTo(0, ly + lstep);
+      }
+
+      if (idx >= pending.length && !leading) finish();
     }
+    // the beat starts counting from the end of the lead-in, not the click
+    lastTick = Date.now() + LEAD;
     cascadeTimer = setInterval(frame, 16);
   }
 
