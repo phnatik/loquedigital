@@ -1,0 +1,59 @@
+---
+// A flip tile for /build. Front: the illustration, large and centred, with the
+// title beneath it. Back: what the service actually does. Hover or keyboard
+// focus turns the card over.
+//
+// The whole tile is a <label> around a real checkbox, so a click anywhere on
+// either face selects — which is why the tick indicator is drawn on both.
+//
+// Touch has no hover, and a tap cannot both turn the card over and select it
+// without one of the two feeling broken. So on touch the card does not flip at
+// all: the two faces un-stack into one taller card with the description already
+// visible, and a tap just selects. See the (hover: none) block in site.css.
+import ServiceArt from './ServiceArt.astro';
+
+const TIER_LABEL = { select: 'Select', reserve: 'Reserve', custom: 'Custom Reserve' };
+
+const {
+  id, name, short, detail, note = '',
+  tier = '',        // '' for add-ons, which never move the plan
+  art = null,
+  group = 'service',
+  delay = 0,
+} = Astro.props;
+
+const badge = tier ? TIER_LABEL[tier] : 'Add-on';
+const badgeKey = tier || 'addon';
+---
+<label class={`svc-tile${tier ? '' : ' is-addon'} reveal`} style={`transition-delay:${delay}s`} data-tier={tier}>
+  <input
+    type="checkbox"
+    name={group === 'addon' ? 'addon' : 'service'}
+    value={id}
+    data-tier={tier}
+    data-name={name}
+  />
+  <span class="svc-flip">
+
+    <span class="svc-face svc-front">
+      <span class="svc-check" aria-hidden="true">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5 6.5 11.5 12.5 5" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="svc-artwrap"><ServiceArt id={art || id} label={name} /></span>
+      <span class="svc-name">{name}</span>
+      <span class="svc-tier" data-t={badgeKey}>{badge}</span>
+    </span>
+
+    <span class="svc-face svc-back">
+      <span class="svc-check" aria-hidden="true">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5 6.5 11.5 12.5 5" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="svc-back-name">{name}</span>
+      <span class="svc-short">{short}</span>
+      <span class="svc-detail">{detail}</span>
+      {note && <span class="svc-note">{note}</span>}
+      <span class="svc-tier" data-t={badgeKey}>{badge}</span>
+    </span>
+
+  </span>
+</label>

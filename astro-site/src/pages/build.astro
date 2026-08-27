@@ -11,10 +11,9 @@
 // Tiers come from src/data/services.js, which transcribes the /plans matrix.
 // audit.py fails if the two ever disagree.
 import Base from '../layouts/Base.astro';
-import ServiceArt from '../components/ServiceArt.astro';
+import ServiceTile from '../components/ServiceTile.astro';
 import { groups, addons } from '../data/services.js';
 
-const TIER_LABEL = { select: 'Select', reserve: 'Reserve', custom: 'Custom Reserve' };
 ---
 <Base
   title="Build your AI assistant | Loque Agent"
@@ -46,18 +45,15 @@ const TIER_LABEL = { select: 'Select', reserve: 'Reserve', custom: 'Custom Reser
       <div class="wrap">
         <div class="svc-grid">
           {g.services.map((s, i) => (
-            <label class="svc-tile reveal" style={`transition-delay:${(i % 3) * 0.05}s`} data-tier={s.tier}>
-              <input type="checkbox" name="service" value={s.id} data-tier={s.tier} data-name={s.name} />
-              <span class="svc-check" aria-hidden="true">
-                <svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5 6.5 11.5 12.5 5" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-              <ServiceArt id={s.id} label={s.name} />
-              <span class="svc-name">{s.name}</span>
-              <span class="svc-short">{s.short}</span>
-              <span class="svc-detail">{s.detail}</span>
-              {s.note && <span class="svc-note">{s.note}</span>}
-              <span class="svc-tier" data-t={s.tier}>{TIER_LABEL[s.tier]}</span>
-            </label>
+            <ServiceTile
+              id={s.id}
+              name={s.name}
+              short={s.short}
+              detail={s.detail}
+              note={s.note}
+              tier={s.tier}
+              delay={(i % 3) * 0.05}
+            />
           ))}
         </div>
       </div>
@@ -76,17 +72,15 @@ const TIER_LABEL = { select: 'Select', reserve: 'Reserve', custom: 'Custom Reser
     <div class="wrap">
       <div class="svc-grid">
         {addons.map((a, i) => (
-          <label class="svc-tile is-addon reveal" style={`transition-delay:${(i % 3) * 0.05}s`}>
-            <input type="checkbox" name="addon" value={a.id} data-name={a.name} />
-            <span class="svc-check" aria-hidden="true">
-              <svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5 6.5 11.5 12.5 5" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            <ServiceArt id={a.art} label={a.name} />
-            <span class="svc-name">{a.name}</span>
-            <span class="svc-short">{a.short}</span>
-            <span class="svc-detail">{a.detail}</span>
-            <span class="svc-tier" data-t="addon">Add-on</span>
-          </label>
+          <ServiceTile
+            id={a.id}
+            name={a.name}
+            short={a.short}
+            detail={a.detail}
+            art={a.art}
+            group="addon"
+            delay={(i % 3) * 0.05}
+          />
         ))}
       </div>
     </div>

@@ -373,15 +373,6 @@
     return inputs().filter(function (i) { return i.checked; });
   }
 
-  // Tap opens the explanation on touch, where :hover never fires. The label
-  // still toggles the checkbox — this only adds the disclosure.
-  if (window.matchMedia && window.matchMedia('(hover: none)').matches) {
-    form.addEventListener('click', function (e) {
-      var tile = e.target.closest('.svc-tile');
-      if (tile) tile.classList.add('is-open');
-    });
-  }
-
   function render() {
     var all = picked();
     var svc = all.filter(function (i) { return i.name === 'service'; });
