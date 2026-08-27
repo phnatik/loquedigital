@@ -552,12 +552,108 @@
   // of a plan, so a plan preset has nothing to say about them.
   var presets = Array.prototype.slice.call(document.querySelectorAll('.preset-btn'));
 
+  // Applying a preset ticks a lot of boxes at once. Doing it instantly, or
+  // jumping straight to the total at the bottom, throws away the one moment
+  // where the amount of work being handed over is visible. So the page walks
+  // down through the tiles and each one ticks as it comes into view.
+  //
+  // The scroll targets the LAST TILE rather than the results panel: the panel
+  // grows as boxes are ticked, so scrolling to it would chase a moving target.
+  // The panel is rendered once at the end, then scrolled to.
+  // Driven by a timer rather than requestAnimationFrame: rAF is suspended in
+  // a background tab, which would strand the cascade half-ticked if someone
+  // clicked a preset and switched away.
+  var cascadeTimer = null;
+
+  function stopCascade() {
+    if (cascadeTimer) { clearInterval(cascadeTimer); cascadeTimer = null; }
+  }
+
   function applyPreset(key) {
-    inputs().forEach(function (i) {
-      if (i.name !== 'service') return;
-      i.checked = RANK[i.dataset.tier] <= RANK[key];
+    stopCascade();
+
+    var svc = inputs().filter(function (i) { return i.name === 'service'; });
+    // anything above the preset comes off immediately — removals are not
+    // something to dramatise
+    svc.forEach(function (i) {
+      if (RANK[i.dataset.tier] > RANK[key]) i.checked = false;
     });
-    render();
+
+    var pending = svc.filter(function (i) {
+      return RANK[i.dataset.tier] <= RANK[key] && !i.checked;
+    });
+
+    var reduced = window.matchMedia &&
+                  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reduced || !pending.length) {
+      pending.forEach(function (i) { i.checked = true; });
+      render();
+      if (pending.length) {
+        document.getElementById('result')
+          .scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+      }
+      return;
+    }
+
+    var startY = window.scrollY;
+    var lastTile = pending[pending.length - 1].closest('.svc-tile');
+    var endY = Math.max(startY,
+      lastTile.getBoundingClientRect().top + window.scrollY
+        - window.innerHeight * 0.55);
+    var dist = endY - startY;
+    // pace it by distance, but keep it inside a couple of seconds
+    var dur = Math.min(2400, Math.max(700, dist * 0.75));
+    var t0 = Date.now();
+    var interrupted = false;
+
+    function onUserScroll() { interrupted = true; }
+    window.addEventListener('wheel', onUserScroll, { passive: true, once: true });
+    window.addEventListener('touchstart', onUserScroll, { passive: true, once: true });
+
+    function finish() {
+      stopCascade();
+      window.removeEventListener('wheel', onUserScroll);
+      window.removeEventListener('touchstart', onUserScroll);
+      pending.forEach(function (i) { i.checked = true; });
+      render();
+      if (!interrupted) {
+        document.getElementById('result')
+          .scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function frame() {
+      var p = Math.min(1, (Date.now() - t0) / dur);
+      var eased = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+
+      if (!interrupted) window.scrollTo(0, startY + dist * eased);
+
+      // tick anything that has climbed into the lower half of the viewport
+      var line = window.innerHeight * 0.75;
+      var still = [];
+      pending.forEach(function (i) {
+        var el = i.closest('.svc-tile');
+        if (!i.checked && el.getBoundingClientRect().top < line) {
+          i.checked = true;
+          bumpBar();
+        } else if (!i.checked) {
+          still.push(i);
+        }
+      });
+
+      if (p >= 1 || (interrupted && !still.length)) finish();
+    }
+    cascadeTimer = setInterval(frame, 16);
+  }
+
+  // Cheap running count during the cascade. The full render() rebuilds the
+  // results list, which would change the page height mid-scroll.
+  function bumpBar() {
+    var n = picked().filter(function (i) { return i.name === 'service'; }).length;
+    var a = picked().filter(function (i) { return i.name === 'addon'; }).length;
+    bar.querySelector('.bb-n').textContent = n + ' picked' + (a ? ' + ' + a : '');
+    bar.classList.add('in');
   }
 
   function markPresets() {

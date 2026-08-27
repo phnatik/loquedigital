@@ -1568,7 +1568,17 @@
   .preset-btn:hover{border-color:var(--accent);color:var(--accent)}
   /* Marked only while the ticks match the preset exactly, so it stops
      claiming to describe the selection the moment you change one. */
+  /* The active preset sinks rather than lifts — the other two stay light, so
+     the chosen one reads as pressed. Inverted against the paper section it
+     sits in, which is the clearest "this one" available without adding a
+     colour. */
   .preset.is-on{border-color:var(--accent)}
+  .sec-light .preset.is-on{
+    background:#22222a;border-color:#22222a;
+  }
+  .sec-light .preset.is-on .preset-name{color:#fffefa}
+  .sec-light .preset.is-on .preset-line{color:#b9b8b1}
+  .sec-light .preset.is-on .preset-n{color:var(--accent-dim)}
   .preset.is-on .preset-btn{background:var(--accent);border-color:var(--accent);color:#10100c}
   /* On paper --accent is olive, and #10100c on olive is unreadable. Use the
      section's own ground as the text colour, the way .btn-primary does. */
