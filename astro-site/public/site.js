@@ -598,7 +598,7 @@
     var prevBehavior = root.style.scrollBehavior;
     root.style.scrollBehavior = 'auto';
 
-    var TICK = 55;                 // ms between boxes — one at a time, visibly
+    var TICK = 275;                // ms between boxes — one at a time, visibly
     var idx = 0;
     var t0 = Date.now();
     var interrupted = false;
@@ -636,7 +636,7 @@
         // and ticking through it would happen where nobody can see it. The
         // 400ms fallback keeps it moving if the scroll is blocked or the user
         // has taken over.
-        if (waited >= TICK && (onScreen || interrupted || waited > 400)) {
+        if (waited >= TICK && (onScreen || interrupted || waited > TICK * 3)) {
           pending[idx].checked = true;
           bumpBar();
           idx++;
@@ -648,7 +648,7 @@
           var target = next.getBoundingClientRect().top + window.scrollY
                      - window.innerHeight * 0.45;
           var y = window.scrollY;
-          var step = (target - y) * 0.2;
+          var step = (target - y) * 0.055;
           if (Math.abs(step) > 0.5) window.scrollTo(0, y + step);
         }
       }
