@@ -598,7 +598,7 @@
     var prevBehavior = root.style.scrollBehavior;
     root.style.scrollBehavior = 'auto';
 
-    var TICK = 275;                // ms between boxes — one at a time, visibly
+    var TICK = 500;                // ms between boxes — two a second, one at a time
     var idx = 0;
     var t0 = Date.now();
     var interrupted = false;
