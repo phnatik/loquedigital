@@ -1345,13 +1345,13 @@
      does. The tile is a <label> around a real checkbox, so a click on
      either face selects — hence the tick on both.
 
-     Fixed height because the two faces are absolutely positioned. 404px
-     is set by the front — a 207px illustration plus the title and badge —
-     and comfortably clears the longest description (209 characters) on
-     the back at this column width. ------------------------------------ */
+     The card is square via aspect-ratio rather than a pixel height, so it
+     tracks the column width at every breakpoint. The art then takes
+     whatever the title and badge leave, which makes it as large as the
+     square allows without a magic number. ---------------------------- */
   .svc-tile{
     position:relative;display:block;cursor:pointer;
-    height:404px;perspective:1200px;background:none;border:0;padding:0;
+    aspect-ratio:1 / 1;perspective:1200px;background:none;border:0;padding:0;
   }
   .svc-tile input{position:absolute;opacity:0;width:0;height:0}
 
@@ -1390,14 +1390,21 @@
   }
 
   /* front — art centred in the space above the title */
-  .svc-artwrap{flex:1;display:grid;place-items:center;min-height:0;padding-top:8px}
-  .svc-art{display:block;width:207px;height:207px;object-fit:contain}
+  /* flex:1 1 0 + min-height:0 lets this shrink below the image's intrinsic
+     size; without it the 414px asset forces the box taller and the art
+     spills over the title. overflow:hidden is the backstop. */
+  .svc-artwrap{
+    flex:1 1 0;min-height:0;overflow:hidden;
+    display:flex;align-items:center;justify-content:center;padding:6px 0 2px;
+  }
+  .svc-art{display:block;width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain}
   .svc-art-todo{color:#4c4c56}
   .svc-art-todo svg{width:100%;height:100%}
 
   .svc-name{
-    display:block;font-family:"Outfit";font-weight:700;font-size:18px;
-    letter-spacing:-.015em;line-height:1.25;padding-right:34px;margin-top:14px;
+    display:block;font-family:"Outfit";font-weight:700;font-size:22px;
+    letter-spacing:-.02em;line-height:1.2;margin-top:12px;
+    text-align:center;color:var(--accent);
   }
 
   /* back */
@@ -1413,10 +1420,11 @@
   }
 
   .svc-tier{
-    display:inline-block;align-self:flex-start;margin-top:auto;padding:5px 10px;
+    display:inline-block;align-self:center;margin-top:10px;padding:5px 10px;
     font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
     border-radius:100px;border:1px solid var(--line);color:var(--muted);
   }
+  .svc-back .svc-tier{align-self:flex-start;margin-top:auto}
   .svc-tier[data-t="reserve"]{color:var(--accent-dim);border-color:rgba(169,207,60,.35)}
   .svc-tier[data-t="custom"]{color:var(--accent);border-color:rgba(210,255,77,.4)}
   .svc-tile.is-addon .svc-face{border-style:dashed}
@@ -1426,7 +1434,7 @@
      faces into one taller card with the description already showing, and let
      a tap just select. */
   @media(hover:none){
-    .svc-tile{height:auto;perspective:none}
+    .svc-tile{aspect-ratio:auto;height:auto;perspective:none}
     .svc-flip{transform:none !important;transform-style:flat}
     .svc-face{
       position:static;backface-visibility:visible;transform:none;
@@ -1434,10 +1442,12 @@
     }
     .svc-front{border-radius:18px 18px 0 0;border-bottom:0;padding-bottom:4px}
     .svc-back{border-radius:0 0 18px 18px;border-top:0;padding-top:14px}
-    .svc-back .svc-check,
+    .svc-back .svc-tier{align-self:flex-start;margin-top:auto}
+  .svc-back .svc-check,
     .svc-back .svc-back-name,
     .svc-front .svc-tier{display:none}
-    .svc-artwrap{flex:none;padding-top:0}
+    .svc-artwrap{flex:none;padding:0}
+    .svc-art{max-height:200px}
   }
 
   /* A flip is a big motion for someone who asked for less of it. */
