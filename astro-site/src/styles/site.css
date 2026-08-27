@@ -1,10 +1,12 @@
   :root{
-    --ink:#0b0b0c;
-    --ink-soft:#141416;
-    --ink-card:#161618;
-    --line:#26262a;
+    --ink:#15151a;
+    --ink-soft:#1c1c22;
+    --ink-card:#212128;
+    --line:#37373f;
     --paper:#f5f4ee;
-    --muted:#8d8d88;
+    --muted:#a2a29c;
+    --text:#c2c1bd;          /* body copy on dark */
+    --text-strong:#d6d5cf;   /* emphasis inside body copy */
     --accent:#d2ff4d;
     --accent-dim:#a9cf3c;
     --maxw:1180px;
@@ -199,7 +201,7 @@
   .demo-atext b{color:var(--paper);background:linear-gradient(transparent 62%,rgba(210,255,77,.34) 0);padding:0 2px;font-weight:600}
   .demo-cites{display:flex;flex-wrap:wrap;gap:8px;padding:0 16px 16px}
   .demo-chip{
-    font-size:11.5px;font-weight:600;color:#cfcec9;border:1px solid var(--line);border-radius:100px;
+    font-size:11.5px;font-weight:600;color:var(--text);border:1px solid var(--line);border-radius:100px;
     padding:5px 11px;display:inline-flex;align-items:center;gap:6px;background:#141416;
   }
   .demo-chip.brand{color:var(--ink);background:var(--accent);border-color:var(--accent)}
@@ -257,7 +259,7 @@
   .card .num{font-family:"Outfit";font-size:14px;color:var(--accent);font-weight:600;letter-spacing:.05em}
   .card h3{font-family:"Outfit";font-weight:800;font-size:30px;letter-spacing:-.02em;margin:18px 0 6px;display:flex;align-items:baseline;gap:12px}
   .card h3 .full{font-family:"Hanken Grotesk";font-weight:500;font-size:15px;color:var(--muted);letter-spacing:0}
-  .card p{color:#c2c1bd;font-size:16.5px;margin-top:8px}
+  .card p{color:var(--text);font-size:16.5px;margin-top:8px}
   .card ul{list-style:none;margin-top:22px;display:flex;flex-wrap:wrap;gap:8px}
   .card li{font-size:13.5px;color:var(--paper);border:1px solid var(--line);border-radius:100px;padding:6px 14px}
 
@@ -295,7 +297,7 @@
   .price-card .amount.range span{display:block;margin-top:4px}
   .price-card .quote{font-family:"Outfit";font-weight:800;font-size:34px;letter-spacing:-.02em;margin:26px 0 2px;line-height:1}
   .price-card ul{list-style:none;margin:24px 0 32px;display:flex;flex-direction:column;gap:12px}
-  .price-card li{font-size:15.5px;color:#d6d5cf;display:flex;align-items:flex-start;gap:11px}
+  .price-card li{font-size:15.5px;color:var(--text-strong);display:flex;align-items:flex-start;gap:11px}
   .price-card li::before{content:"";flex:none;width:18px;height:18px;margin-top:2px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(210,255,77,.12);
     -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z'/%3E%3C/svg%3E") center/13px no-repeat;
     mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z'/%3E%3C/svg%3E") center/13px no-repeat;background-color:var(--accent)}
@@ -327,7 +329,7 @@
   }
   .testi-stars{display:flex;gap:3px;margin-bottom:18px}
   .testi-stars svg{width:16px;height:16px;fill:var(--accent)}
-  .testi q{font-size:16px;line-height:1.6;color:#d6d5cf;flex:1;display:block;quotes:none}
+  .testi q{font-size:16px;line-height:1.6;color:var(--text-strong);flex:1;display:block;quotes:none}
   .testi-who{margin-top:22px;padding-top:18px;border-top:1px solid var(--line);display:flex;align-items:center;gap:14px}
   .testi-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#7ab82a);display:grid;place-items:center;font-family:"Outfit";font-weight:800;font-size:16px;color:var(--ink);flex:none}
   .testi-info .name{font-family:"Outfit";font-weight:700;font-size:15px;color:var(--paper)}
@@ -479,14 +481,14 @@
 
   /* reusable accent tick list (same mark as .price-card li) */
   .ticks{list-style:none;display:flex;flex-direction:column;gap:13px}
-  .ticks li{font-size:15.5px;color:#d6d5cf;display:flex;align-items:flex-start;gap:11px}
+  .ticks li{font-size:15.5px;color:var(--text-strong);display:flex;align-items:flex-start;gap:11px}
   .ticks li::before{
     content:"";flex:none;width:18px;height:18px;margin-top:3px;border-radius:50%;
     background-color:var(--accent);box-shadow:0 0 0 4px rgba(210,255,77,.12);
     -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z'/%3E%3C/svg%3E") center/13px no-repeat;
     mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z'/%3E%3C/svg%3E") center/13px no-repeat;
   }
-  .sec-sub{max-width:64ch;margin-top:20px;color:#c2c1bd;font-size:17.5px}
+  .sec-sub{max-width:64ch;margin-top:20px;color:var(--text);font-size:17.5px}
 
   /* ---------- HERO DEMO: inbox triage → draft → approve ---------- */
   .demo-mail{
@@ -502,7 +504,7 @@
   .demo-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px;min-height:29px;transform:translateZ(26px)}
   .demo-tag{
     font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-    border:1px solid var(--line);background:#141416;color:#cfcec9;border-radius:100px;padding:5px 11px;
+    border:1px solid var(--line);background:#141416;color:var(--text);border-radius:100px;padding:5px 11px;
     opacity:0;transform:translateY(6px);transition:opacity .3s var(--ease),transform .3s var(--ease);
   }
   .demo-tag.in{opacity:1;transform:none}
@@ -533,11 +535,11 @@
   .prob-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:64px;align-items:start;margin-top:54px}
   .prob-grid p.big{font-size:clamp(20px,2.4vw,28px);line-height:1.45;font-family:"Outfit";font-weight:400;letter-spacing:-.01em}
   .prob-grid p.big b{color:var(--accent);font-weight:600}
-  .prob-grid p.body{margin-top:24px;color:#c2c1bd;font-size:17px}
+  .prob-grid p.body{margin-top:24px;color:var(--text);font-size:17px}
   .alt-card{background:var(--ink-card);border:1px solid var(--line);border-radius:20px;padding:34px 32px}
   .alt-card .kicker{font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700}
   .alt-card h4{font-family:"Outfit";font-weight:700;font-size:22px;letter-spacing:-.01em;margin:14px 0 10px}
-  .alt-card p{color:#c2c1bd;font-size:16px}
+  .alt-card p{color:var(--text);font-size:16px}
   .alt-rows{list-style:none;margin-top:26px;display:flex;flex-direction:column}
   .alt-rows li{display:flex;align-items:baseline;gap:16px;padding:16px 0;border-top:1px solid var(--line)}
   .alt-rows li .v{font-family:"Outfit";font-weight:800;font-size:24px;letter-spacing:-.02em;color:var(--accent);flex:none;min-width:106px}
@@ -591,7 +593,7 @@
   .plan h3{font-family:"Outfit";font-weight:800;font-size:29px;letter-spacing:-.025em;margin:16px 0 4px}
   .plan .job{font-family:"Outfit";font-weight:500;font-size:17px;color:var(--accent);letter-spacing:-.01em}
   .plan .kind{font-size:13px;color:var(--muted);margin-top:7px;letter-spacing:.02em}
-  .plan p.blurb{color:#c2c1bd;font-size:16px;margin-top:18px}
+  .plan p.blurb{color:var(--text);font-size:16px;margin-top:18px}
   .plan .ticks{margin-top:24px}
   .plan .deploy{
     margin:28px 0 0;padding-top:18px;border-top:1px solid var(--line);
@@ -603,7 +605,7 @@
   .plan .runrows li{display:flex;justify-content:space-between;gap:16px;padding:9px 0;font-size:14px;border-bottom:1px solid rgba(38,38,42,.7)}
   .plan .runrows li:last-child{border-bottom:0}
   .plan .runrows li span{color:var(--muted)}
-  .plan .runrows li b{font-weight:600;color:#d6d5cf;text-align:right}
+  .plan .runrows li b{font-weight:600;color:var(--text-strong);text-align:right}
   .plan .btn{margin-top:auto;width:100%;text-align:center}
   .plan .btn-wrap{padding-top:26px}
 
@@ -614,7 +616,7 @@
   .build:hover{transform:translateY(-6px);border-color:#3a3a40}
   .build h4{font-family:"Outfit";font-weight:700;font-size:22px;letter-spacing:-.02em;display:flex;align-items:baseline;gap:12px}
   .build h4 .k{font-size:13.5px;color:var(--accent);font-weight:600}
-  .build p{color:#c2c1bd;font-size:16px;margin-top:12px}
+  .build p{color:var(--text);font-size:16px;margin-top:12px}
   .build-note{
     margin-top:22px;border:1px solid var(--line);border-radius:20px;padding:32px 34px;
     background:linear-gradient(180deg,rgba(210,255,77,.05),transparent 70%);
@@ -638,8 +640,8 @@
     font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;
     background:rgba(210,255,77,.045);padding:15px 20px;position:static;
   }
-  .matrix td.feat{color:#d6d5cf;font-size:15px;width:38%}
-  .matrix td.val{text-align:center;width:20.6%;color:#cfcec9;font-size:13.5px;font-weight:600}
+  .matrix td.feat{color:var(--text-strong);font-size:15px;width:38%}
+  .matrix td.val{text-align:center;width:20.6%;color:var(--text);font-size:13.5px;font-weight:600}
   .matrix tbody tr:not(.grp):hover td{background:rgba(255,255,255,.022)}
   .matrix tbody tr:last-child td{border-bottom:0}
   .mdot{
@@ -654,7 +656,7 @@
 
   /* ---------- HANDWRITTEN LAYER ---------- */
   .hw-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:56px;align-items:start;margin-top:54px}
-  .hw-copy p{color:#c2c1bd;font-size:17px;margin-top:20px}
+  .hw-copy p{color:var(--text);font-size:17px;margin-top:20px}
   .hw-copy .hw-quote{
     font-family:"Outfit";font-weight:400;font-size:clamp(20px,2.4vw,27px);line-height:1.4;letter-spacing:-.015em;
     border-left:2px solid var(--accent);padding-left:24px;margin-top:32px;color:var(--paper);
@@ -680,7 +682,7 @@
 
   /* ---------- REGULATED PRACTICE LAYER ---------- */
   .rpl-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;margin-top:54px}
-  .rpl-copy p{color:#c2c1bd;font-size:17px;margin-top:20px}
+  .rpl-copy p{color:var(--text);font-size:17px;margin-top:20px}
   .rpl-paths{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px}
   .rpl-path{border:1px solid var(--line);border-radius:16px;padding:22px 20px;background:var(--ink-card)}
   .rpl-path .pk{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700}
@@ -698,12 +700,12 @@
 
   /* ---------- FOUNDER / WHY US ---------- */
   .why-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:start;margin-top:54px}
-  .why-copy p{color:#c2c1bd;font-size:17px;margin-top:20px}
+  .why-copy p{color:var(--text);font-size:17px;margin-top:20px}
   .why-copy p.big{font-size:clamp(20px,2.4vw,28px);line-height:1.45;font-family:"Outfit";font-weight:400;letter-spacing:-.01em;color:var(--paper);margin-top:0}
   .why-copy p.big b{color:var(--accent);font-weight:600}
   .why-stat{background:var(--ink-card);border:1px solid var(--line);border-radius:20px;padding:38px 34px}
   .why-stat .val{font-family:"Outfit";font-weight:800;font-size:clamp(46px,6vw,68px);letter-spacing:-.04em;color:var(--accent);line-height:1}
-  .why-stat .label{margin-top:12px;font-size:16px;color:#c2c1bd;line-height:1.5}
+  .why-stat .label{margin-top:12px;font-size:16px;color:var(--text);line-height:1.5}
   .why-line{
     margin-top:22px;border:1px solid var(--line);border-radius:20px;padding:28px 34px;
     font-family:"Outfit";font-weight:600;font-size:clamp(18px,2.1vw,23px);letter-spacing:-.02em;
@@ -721,17 +723,17 @@
   .price-rows li .rl small{display:block;font-weight:400;font-size:12px;color:#66665f;margin-top:2px}
   .price-rows li .rs,.price-rows li .rm{font-family:"Outfit";font-weight:700;font-size:16.5px;letter-spacing:-.015em;text-align:right;white-space:nowrap}
   .price-rows li.best .rs,.price-rows li.best .rm{color:var(--accent)}
-  .price-rows li.best .rl{color:#d6d5cf}
+  .price-rows li.best .rl{color:var(--text-strong)}
   .addon-wrap{display:grid;grid-template-columns:1.25fr .75fr;gap:18px;margin-top:22px}
   .addon-card,.guarantee{background:var(--ink-card);border:1px solid var(--line);border-radius:20px;padding:34px 32px}
   .addon-card .kicker,.guarantee .kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:16px}
   .addon-rows{list-style:none;display:flex;flex-direction:column}
-  .addon-rows li{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:14px 0;border-bottom:1px solid var(--line);font-size:15.5px;color:#d6d5cf}
+  .addon-rows li{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:14px 0;border-bottom:1px solid var(--line);font-size:15.5px;color:var(--text-strong)}
   .addon-rows li:last-child{border-bottom:0}
   .addon-rows li b{font-family:"Outfit";font-weight:700;font-size:15.5px;color:var(--paper);text-align:right;white-space:nowrap;letter-spacing:-.01em}
   .guarantee{border-color:var(--accent-dim);background:linear-gradient(180deg,rgba(210,255,77,.07),transparent 62%);display:flex;flex-direction:column}
   .guarantee h4{font-family:"Outfit";font-weight:800;font-size:clamp(22px,2.4vw,28px);line-height:1.15;letter-spacing:-.025em}
-  .guarantee p{color:#c2c1bd;font-size:15.5px;margin-top:16px}
+  .guarantee p{color:var(--text);font-size:15.5px;margin-top:16px}
 
   /* ---------- FOUNDING CLIENTS ---------- */
   .founding{padding:110px 0 0}
@@ -846,9 +848,9 @@
   .ind .ico svg{width:22px;height:22px;fill:var(--accent)}
   .ind h3{font-family:"Outfit";font-weight:800;font-size:27px;letter-spacing:-.025em;margin:22px 0 0}
   .ind .isub{color:var(--accent);font-size:14.5px;margin-top:7px;font-family:"Outfit";font-weight:500}
-  .ind p{color:#c2c1bd;font-size:15.5px;margin-top:16px}
+  .ind p{color:var(--text);font-size:15.5px;margin-top:16px}
   .ind ul{list-style:none;margin:20px 0 0;display:flex;flex-direction:column;gap:10px}
-  .ind li{font-size:14.5px;color:#d6d5cf;display:flex;align-items:flex-start;gap:10px}
+  .ind li{font-size:14.5px;color:var(--text-strong);display:flex;align-items:flex-start;gap:10px}
   .ind li::before{
     content:"";flex:none;width:15px;height:15px;margin-top:3px;border-radius:50%;
     background-color:var(--accent);box-shadow:0 0 0 3px rgba(210,255,77,.12);
@@ -862,8 +864,8 @@
   .ind .go .arw{transition:transform .25s var(--ease)}
   .ind:hover .go .arw{transform:translateX(5px)}
   .ind.soft .ico{background:rgba(255,255,255,.05);border-color:var(--line)}
-  .ind.soft .ico svg{fill:#c2c1bd}
-  .ind.soft .isub,.ind.soft .go{color:#c2c1bd}
+  .ind.soft .ico svg{fill:var(--text)}
+  .ind.soft .isub,.ind.soft .go{color:var(--text)}
 
   /* ---------- VERTICAL PAGE: workflow map ---------- */
   .map{margin-top:54px;border:1px solid var(--line);border-radius:22px;background:var(--ink-card);overflow:hidden}
@@ -886,7 +888,7 @@
     background:rgba(210,255,77,.10);border:1px solid rgba(210,255,77,.25);margin-top:1px;
   }
   .map-cell h4{font-family:"Outfit";font-weight:700;font-size:16.5px;letter-spacing:-.015em;margin-bottom:5px}
-  .map-cell p{font-size:14.5px;color:#c2c1bd;line-height:1.55}
+  .map-cell p{font-size:14.5px;color:var(--text);line-height:1.55}
   .map-cell.act h4{color:var(--accent)}
   .map-cell.act p{color:#e2e1dc}
   .map-note{margin-top:20px;font-size:14.5px;color:var(--muted);max-width:72ch}
@@ -923,7 +925,7 @@
   .magnet-copy .kicker{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700}
   .magnet-copy h3{font-family:"Outfit";font-weight:800;font-size:clamp(24px,2.9vw,34px);line-height:1.08;
     letter-spacing:-.03em;margin:16px 0 0;max-width:20ch}
-  .magnet-copy p{color:#c2c1bd;font-size:16px;margin-top:16px;max-width:50ch}
+  .magnet-copy p{color:var(--text);font-size:16px;margin-top:16px;max-width:50ch}
   .magnet-form{padding:46px 40px;display:flex;flex-direction:column;justify-content:center}
   .magnet-form .field{margin-bottom:14px}
   .magnet-form .btn{width:100%;text-align:center}
@@ -937,7 +939,7 @@
   .fit.featured{border-color:var(--accent-dim);background:linear-gradient(180deg,rgba(210,255,77,.06),transparent 58%)}
   .fit h4{font-family:"Outfit";font-weight:800;font-size:24px;letter-spacing:-.025em}
   .fit .fj{color:var(--accent);font-size:14.5px;margin-top:6px;font-family:"Outfit";font-weight:500}
-  .fit p{color:#c2c1bd;font-size:15px;margin-top:14px}
+  .fit p{color:var(--text);font-size:15px;margin-top:14px}
   .fit .flink{margin-top:auto;padding-top:22px;font-family:"Outfit";font-weight:700;font-size:14.5px;color:var(--accent)}
 
   /* ---------- RESPONSIVE ---------- */
@@ -1027,3 +1029,290 @@
   .ph-body{margin-top:16px;font-size:18px;color:var(--paper)}
   .ph-body b{color:var(--accent)}
   .ph-note{margin-top:12px;font-size:14.5px;color:var(--muted)}
+
+  /* Standalone pages split off the homepage open mid-argument, so they need
+     top room the homepage got from its hero. */
+  .page-top .sec-head{padding-top:150px}
+  @media(max-width:760px){ .page-top .sec-head{padding-top:120px} }
+
+  /* Shared closing CTA on every split page */
+  .page-cta{padding:90px 0 110px}
+  .page-cta-box{
+    max-width:var(--maxw);margin:0 auto;
+    display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;
+    background:var(--ink-card);border:1px solid var(--line);border-radius:20px;
+    padding:34px 38px;
+  }
+  .page-cta-box p{
+    font-family:"Outfit";font-weight:700;font-size:clamp(21px,2.4vw,27px);
+    letter-spacing:-.02em;line-height:1.2;max-width:22ch;
+  }
+
+  /* Homepage: five-card vertical router. Reuses .ind cards; only the
+     grid changes, so rows of three then two stay evenly sized. */
+  .router-grid{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:1000px){ .router-grid{grid-template-columns:repeat(2,1fr)} }
+  @media(max-width:660px){ .router-grid{grid-template-columns:1fr} }
+
+  /* Homepage: plans at a glance — three compact cards, detail lives on /plans */
+  .glance-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:54px}
+  @media(max-width:880px){ .glance-grid{grid-template-columns:1fr} }
+  .glance{
+    background:var(--ink-card);border:1px solid var(--line);border-radius:20px;
+    padding:34px 32px;display:flex;flex-direction:column;gap:10px;
+    transition:transform .35s var(--ease),border-color .35s;
+  }
+  .glance:hover{transform:translateY(-6px);border-color:#3a3a40}
+  .glance.featured{border-color:var(--accent-dim);background:linear-gradient(180deg,rgba(210,255,77,.06),transparent 60%)}
+  .glance .gname{font-family:"Outfit";font-weight:800;font-size:26px;letter-spacing:-.02em}
+  .glance .gjob{color:var(--accent);font-size:14px;font-weight:600;letter-spacing:.02em}
+  .glance p{color:var(--muted);font-size:16px}
+  .glance .gwhen{
+    margin-top:auto;padding-top:16px;border-top:1px solid var(--line);
+    font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+  }
+
+  /* Homepage: the close */
+  .close-band{padding:40px 0 130px}
+  .close-box{
+    max-width:var(--maxw);margin:0 auto;text-align:center;
+    border:1px solid var(--line);border-radius:24px;padding:64px 40px;
+    background:linear-gradient(180deg,rgba(210,255,77,.05),transparent 70%),var(--ink-card);
+  }
+  .close-box h2{
+    font-family:"Outfit";font-weight:800;letter-spacing:-.03em;line-height:1.05;
+    font-size:clamp(30px,4.2vw,50px);max-width:20ch;margin:0 auto;
+  }
+  .close-box p{margin:20px auto 0;max-width:56ch;color:var(--muted);font-size:18px}
+  .close-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+  .why-more{margin-top:22px}
+  .why-more a{color:var(--accent);font-weight:600;font-size:16px}
+  .why-more a:hover{text-decoration:underline}
+
+  /* /proof — case-study slots, two across */
+  .ph-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:54px}
+  @media(max-width:860px){ .ph-grid{grid-template-columns:1fr} }
+  .ph-grid .placeholder{margin-top:0;display:flex;flex-direction:column;gap:0}
+  .ph-grid .placeholder h4{
+    font-family:"Outfit";font-weight:700;font-size:21px;letter-spacing:-.02em;margin-top:16px;
+  }
+  .ph-grid .placeholder .ph-body{margin-top:10px;font-size:16.5px;color:var(--muted)}
+  .ph-grid .placeholder .ph-note{margin-top:auto;padding-top:14px}
+
+  /* ==========================================================
+     MOBILE FIXES — found in the launch audit, 2026-08-26.
+     Two real horizontal-overflow bugs at 390px.
+     ========================================================== */
+
+  /* /pricing: the add-on price strings are white-space:nowrap, and
+     "$250/mo Reserve · $400/mo Custom Reserve" is wider than a phone.
+     Stack the label above the price rather than letting it push the page. */
+  @media(max-width:640px){
+    .addon-rows li{flex-direction:column;align-items:flex-start;gap:4px}
+    .addon-rows li b{text-align:left;white-space:normal}
+  }
+
+  /* .alt-rows: an unconditional `min-width:152px` override further up the
+     file lands after the max-width:1000px rule that shrinks it to 92px, so
+     the wide value applied at every size. Restore the stacked layout on
+     phones — this affects every vertical page's comparison cards. */
+  @media(max-width:640px){
+    .alt-rows li{flex-direction:column;align-items:flex-start;gap:6px}
+    .alt-rows li .v{min-width:0;font-size:20px}
+  }
+
+  /* ==========================================================
+     IMAGE SLOTS — art-direction placeholders, added 2026-08-26.
+
+     The site was reading as an unbroken wall of type. These give every
+     page an image rhythm now and a drop-in target later: replace the
+     .img-slot div with an <img> of the same aspect and nothing else moves.
+
+     Distinct from .placeholder on purpose. Those are lime and dashed
+     because an unearned claim must not survive to launch. These are
+     graphite and solid because a missing photograph is a production
+     task, not a credibility problem — see [data-image-slot] in audit.py.
+     ========================================================== */
+
+  .img-figure{position:relative;z-index:2;margin:0}
+
+  .img-slot{
+    position:relative;overflow:hidden;
+    border:1px solid var(--line);border-radius:20px;
+    background:
+      radial-gradient(120% 140% at 50% 0%, rgba(210,255,77,.07), transparent 62%),
+      linear-gradient(160deg, #232327 0%, #1a1a1e 52%, #141417 100%);
+    display:flex;align-items:center;justify-content:center;
+    width:100%;
+  }
+
+  /* Faint diagonal hatch so an empty frame never reads as a styling bug. */
+  .img-slot-hatch{
+    position:absolute;inset:0;pointer-events:none;opacity:.9;
+    background-image:repeating-linear-gradient(
+      -45deg, rgba(245,244,238,.055) 0 1px, transparent 1px 11px);
+  }
+
+  .img-slot-body{
+    position:relative;z-index:1;
+    max-width:440px;padding:32px 34px;text-align:center;
+    display:flex;flex-direction:column;align-items:center;gap:14px;
+  }
+  .img-slot-mark{width:30px;height:30px;color:var(--accent-dim);opacity:.75;flex:none}
+  .img-brief{
+    font-family:"Hanken Grotesk",sans-serif;
+    font-size:16px;line-height:1.55;color:var(--text);
+  }
+  .img-tone{font-size:13.5px;line-height:1.5;color:var(--muted);font-style:italic}
+
+  /* Filename + aspect, so the spec travels with the frame. */
+  .img-spec{
+    position:absolute;left:16px;bottom:14px;z-index:1;
+    display:flex;align-items:center;gap:10px;
+    font-family:"Hanken Grotesk",sans-serif;
+    font-size:10.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
+  }
+  .img-spec-id{color:var(--accent-dim);opacity:.9}
+  .img-spec-ar{color:var(--muted);opacity:.75}
+  .img-spec-ar::before{content:"·";margin-right:10px;opacity:.6}
+
+  .img-figure figcaption{
+    margin-top:14px;font-size:14.5px;line-height:1.5;color:var(--muted);
+    max-width:640px;
+  }
+
+  /* --- variants --------------------------------------------------------- */
+
+  /* Full-bleed band: the hard break between two dense text sections. */
+  .img-band{width:100vw;margin-left:calc(50% - 50vw);padding:0}
+  .img-band .img-slot{border-radius:0;border-left:0;border-right:0}
+  .img-band figcaption{max-width:var(--maxw);margin-left:auto;margin-right:auto;padding:0 32px}
+
+  /* Contained figure at body width. */
+  .img-feature,
+  .img-portrait,
+  .img-split{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+
+  /* Section-level spacing when a slot sits between two <section>s. */
+  .img-band{margin-top:96px;margin-bottom:96px}
+  .img-feature,.img-portrait{margin-top:84px;margin-bottom:84px}
+
+  /* A slot living inside an existing grid cell owns no outer rhythm. */
+  .sec-split .img-figure,
+  .why-grid .img-figure,
+  .hw-grid .img-figure{margin:0;padding:0;max-width:none}
+
+
+  /* When a real asset lands, the <img> replaces the .img-slot div and these
+     rules do the framing: the figure keeps the layout ratio, the image fills
+     it and crops from the centre. That means a generated 16:9 source can sit
+     in a 21:8 band without redrawing anything — see image-brief.csv. */
+  .img-figure img{
+    display:block;width:100%;height:100%;
+    object-fit:cover;object-position:center;
+    border-radius:20px;
+    background:var(--ink-card);
+  }
+  .img-band img{border-radius:0}
+  /* A tile has no ratio of its own, so its image has to be told to fill the
+     grid cell the same way the placeholder did. */
+  .img-tile.is-live{display:flex}
+  .img-tile img{height:100%;min-height:230px}
+  @media(max-width:640px){
+    .img-tile img{min-height:0;aspect-ratio:4 / 3}
+  }
+
+  /* --- tile: an image cell living inside an existing card grid ----------
+     This is the one that makes a card wall breathe. The tile takes a grid
+     cell, matches the card radius exactly, and is sized by the row rather
+     than by an aspect ratio — so it lines up with its neighbours at every
+     breakpoint without a single hard-coded height. */
+  .img-tile{height:100%}
+  .img-tile .img-slot{
+    height:100%;min-height:230px;
+    border-radius:20px;
+  }
+  .img-tile .img-slot-body{padding:26px 24px;gap:11px;max-width:none}
+  .img-tile .img-brief{font-size:14.5px;line-height:1.5}
+  .img-tile .img-tone{font-size:12.5px}
+  .img-tile .img-slot-mark{width:26px;height:26px}
+  .img-tile .img-spec{left:14px;bottom:12px;font-size:9.5px}
+
+  /* On one-column phone layouts a tile would otherwise stretch to whatever
+     the tallest card was; give it a shape of its own instead. */
+  @media(max-width:640px){
+    .img-tile .img-slot{min-height:0;aspect-ratio:4 / 3}
+  }
+
+  /* --- image beside text (the sai.work pattern) ------------------------- */
+  .sec-split{
+    display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;
+    margin-top:54px;
+  }
+  .sec-split.reverse .img-figure{order:2}
+  .sec-split-copy p{color:var(--muted);font-size:17px}
+  .sec-split-copy p + p{margin-top:14px}
+  .sec-split-copy .big{color:var(--paper);font-size:21px;line-height:1.45}
+
+  @media(max-width:900px){
+    .sec-split{grid-template-columns:1fr;gap:34px}
+    .sec-split.reverse .img-figure{order:0}
+  }
+
+  @media(max-width:760px){
+    .img-band{margin-top:64px;margin-bottom:64px}
+    .img-feature,.img-portrait{margin-top:58px;margin-bottom:58px}
+    .img-slot-body{padding:22px 24px;gap:11px}
+    .img-brief{font-size:14.5px}
+    .img-tone{font-size:12.5px}
+    .img-spec{left:13px;bottom:11px;font-size:9.5px}
+    /* A 21:8 band is a letterbox slit on a phone. */
+    .img-band .img-slot{aspect-ratio:16 / 10 !important}
+    .img-feature .img-slot{aspect-ratio:4 / 3 !important}
+  }
+
+  /* ==========================================================
+     LIGHT SECTIONS
+     Selected sections invert to paper so a page alternates instead of
+     running as one continuous dark field. The dark photography sitting in
+     a light grid is the contrast that makes it read as designed.
+
+     This works by redefining the palette tokens on the section rather than
+     restyling each component: .build, .plan, .ind, .matrix and the rest all
+     already read --ink-card / --line / --muted / --paper, so they invert on
+     their own. Only the handful of hard-coded greys need patching below.
+     ========================================================== */
+  .sec-light{
+    --ink:#f4f3ec;
+    --ink-soft:#eceadf;
+    --ink-card:#fffefa;
+    --line:#e3e2d6;
+    --paper:#15151a;      /* the foreground role — inverted */
+    --muted:#6a6a61;
+    --accent:#5f7d0f;     /* lime is unreadable on paper; olive holds the brand */
+    --accent-dim:#7f9c1f;
+    --text:#50504a;
+    --text-strong:#262621;
+
+    background:var(--ink);
+    color:var(--paper);
+    padding:96px 0 104px;
+    margin:72px 0;
+  }
+  .sec-light .sec-head{padding-top:0}
+  .sec-light .build{box-shadow:0 1px 2px rgba(20,20,16,.05)}
+  .sec-light .build:hover{border-color:#cfcec2}
+
+
+  /* Dark literals that would otherwise punch a hole in a light section. */
+  .sec-light .matrix thead th{background:#efeee3}
+  .sec-light .matrix tbody tr:not(.grp):hover td{background:rgba(20,20,16,.03)}
+  .sec-light .plan .runrows li{border-bottom-color:rgba(20,20,16,.09)}
+  .sec-light .ph-tag{color:#fffefa}
+
+  /* The image tiles keep their own dark frame — that is the point. */
+  .sec-light .img-figure img{border:0}
+
+  @media(max-width:760px){
+    .sec-light{padding:64px 0 72px;margin:48px 0}
+  }
